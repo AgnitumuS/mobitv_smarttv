@@ -20,6 +20,8 @@ var config = {
     });
   },
   cssfiles: [
+    'css/bootstrap.css',
+    'css/bootstrap-theme.css',
     'css/**/*.css',
     'styles/**/*.css'
   ],
