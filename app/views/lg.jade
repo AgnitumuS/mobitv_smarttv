@@ -2,8 +2,8 @@ extends layout
 block platform
   -platform = 'tv_webos'
   script(type='text/javascript').
-    window.fimplus = {};
-    window.fimplus.platform = '#{platform}';
+    window.pateco = {};
+    window.pateco.platform = '#{platform}';
   script(type="text/javascript" src="#{process.env.SERVER}lg/webOS.js")
 
 block style

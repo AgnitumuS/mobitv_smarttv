@@ -1,73 +1,73 @@
-fimplus.PlayerService =
-  actionKey         : ['backward', 'forward',
+pateco.PlayerService =
+  actionKey : ['backward', 'forward',
     'pause', 'stop', 'seekTo',
     'getState', 'getDuration',
     'getCurrentTime', 'play'
     'getVolume', 'setVolume'
   ]
-  _configPlayer     :
-    env       : 'development'
-    platform  : 'web'
-    state     : 'IDLE' #PAUSE , STOP, PLAY
-    duration  : 0
-    position  : 0
-    skdVersion: 3
-    drm       : {}
-    url       : ''
-    listener  : {}
-    browser   :
-      name   : 'chrome'
-      version: 40
-    webos     :
-      isDrmClientLoaded: false
-      clientId         : undefined
-      drmType          : 'viewright_web'
-      drmTypeInit      : 'verimatrix'
-      appId            : 'com.yourdomain.app'
-      msg              : '{"company_name":"galaxy", "vcas_boot_address":"vm-acsm.fimplus.vn:80"}'
-      drmSystemId      : '0x5601'
-      msgId            : null
-    tv_tizen  :
-      drmServer:
+  _configPlayer :
+    env : 'development'
+    platform : 'web'
+    state : 'IDLE' #PAUSE , STOP, PLAY
+    duration : 0
+    position : 0
+    skdVersion : 3
+    drm : {}
+    url : ''
+    listener : {}
+    browser :
+      name : 'chrome'
+      version : 40
+    webos :
+      isDrmClientLoaded : false
+      clientId : undefined
+      drmType : 'viewright_web'
+      drmTypeInit : 'verimatrix'
+      appId : 'com.yourdomain.app'
+      msg : '{"company_name":"galaxy", "vcas_boot_address":"vm-acsm.pateco.vn:80"}'
+      drmSystemId : '0x5601'
+      msgId : null
+    tv_tizen :
+      drmServer :
         production : 'https://lic.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx?PlayRight=1&UseSimpleNonPersistentLicense=1'
-        staging    : 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx?PlayRight=1&UseSimpleNonPersistentLicense=1'
-        sandbox    : 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx?PlayRight=1&UseSimpleNonPersistentLicense=1'
-        development: 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx?PlayRight=1&UseSimpleNonPersistentLicense=1'
-        sandbox    : 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx?PlayRight=1&UseSimpleNonPersistentLicense=1'
-    web       :
-      player   : undefined
-      html     :
-        techs: ['html5hls']
-      flash    :
-        silverlightFile: "/player_web/dashcs.xap?t=" + (new Date).getTime()
-        flashFile      : "./player_web/dashas.swf?t=" + (new Date).getTime()
-        techs          : ['dashjs', 'dashas', 'dashcs']
-      drmServer:
+        staging : 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx?PlayRight=1&UseSimpleNonPersistentLicense=1'
+        sandbox : 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx?PlayRight=1&UseSimpleNonPersistentLicense=1'
+        development : 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx?PlayRight=1&UseSimpleNonPersistentLicense=1'
+        sandbox : 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx?PlayRight=1&UseSimpleNonPersistentLicense=1'
+    web :
+      player : undefined
+      html :
+        techs : ['html5hls']
+      flash :
+        silverlightFile : "/player_web/dashcs.xap?t=" + (new Date).getTime()
+        flashFile : "./player_web/dashas.swf?t=" + (new Date).getTime()
+        techs : ['dashjs', 'dashas', 'dashcs']
+      drmServer :
         production :
           fairplayLicenseServerURL : "https://lic.drmtoday.com/license-server-fairplay/",
-          fairplayCertificateURL   : 'https://lic.drmtoday.com/license-server-fairplay/cert/',
+          fairplayCertificateURL : 'https://lic.drmtoday.com/license-server-fairplay/cert/',
           widevineLicenseServerURL : 'https://lic.drmtoday.com/license-proxy-widevine/cenc/'
-          accessLicenseServerURL   : 'https://lic.drmtoday.com/flashaccess/LicenseTrigger/v1'
-          playReadyLicenseServerURL: 'https://lic.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx'
-        development:
+          accessLicenseServerURL : 'https://lic.drmtoday.com/flashaccess/LicenseTrigger/v1'
+          playReadyLicenseServerURL : 'https://lic.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx'
+        development :
           widevineLicenseServerURL : 'https://lic.staging.drmtoday.com/license-proxy-widevine/cenc/'
-          accessLicenseServerURL   : 'https://lic.staging.drmtoday.com/flashaccess/LicenseTrigger/v1'
-          playReadyLicenseServerURL: 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx'
+          accessLicenseServerURL : 'https://lic.staging.drmtoday.com/flashaccess/LicenseTrigger/v1'
+          playReadyLicenseServerURL : 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx'
           fairplayLicenseServerURL : "https://lic.staging.drmtoday.com/license-server-fairplay/",
-          fairplayCertificateURL   : 'https://lic.staging.drmtoday.com/license-server-fairplay/cert/',
-        staging    :
+          fairplayCertificateURL : 'https://lic.staging.drmtoday.com/license-server-fairplay/cert/',
+        staging :
           widevineLicenseServerURL : 'https://lic.staging.drmtoday.com/license-proxy-widevine/cenc/'
-          accessLicenseServerURL   : 'https://lic.staging.drmtoday.com/flashaccess/LicenseTrigger/v1'
-          playReadyLicenseServerURL: 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx'
+          accessLicenseServerURL : 'https://lic.staging.drmtoday.com/flashaccess/LicenseTrigger/v1'
+          playReadyLicenseServerURL : 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx'
           fairplayLicenseServerURL : "https://lic.staging.drmtoday.com/license-server-fairplay/",
-          fairplayCertificateURL   : 'https://lic.staging.drmtoday.com/license-server-fairplay/cert/',
-        sandbox    :
+          fairplayCertificateURL : 'https://lic.staging.drmtoday.com/license-server-fairplay/cert/',
+        sandbox :
           widevineLicenseServerURL : 'https://lic.staging.drmtoday.com/license-proxy-widevine/cenc/'
-          accessLicenseServerURL   : 'https://lic.staging.drmtoday.com/flashaccess/LicenseTrigger/v1'
-          playReadyLicenseServerURL: 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx'
+          accessLicenseServerURL : 'https://lic.staging.drmtoday.com/flashaccess/LicenseTrigger/v1'
+          playReadyLicenseServerURL : 'https://lic.staging.drmtoday.com/license-proxy-headerauth/drmtoday/RightsManager.asmx'
           fairplayLicenseServerURL : "https://lic.staging.drmtoday.com/license-server-fairplay/",
-          fairplayCertificateURL   : 'https://lic.staging.drmtoday.com/license-server-fairplay/cert/',
-  listListener      : [
+          fairplayCertificateURL : 'https://lic.staging.drmtoday.com/license-server-fairplay/cert/',
+  listListener : [
     'onPlay',
     'onError',
     'onBufferingStart'
@@ -77,37 +77,37 @@ fimplus.PlayerService =
     'onVolumeChange',
     'onStateChange'
   ]
-  triggerStateChange: ()->
-    self = fimplus.PlayerService
+  triggerStateChange : ()->
+    self = pateco.PlayerService
     self.onStateChange(self.getState())
-  onStateChange     : ()->
+  onStateChange : ()->
     console.log 'on state change'
-  
-  onBufferingStart: ()->
+
+  onBufferingStart : ()->
     console.log 'on Buffering Start'
-  
-  onBufferingProgress: (percent)->
+
+  onBufferingProgress : (percent)->
     console.log "Buffering progress data : " + percent
-  
-  onBufferingComplete: ()->
+
+  onBufferingComplete : ()->
     console.log "Buffering complete."
-  
-  onCurrentPlaytime: (position)->
+
+  onCurrentPlaytime : (position)->
     console.log position
-  
-  onStreamCompleted: ()->
+
+  onStreamCompleted : ()->
     console.log "Stream Completed"
-  
-  onPlay: ()->
+
+  onPlay : ()->
     console.log 'Player on Play'
-  
-  onError: (error)->
+
+  onError : (error)->
     console.error error
-  
-  onVolumeChange: (volume)->
+
+  onVolumeChange : (volume)->
     console.log volume
-  
-  preparePlayerElement: ()->
+
+  preparePlayerElement : ()->
     console.info 'Prepare Element'
     self = @
     element = $(self.options.wrapper)
@@ -118,10 +118,10 @@ fimplus.PlayerService =
         self.web.init(element)
       when 'tv_webos'
         self.tv_webos.init(element)
-  
-  onSetActionKey: (action)->
+
+  onSetActionKey : (action)->
     console.info 'Init Action Player : ' + action
-    self = fimplus.PlayerService
+    self = pateco.PlayerService
     self[action] = (data)->
       switch self.options.platform
         when 'tv_tizen'
@@ -130,13 +130,13 @@ fimplus.PlayerService =
           self.web[action](data)
         when 'tv_webos'
           self.tv_webos[action](data)
-  
-  setup: (options)->
+
+  setup : (options)->
     self = @
     _.map self.actionKey, self.onSetActionKey
     console.info 'Init Setup Player'
     self.options = _.extend _.clone(self._configPlayer), options
-    
+
     _.map _.clone(self.options.listener), (func, key)->
       if _.isFunction(func) and key in self.listListener
         console.info "Init listener #{key} success!"
@@ -145,46 +145,46 @@ fimplus.PlayerService =
         console.warn('Listener ' + key + ' is not function')
     unless self.options.url
       self.onError({
-        message: ['connect-error-try','#1100']
+        message : ['connect-error-try', '#1100']
         detail : self.options.drm
       })
       return
     self.preparePlayerElement()
     self.play()
-  
-  tv_tizen:
-    listener  :
-      onbufferingstart   : ()->
-        fimplus.PlayerService.onBufferingStart()
-      onbufferingprogress: (percent)->
-        fimplus.PlayerService.onBufferingProgress(percent)
-      onbufferingcomplete: ()->
-        fimplus.PlayerService.onBufferingComplete()
-      onstreamcompleted  : ()->
-        fimplus.PlayerService.onStreamCompleted()
-      oncurrentplaytime  : (currentTime) ->
-        fimplus.PlayerService.onCurrentPlaytime(currentTime / 1000)
-      onevent            : (eventType, eventData) ->
+
+  tv_tizen :
+    listener :
+      onbufferingstart : ()->
+        pateco.PlayerService.onBufferingStart()
+      onbufferingprogress : (percent)->
+        pateco.PlayerService.onBufferingProgress(percent)
+      onbufferingcomplete : ()->
+        pateco.PlayerService.onBufferingComplete()
+      onstreamcompleted : ()->
+        pateco.PlayerService.onStreamCompleted()
+      oncurrentplaytime : (currentTime) ->
+        pateco.PlayerService.onCurrentPlaytime(currentTime / 1000)
+      onevent : (eventType, eventData) ->
         console.log "event type: " + eventType + ", data: " + eventData
-      ondrmevent         : (drmEvent, drmData) ->
+      ondrmevent : (drmEvent, drmData) ->
         if drmData.name is "Challenge"
-          drmParam = ResponseMessage: drmData.message
+          drmParam = ResponseMessage : drmData.message
           webapis.avplay.setDrm "PLAYREADY", "InstallLicense", JSON.stringify(drmParam)
-      onerror            : (eventType) ->
-        fimplus.PlayerService.onError(
-          code   : 2
-          message: 'Kết nối đến hệ thống bị gián đoạn vui lòng thử lại sau, #1700'
+      onerror : (eventType) ->
+        pateco.PlayerService.onError(
+          code : 2
+          message : 'Kết nối đến hệ thống bị gián đoạn vui lòng thử lại sau, #1700'
           detail : eventType
         )
-    prepareDrm: ()->
-      self = fimplus.PlayerService
+    prepareDrm : ()->
+      self = pateco.PlayerService
       data =
-        LicenseServer        : fimplus.PlayerService.options.tv_tizen.drmServer[self.options.env]
-        DeleteLicenseAfterUse: true
-        CustomData           : base64.encode JSON.stringify(self.options.drm)
+        LicenseServer : pateco.PlayerService.options.tv_tizen.drmServer[self.options.env]
+        DeleteLicenseAfterUse : true
+        CustomData : base64.encode JSON.stringify(self.options.drm)
       return  JSON.stringify(data)
-    init      : (element)->
-      self = fimplus.PlayerService
+    init : (element)->
+      self = pateco.PlayerService
       element.html("""
             <object id='#{self.options.element}' type='application/avplayer' style="width:100%;height:100%"></object>
             """)
@@ -197,7 +197,7 @@ fimplus.PlayerService =
       #        webapis.avplay.setStreamingProperty("SET_MODE_4K", "TRUE");
       #      else
       #        console.log("4K UHD is not supported");
-      
+
       webapis.avplay.setDisplayRect(0, 0, 1920, 1080)
       unless _.isEmpty self.options.drm
         webapis.avplay.setDrm("PLAYREADY", "SetProperties", self.tv_tizen.prepareDrm())
@@ -211,22 +211,22 @@ fimplus.PlayerService =
         if self.options.position isnt 0
           webapis.avplay.seekTo(self.options.position * 1000)
         webapis.avplay.play()
-        fimplus.PlayerService.triggerStateChange()
+        pateco.PlayerService.triggerStateChange()
         self.onPlay()
       )
-    forward   : (second = 60)->
+    forward : (second = 60)->
       try
         webapis.avplay.jumpForward(second * 1000)
       catch e
         console.warn('This device isnt tv_tizen platform', e)
-    
-    backward: (second = 60)->
+
+    backward : (second = 60)->
       try
         webapis.avplay.jumpBackward(second * 1000)
       catch e
         console.warn('This device isnt tv_tizen platform', e)
-    
-    getState: ()->
+
+    getState : ()->
       try
         switch webapis.avplay.getState()
           when 'PLAYING'
@@ -237,41 +237,41 @@ fimplus.PlayerService =
             webapis.avplay.getState()
       catch e
         console.warn('This device isnt tv_tizen platform', e)
-    
-    getCurrentTime: ()->
+
+    getCurrentTime : ()->
       try
         return webapis.avplay.getCurrentTime() / 1000
       catch e
         console.warn('This device isnt tv_tizen platform', e)
-    
-    getDuration: ()->
+
+    getDuration : ()->
       try
         return webapis.avplay.getDuration() / 1000
       catch e
         console.warn('This device isnt tv_tizen platform', e)
-    
-    pause    : ()->
-      self = fimplus.PlayerService
+
+    pause : ()->
+      self = pateco.PlayerService
       try
         console.log 'call paause', webapis.avplay.getState()
         webapis.avplay.pause() if webapis.avplay.getState() is 'PLAYING'
       catch e
         console.warn('This device isnt tv_tizen platform', e)
       self.triggerStateChange()
-    setVolume: (volume = 0) ->
-      self = fimplus.PlayerService
+    setVolume : (volume = 0) ->
+      self = pateco.PlayerService
       try
         tizen.tvaudiocontrol.setVolume(volume);
         self.onVolumeChange(volume)
       catch e
         console.warn('This device isnt tv_tv_tizen platform', e)
-    getVolume: (volume = 0) ->
+    getVolume : (volume = 0) ->
       try
         return tizen.tvaudiocontrol.getVolume();
       catch e
         console.warn('This device isnt tizen platform', e)
-    
-    stop: ()->
+
+    stop : ()->
       try
         webapis.appcommon.setScreenSaver(webapis.appcommon.AppCommonScreenSaverState.SCREEN_SAVER_ON);
       catch e
@@ -280,58 +280,58 @@ fimplus.PlayerService =
         webapis.avplay.close()
       catch e
         console.warn('This device isnt tv_tizen platform', e)
-      fimplus.PlayerService.triggerStateChange()
-    
-    play: ()->
+      pateco.PlayerService.triggerStateChange()
+
+    play : ()->
       console.log 'call tv_tizen play'
       try
         webapis.appcommon.setScreenSaver(webapis.appcommon.AppCommonScreenSaverState.SCREEN_SAVER_OFF);
       catch e
         console.info 'Can not off screen saver on tizen'
-      
+
       try
         webapis.avplay.play() if webapis.avplay.getState() is 'PAUSED'
       catch e
         console.warn 'This device isnt tv_tizen platform -> can not play', e
-      fimplus.PlayerService.triggerStateChange()
-    
-    seekTo: (second = 0)->
+      pateco.PlayerService.triggerStateChange()
+
+    seekTo : (second = 0)->
       try
         console.log 'is seekto', second
         webapis.avplay.seekTo(second * 1000) if second isnt 0
       catch e
         console.warn('This device isnt tv_tizen platform', e)
-  
-  web:
-    init: (element)->
-      self = fimplus.PlayerService
+
+  web :
+    init : (element)->
+      self = pateco.PlayerService
       console.info 'Init Player Web Element'
       element.append("<video id='#{self.options.element}'></video>")
       self.options.web.player = videojs self.options.element,
-        autoplay      : true,
-        controls      : false,
-        dasheverywhere: self.web.prepareDrm(),
-        techOrder     : ['dasheverywhere']
+        autoplay : true,
+        controls : false,
+        dasheverywhere : self.web.prepareDrm(),
+        techOrder : ['dasheverywhere']
       self.web.listener()
       self.options.state = "IDLE"
-    
-    prepareDrm: ()->
-      self = fimplus.PlayerService
+
+    prepareDrm : ()->
+      self = pateco.PlayerService
       config =
-        assetId   : self.options.drm.assetId
-        customData:
-          userId   : self.options.drm.userId
-          sessionId: self.options.drm.sessionId
+        assetId : self.options.drm.assetId
+        customData :
+          userId : self.options.drm.userId
+          sessionId : self.options.drm.sessionId
           merchant : self.options.drm.merchant
       config = _.extend config, self.options.web.drmServer[self.options.env]
       if self.options.browser.name in ['safari']
         config = _.extend config, self.options.web.html
       else
         config = _.extend config, self.options.web.flash
-      
+
       return config
-    listener  : ()->
-      self = fimplus.PlayerService
+    listener : ()->
+      self = pateco.PlayerService
       self.options.web.player.on 'volumechange', ()->
         self.onVolumeChange(self.web.getVolume())
       self.options.web.player.on 'loadedmetadata', ->
@@ -365,46 +365,46 @@ fimplus.PlayerService =
         return
       self.options.web.player.on 'error', (error) ->
         params =
-          code   : 2
-          message: ["connect-error-try", "#1200"]
+          code : 2
+          message : ["connect-error-try", "#1200"]
           detail : error
         self.options.state = 'STOP'
         self.triggerStateChange()
         self.onError params
-    
-    getCurrentTime: ()->
-      self = fimplus.PlayerService
+
+    getCurrentTime : ()->
+      self = pateco.PlayerService
       return self.options.web.player.currentTime()
-    
-    play     : ()->
-      self = fimplus.PlayerService
+
+    play : ()->
+      self = pateco.PlayerService
       return self.options.web.player.play() if self.options.state is 'PAUSE'
       if self.options.state is 'IDLE'
         self.options.web.player.loadVideo(self.options.url, {});
-    setVolume: (volume)->
-      self = fimplus.PlayerService
+    setVolume : (volume)->
+      self = pateco.PlayerService
       volume = volume / 100
       self.options.web.player.volume(volume)
-    getVolume: ()->
-      self = fimplus.PlayerService
+    getVolume : ()->
+      self = pateco.PlayerService
       return self.options.web.player.volume() * 100
-    seekTo   : (second)->
-      fimplus.PlayerService.options.web.player.currentTime(second)
-    
-    forward: (second = 60)->
-      fimplus.PlayerService.options.web.player.currentTime(fimplus.PlayerService.web.getCurrentTime() + second)
-    
-    backward: (second = 60)->
-      fimplus.PlayerService.options.web.player.currentTime(fimplus.PlayerService.web.getCurrentTime() - second)
-    
-    pause: ()->
-      fimplus.PlayerService.options.web.player.pause()
-    
-    getState: ()->
-      return fimplus.PlayerService.options.state
-    
-    stop: ()->
-      self = fimplus.PlayerService
+    seekTo : (second)->
+      pateco.PlayerService.options.web.player.currentTime(second)
+
+    forward : (second = 60)->
+      pateco.PlayerService.options.web.player.currentTime(pateco.PlayerService.web.getCurrentTime() + second)
+
+    backward : (second = 60)->
+      pateco.PlayerService.options.web.player.currentTime(pateco.PlayerService.web.getCurrentTime() - second)
+
+    pause : ()->
+      pateco.PlayerService.options.web.player.pause()
+
+    getState : ()->
+      return pateco.PlayerService.options.state
+
+    stop : ()->
+      self = pateco.PlayerService
       self.options.state = 'STOP'
       self.triggerStateChange()
       delete videojs.getPlayers()[self.options.element]
@@ -412,13 +412,13 @@ fimplus.PlayerService =
         document.getElementById(self.options.element).remove();
       catch e
         console.log e
-    
-    getDuration: ()->
-      return fimplus.PlayerService.options.web.player.duration()
-  
-  tv_webos:
-    init      : (element)->
-      self = fimplus.PlayerService
+
+    getDuration : ()->
+      return pateco.PlayerService.options.web.player.duration()
+
+  tv_webos :
+    init : (element)->
+      self = pateco.PlayerService
       tv_webos.unloadDrmClient()
       #      self.options.drm = {}
       #      self.options.url = 'http://103.205.104.214/hevc_hdr_dash/manifest.mpd'
@@ -430,96 +430,96 @@ fimplus.PlayerService =
         tv_webos.listener()
       else
         tv_webos.listener20()
-    requestDrm: (params)->
+    requestDrm : (params)->
       try
         webOS.service.request('luna://com.webos.service.drm', params)
       catch e
         console.warn('This device isnt tv_webos platform', e)
-    
-    requestVolume: (params)->
+
+    requestVolume : (params)->
       try
         webOS.service.request('luna://com.webos.audio', params)
       catch e
         console.warn('This device isnt tv_webos platform', e)
-    
-    setVolume: (volume = 30)->
-      self = fimplus.PlayerService
+
+    setVolume : (volume = 30)->
+      self = pateco.PlayerService
       self.onVolumeChange(30)
 #    params =
 #      method  :'volumn
-    getVolume: ()->
-      self = fimplus.PlayerService
+    getVolume : ()->
+      self = pateco.PlayerService
       self.onVolumeChange(30)
       return 30
-    
-    unloadDrmClient: ()->
+
+    unloadDrmClient : ()->
       return unless self.options.webos.isDrmClientLoaded
       params =
-        method    : 'unload'
-        parameters:
-          clientId: self.options.webos.clientId
+        method : 'unload'
+        parameters :
+          clientId : self.options.webos.clientId
         onSuccess : (result) ->
           self.options.webos.isDrmClientLoaded = false
         onFailure : (result) ->
           data =
-            code   : 2
-            message: ["connect-error-try", "#1501"]
-            default: result
+            code : 2
+            message : ["connect-error-try", "#1501"]
+            default : result
           self.onError(data)
-      
+
       tv_webos.requestDrm(params)
       null
-    
-    loadDrmClient: ()->
+
+    loadDrmClient : ()->
       params =
-        method    : 'load'
-        parameters:
-          drmType: self.options.webos.drmType
-          appId  : self.options.webos.appId
+        method : 'load'
+        parameters :
+          drmType : self.options.webos.drmType
+          appId : self.options.webos.appId
         onSuccess : (result) ->
           self.options.webos.clientId = result.clientId
           self.options.webos.isDrmClientLoaded = true
           tv_webos.sendRightInformation()
         onFailure : (result) ->
           data =
-            code   : 2
-            message: ["connect-error-try", "#1502"]
-            default: result
+            code : 2
+            message : ["connect-error-try", "#1502"]
+            default : result
           self.onError(data)
       tv_webos.requestDrm(params)
       null
-    
-    sendRightInformation: ()->
+
+    sendRightInformation : ()->
       params =
-        method    : 'sendDrmMessage'
-        parameters:
-          clientId   : self.options.webos.clientId
-          msgType    : 'json'
-          msg        : self.options.webos.msg
-          drmSystemId: self.options.webos.drmSystemId
-        
-        onSuccess: (result) ->
+        method : 'sendDrmMessage'
+        parameters :
+          clientId : self.options.webos.clientId
+          msgType : 'json'
+          msg : self.options.webos.msg
+          drmSystemId : self.options.webos.drmSystemId
+
+        onSuccess : (result) ->
           console.info 'LG request DRM success'
           self.options.webos.msgId = result.msgId
           tv_webos.setPlaybackOptions()
-        
-        onFailure: (result) ->
+
+        onFailure : (result) ->
           console.info 'LG request DRM unsuccess', result
           data =
-            code   : 2
-            message: ["connect-error-try", "#1503"]
-            default: result
+            code : 2
+            message : ["connect-error-try", "#1503"]
+            default : result
           self.onError(data)
       console.info 'LG request DRM with parameters', params.parameters
       tv_webos.requestDrm(params)
       null
-    
-    prepareSource: ()->
+
+    prepareSource : ()->
       params =
-        option:
-          drm:
-            type    : self.options.webos.drmTypeInit
-            clientId: self.options.webos.clientId
+        option :
+          drm :
+            type : self.options.webos.drmTypeInit
+            clientId : self.options.webos.clientId
       source = document.createElement('source')
       source.setAttribute 'src', self.options.url
       if _.isEmpty self.options.drm
@@ -527,21 +527,21 @@ fimplus.PlayerService =
       else
         source.setAttribute 'type', 'application/x-mpegurl;mediaOption=' + escape(JSON.stringify(params))
       return source
-    
-    setPlaybackOptions: () ->
+
+    setPlaybackOptions : () ->
       source = tv_webos.prepareSource()
       self.options.webos.player.appendChild source
       if self.options.skdVersion is 3
         self.options.webos.player.load()
       else
         self.options.webos.player.play()
-    
-    listener20: ()->
+
+    listener20 : ()->
       console.log 'init listener 2.0'
       timeoutload = setTimeout(()->
         data =
-          code   : 2
-          message: ["connect-error-try", "#1520"]
+          code : 2
+          message : ["connect-error-try", "#1520"]
           detail : "Can not load #{self.options.url}"
         self.onError(data)
       , 20000)
@@ -553,31 +553,31 @@ fimplus.PlayerService =
         self.options.state = 'PLAY'
         self.options.webos.player.currentTime = self.options.position if self.options.position isnt 0
         self.onPlay()
-      
+
       self.options.webos.player.addEventListener 'pause', ()->
         console.log 'on pause'
         self.options.state = 'PAUSE'
-      
+
       self.options.webos.player.addEventListener 'playing', ()->
         console.log 'on play'
         self.options.state = 'PLAY'
-      
+
       self.options.webos.player.addEventListener 'timeupdate', ()->
         self.onCurrentPlaytime(tv_webos.getCurrentTime())
-      
+
       self.options.webos.player.addEventListener 'error', (error)->
         data =
-          code   : 2
-          message: ["connect-error-try", "#1500"]
+          code : 2
+          message : ["connect-error-try", "#1500"]
           detail : error
         self.onError(data)
-      
+
       self.options.webos.player.addEventListener 'waiting', ()->
         self.onBufferingStart()
       self.options.webos.player.addEventListener 'ended', ()->
         self.onStreamCompleted()
-    
-    listener: ()->
+
+    listener : ()->
       console.log 'init listener 3.0'
       #      timeoutload = setTimeout(()->
       #        data =
@@ -599,53 +599,53 @@ fimplus.PlayerService =
       self.options.webos.player.onpause = ()->
         console.log 'on pause'
         self.options.state = 'PAUSE'
-      
+
       self.options.webos.player.onplay = ()->
         console.log 'on play'
         self.options.state = 'PLAY'
-      
+
       self.options.webos.player.ontimeupdate = ()->
         self.onCurrentPlaytime(tv_webos.getCurrentTime())
-      
+
       self.options.webos.player.onerror = (error)->
         console.log error
         data =
-          code   : 2
-          message: ["connect-error-try", "#1500"]
+          code : 2
+          message : ["connect-error-try", "#1500"]
           detail : error
         self.onError(data)
-      
+
       self.options.webos.player.onloadstart = (da) ->
         self.onBufferingStart()
       self.options.webos.player.onended = (data)->
         self.onStreamCompleted()
-    
-    getState: ()->
+
+    getState : ()->
       try
         self.options.state
       catch e
         console.warn('This device isnt TV_WEBOS platform', e)
-    
-    getCurrentTime: ()->
+
+    getCurrentTime : ()->
       try
         return self.options.webos.player.currentTime
       catch e
         console.warn('This device isnt TV_WEBOS platform', e)
-    
-    getDuration: ()->
+
+    getDuration : ()->
       try
         return self.options.webos.player.duration
       catch e
         console.warn('This device isnt TV_WEBOS platform', e)
-    
-    pause: ()->
+
+    pause : ()->
       try
         self.options.webos.player.pause()
         self.options.state = 'PAUSE'
       catch e
         console.warn('This device isnt TV_WEBOS platform', e)
-    
-    stop: ()->
+
+    stop : ()->
       try
         self.options.state = 'STOP'
         #      self.options.webos.player.
@@ -653,27 +653,27 @@ fimplus.PlayerService =
         document.getElementById(self.options.element).remove();
       catch e
         console.warn('This device isnt TV_WEBOS platform', e)
-    
-    seekTo: (second = 0)->
+
+    seekTo : (second = 0)->
       try
         console.log 'is seekto', second
         self.options.webos.player.currentTime = second
       catch e
         console.warn('This device isnt TV_WEBOS platform', e)
-    
-    forward: (second = 60)->
+
+    forward : (second = 60)->
       try
         self.options.webos.player.currentTime = self.options.webos.player.currentTime + second
       catch e
         console.warn('This device isnt TV_WEBOS platform', e)
-    
-    backward: (second = 60)->
+
+    backward : (second = 60)->
       try
         self.options.webos.player.currentTime = self.options.webos.player.currentTime - second
       catch e
         console.warn('This device isnt TV_WEBOS platform', e)
-    
-    play: ()->
+
+    play : ()->
       return self.options.webos.player.play() if tv_webos.getState() is 'PAUSE'
       unless _.isEmpty self.options.drm
         tv_webos.loadDrmClient()

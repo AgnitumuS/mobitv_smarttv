@@ -59,7 +59,6 @@ Handlebars.registerHelper 'ifNotEqual', (v1, v2, options)->
     return options.fn(this)
   return options.inverse(this)
 
-
 Handlebars.registerHelper 'ifBetween', (value, param1, param2, options)->
   if value > param1 and value < param2
     return options.fn(this)
@@ -72,23 +71,22 @@ Handlebars.registerHelper 'ifBetweenEqual', (value, param1, param2, options)->
 
 Handlebars.registerHelper 'language', (str)->
   if localStorage.userSettings
-    lang = fimplus.UserService.getValueStorage('userSettings', 'language')
-    return fimplus.LanguageService.convert(str, lang)
+    lang = pateco.UserService.getValueStorage('userSettings', 'language')
+    return pateco.LanguageService.convert(str, lang)
   else
-    return fimplus.LanguageService.convert(str)
+    return pateco.LanguageService.convert(str)
 
 Handlebars.registerHelper 'coverNumber', (int)->
-  return fimplus.UtitService.coverNumber(int)
+  return pateco.UtitService.coverNumber(int)
 
 Handlebars.registerHelper 'inc', (value, options)->
   return parseInt(value) + 1
 
-
 Handlebars.registerHelper 'coverTime', (seconds)->
-    hh = Math.floor(seconds / 3600)
-    mm = Math.floor(seconds / 60) % 60
-    ss = Math.floor(seconds) % 60
-    return ((if hh then ((if hh < 10 then "0" else "")) + hh + ":" else "")) + ((if (mm < 10) then "0" else "")) + mm + ":" + ((if (ss < 10) then "0" else "")) + ss
+  hh = Math.floor(seconds / 3600)
+  mm = Math.floor(seconds / 60) % 60
+  ss = Math.floor(seconds) % 60
+  return ((if hh then ((if hh < 10 then "0" else "")) + hh + ":" else "")) + ((if (mm < 10) then "0" else "")) + mm + ":" + ((if (ss < 10) then "0" else "")) + ss
 
 Handlebars.registerHelper 'coverTimeMinute', (seconds)->
   mm = Math.ceil(seconds / 60)
@@ -115,15 +113,3 @@ Handlebars.registerHelper('forLoop', (n, block)->
     i++
   return accum
 )
-#
-#Handlebars.registerHelper('currency', (amount, options)->
-#  console.log amount
-#  console.log options
-#  if typeof(amount) is 'string'
-#    amount = options.contexts[0].get(amount)
-#  rounded = Math.round(amount*100)
-#  dec = rounded%100
-#  whole = rounded/100 - dec/100
-#  decStr = ''+dec
-#  return '$' + whole + '.' + decStr + ( decStr.length < 2 ? '0' : '')
-#)

@@ -1,10 +1,10 @@
-fimplus.UserService =
+pateco.UserService =
   data:
     watchLater:
       items: []
   
   addDataWatchLater: (item, add = true)->
-    self = fimplus.UserService
+    self = pateco.UserService
     index = _.findIndex self.data.watchLater.items, {id: item.id}
     if add and index is -1
       self.data.watchLater.items.unshift item
@@ -12,7 +12,7 @@ fimplus.UserService =
       self.data.watchLater.items.splice(index, 1)
   
   getWatchLater: (callback)->
-    self = fimplus.UserService
+    self = pateco.UserService
     done = (error, result)->
       if error
         return callback()
@@ -22,7 +22,7 @@ fimplus.UserService =
     params =
       limit: 40
       page : 0
-    fimplus.ApiService.getWatchLater(params, done)
+    pateco.ApiService.getWatchLater(params, done)
   
   getProfile : ()->
     try
