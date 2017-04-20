@@ -6,9 +6,9 @@ config =
 
   api:
     production :
-      cm     : "https://api.pateco.io/cm/hd1/v1/"
+      cm     : 'https://api.mobitv.io/v1/'
     development:
-      cm     : "http://dev.pateco.io/hd1/v1/"
+      cm     : 'http://dev.mobitv.io:1337/v1/'
 
   web:
     exit      : ()->

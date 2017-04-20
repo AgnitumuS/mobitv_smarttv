@@ -1,33 +1,28 @@
-# README #
+# Smart TV JS #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+### Libary js ###
+* Handlebar js
+* Jquery
+* Underscore
+* Async js
+* Platform js
+* Moment js
 
-### What is this repository for? ###
+### TV Samsung Tizen ###
+* build for samsung tv tizen
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Setup DEV ###
 
-### How do I get set up? ###
+* install ruby, sass, node, grunt, jade
+* npm install
+* ENV=dev SERVER=/ grunt dev
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### Setup PROD ###
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* install ruby, sass, node, grunt, jade
+* npm install
+* ENV=production SERVER=/ grunt prod
 
 ### ERROR CODE DEFINE ###
-* 1000 error when get api home
-* 1001 error when get api detail entity
+* 1000 : error when get api home
+* 1001 : error when get api detail entity
