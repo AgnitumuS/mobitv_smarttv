@@ -20,3 +20,22 @@
 @import "search";
 @import "season";
 @import "viewmore";
+
+
+//Bootstrap responsive standand size
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1920px) {
+  //  default style here
+  //  after responsive on 1280 and 768
+  //  after on 480
+}
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1280px) {  }
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {  }
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {  }
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {  }
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {  }
