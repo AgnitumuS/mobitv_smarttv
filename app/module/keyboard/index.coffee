@@ -7,20 +7,20 @@ Handlebars.registerHelper 'checkColSpan', (value)->
   return col
 
 Handlebars.registerHelper 'filterKeyboard', (value)->
-  lang = fimplus.UserService.getValueStorage('userSettings', 'language')
+  lang = pateco.UserService.getValueStorage('userSettings', 'language')
   switch value
     when 'shift'
       value = "<i class='icon ic-shift'></i>"
     when 'space'
       value = "<i class='icon ic-space'></i>"
     when 'delete'
-      value = fimplus.LanguageService.convert('key-delete', lang)
+      value = pateco.LanguageService.convert('key-delete', lang)
     when 'deleteAll'
-      value = fimplus.LanguageService.convert('key-delete-all', lang)
+      value = pateco.LanguageService.convert('key-delete-all', lang)
   
   return value
 
-fimplus._keyboard =
+pateco._keyboard =
   data:
     template      : Templates['module.keyboard']()
     currentBoard  : 'text'
@@ -79,7 +79,7 @@ fimplus._keyboard =
     self.initEventClick()
   
   onEnter: (event, value)->
-    self = fimplus._keyboard
+    self = pateco._keyboard
     currentValue = self.data.input.val()
     keyboardEl = $('.keyboard')
     if value is undefined
@@ -147,7 +147,7 @@ fimplus._keyboard =
       keyboard.find('li').eq(current).addClass('active')
   
   handleKeyButton: (keyCode, key)->
-    self = fimplus._keyboard
+    self = pateco._keyboard
     console.log('Keyboard Button :', keyCode)
     if self.data.currentBoard is 'number'
       button = self.data.buttonsNoSpace
@@ -181,23 +181,23 @@ fimplus._keyboard =
         value = button[self.data.positionButton]
         self.onEnter(null, value)
         return;
-    self.data.positionButton = fimplus.KeyService.reCalc(self.data.positionButton, button.length)
+    self.data.positionButton = pateco.KeyService.reCalc(self.data.positionButton, button.length)
     self.setActiveKeyBoardButton(self.data.positionButton)
   
   onBackKeyboard: ()->
-    self = fimplus._keyboard
+    self = pateco._keyboard
     self.data.layout = 'keyboard'
     self.setActiveKeyboard(self.data.positionKey.col, self.data.positionKey.row, true)
   
   onBackBoardButton: ()->
-    self = fimplus._keyboard
+    self = pateco._keyboard
     self.data.layout = 'button'
     self.setActiveKeyBoardButton(self.data.positionButton)
     self.setActiveKeyboard(0, 0, false)
   
   handleKey: (keyCode, key)->
     console.log('Keyboard :', keyCode)
-    self = fimplus._keyboard
+    self = pateco._keyboard
     positionKey = self.data.positionKey
     board = self.data[self.data.currentBoard]
     if self.data.layout is 'button'
@@ -235,8 +235,8 @@ fimplus._keyboard =
         value = board[positionKey.row][positionKey.col]
         self.onEnter(null, value)
     
-    positionKey.row = fimplus.KeyService.reCalc(positionKey.row, board.length)
-    positionKey.col = fimplus.KeyService.reCalc(positionKey.col, board[positionKey.row].length)
+    positionKey.row = pateco.KeyService.reCalc(positionKey.row, board.length)
+    positionKey.col = pateco.KeyService.reCalc(positionKey.col, board[positionKey.row].length)
     self.data.positionKey = positionKey
     self.setActiveKeyboard(positionKey.col, positionKey.row)
     

@@ -1,4 +1,4 @@
-fimplus._registerOtp =
+pateco._registerOtp =
   data:
     id           : '#register-otp'
     title        : 'login-phone-otp'
@@ -11,12 +11,12 @@ fimplus._registerOtp =
       backBtn =
         title : 'button-back'
         action: ()->
-          fimplus._registerOtp.backOtp()
+          pateco._registerOtp.backOtp()
       ,
       continueBtn =
         title : 'button-continue'
         action: ()->
-          fimplus._registerOtp.registerContinue()
+          pateco._registerOtp.registerContinue()
       ]
     positionEntity:
       active : false
@@ -34,12 +34,12 @@ fimplus._registerOtp =
       self.element.find('#otp, #otp1, #otp2, #otp3, #otp4').val('')
       self.initKey()
     params =
-      mobile : fimplus._registerUserName.username
+      mobile : pateco._registerUserName.username
       code : self.otp
-      platform : fimplus.config.platform
-    fimplus.ApiService.registerCheckCode params, (error, result)->
+      platform : pateco.config.platform
+    pateco.ApiService.registerCheckCode params, (error, result)->
       if result.status
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "register-fail"
           onReturn   : retry
           description: result.responseJSON.message
@@ -50,12 +50,12 @@ fimplus._registerOtp =
         });
         return
       self.data.token = result.token
-      fimplus._registerPassword.initPage(self.onReturnPage)
+      pateco._registerPassword.initPage(self.onReturnPage)
 
   setActiveButton    : (current = 0, length = 0)->
     self = @
     button = self.element.find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
 
@@ -76,10 +76,10 @@ fimplus._registerOtp =
     self.initKey()
 
   onReturnPage: ()->
-    self = fimplus._registerOtp
+    self = pateco._registerOtp
     element = $('.register-otp-keyboard')
     input = $('#otp')
-    fimplus._keyboard.render(element, input, self.onActiveEntity, 'number')
+    pateco._keyboard.render(element, input, self.onActiveEntity, 'number')
     self.initKey()
 
   render: ()->
@@ -89,7 +89,7 @@ fimplus._registerOtp =
     self.element = $(self.data.id)
     self.element.html(template({register: self.data}))
     @renderKeyboard()
-    fimplus._keyboard.setActiveKeyboard(0, 0)
+    pateco._keyboard.setActiveKeyboard(0, 0)
     buttonClick = ()->
       index = $(@).index()
       self.data.buttons[index].action()
@@ -102,7 +102,7 @@ fimplus._registerOtp =
     retry = ()->
       self.element.find('#otp, #otp1, #otp2, #otp3, #otp4').val('')
       self.initKey()
-    fimplus._error.initPage({
+    pateco._error.initPage({
       title      : "login-phone-otp"
       onReturn   : retry
       description: 'get-otp-again-message'
@@ -112,9 +112,9 @@ fimplus._registerOtp =
       ]
     });
     params =
-      mobile  : fimplus._registerUserName.username
-      platform: fimplus.config.platform
-    fimplus.ApiService.registerGetCode params, (error, result)->
+      mobile  : pateco._registerUserName.username
+      platform: pateco.config.platform
+    pateco.ApiService.registerGetCode params, (error, result)->
       console.log 'get otp again'
 
   renderKeyboard: ()->
@@ -122,7 +122,7 @@ fimplus._registerOtp =
     self.data.positionEntity.active = false
     element = $('.register-otp-keyboard')
     input = $('#otp')
-    fimplus._keyboard.render(element, input, self.onActiveEntity, 'number')
+    pateco._keyboard.render(element, input, self.onActiveEntity, 'number')
 
   initEventOtpOnchange: ()->
     self = @
@@ -149,31 +149,31 @@ fimplus._registerOtp =
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._registerOtp
+    self = pateco._registerOtp
     switch keyCode
       when key.DOWN
-        fimplus._keyboard.onBackKeyboard()
+        pateco._keyboard.onBackKeyboard()
         self.initKey()
       when key.RETURN,key.ENTER
         self.removePage()
 
   onActiveEntity: (type = 'DOWN')->
-    self = fimplus._registerOtp
+    self = pateco._registerOtp
     switch type
       when 'DOWN'
         if !self.data.positionEntity.active
           self.setActiveButton(self.data.currentActive, self.data.buttons.length)
           self.data.positionEntity.active = true
       when 'UP'
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
-        fimplus._keyboard.setActiveKeyboard(0, 0, false)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._keyboard.setActiveKeyboard(0, 0, false)
 
   handleKey: (keyCode, key)->
-    self = fimplus._registerOtp
+    self = pateco._registerOtp
     positionEntity = self.data.positionEntity
     if keyCode isnt key.RETURN
       unless positionEntity.active
-        fimplus._keyboard.handleKey(keyCode, key)
+        pateco._keyboard.handleKey(keyCode, key)
         return
     switch keyCode
       when key.RETURN
@@ -198,7 +198,7 @@ fimplus._registerOtp =
         else
           self.data.positionEntity.active = false
           self.element.find('.bt-movie').find('li').removeClass('active')
-          fimplus._keyboard.onBackBoardButton()
+          pateco._keyboard.onBackBoardButton()
         break;
       when key.LEFT
         if self.data.getOtp is false
@@ -212,10 +212,10 @@ fimplus._registerOtp =
   initKey: ()->
     self = @
     self.data.lengthDefault = 0
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   removePage: ()->
-    self = fimplus._registerOtp
+    self = pateco._registerOtp
     self.data.callback()
     self.element.html('')
     

@@ -1,4 +1,4 @@
-fimplus._settingMethod =
+pateco._settingMethod =
   data:
     id: '#setting-method'
     template  : Templates['module.setting.setting-method']()
@@ -28,11 +28,11 @@ fimplus._settingMethod =
           console.log 'change-card'
           # self.data.loadCard.active = false
           # self.data.addCard.active = true
-          fimplus._settingMethod.initKey()
-          fimplus._addCard.initPage(fimplus._settingMethod.callBackFunc)
+          pateco._settingMethod.initKey()
+          pateco._addCard.initPage(pateco._settingMethod.callBackFunc)
   
   loadVisaKey: (event)->
-    self = fimplus._settingMethod
+    self = pateco._settingMethod
     self.data.loadCard.active = true
     self.data.onFocus = true
     self.data.addMethod = 2
@@ -40,7 +40,7 @@ fimplus._settingMethod =
     self.render()
 
   initPage: (callback)->
-    self = fimplus._settingMethod
+    self = pateco._settingMethod
     self.data.loadCard.active = false
     self.data.callback = ()->
       console.log 'setting method callback to setting'
@@ -50,12 +50,12 @@ fimplus._settingMethod =
     self.initKey()
 
   getData: ()->
-    self = fimplus._settingMethod
+    self = pateco._settingMethod
     done = (error, result)->
       if result.status is 403
         #UtitService.closeHome()
         console.log "call login Screen"
-        fimplus._login.initPage(self.callBackFunc, self.callBackFunc)
+        pateco._login.initPage(self.callBackFunc, self.callBackFunc)
         #UtitService.openLogin()
       if result.sources[0] isnt null and result.sources[0] isnt undefined
         self.data.haveSource = true
@@ -69,12 +69,12 @@ fimplus._settingMethod =
           if month < 10
             result.sources[0].detail.expMonth = '0' + month
         self.loadVisaKey()
-        fimplus.KeyService.initKey(self.handleKeyLoadCard)
+        pateco.KeyService.initKey(self.handleKeyLoadCard)
       else
         # open add card
         self.initKey()
     
-    fimplus.ApiService.getPaymentMethod(null, window.fimplus.env, done)
+    pateco.ApiService.getPaymentMethod(null, window.pateco.env, done)
 
   render: ()->
     self = @
@@ -110,14 +110,14 @@ fimplus._settingMethod =
       $(listElement).find('li').first().addClass('active')
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._settingMethod
+    self = pateco._settingMethod
     switch keyCode
       when key.DOWN
         self.data.currentActive = 0
         self.toggleActiveMenu(true)
         # check to focus Active Key handle
         if self.data.sources isnt null and self.data.sources isnt undefined
-          fimplus.KeyService.initKey(self.handleKeyLoadCard)
+          pateco.KeyService.initKey(self.handleKeyLoadCard)
         else
           self.initKey()
 
@@ -125,45 +125,45 @@ fimplus._settingMethod =
         self.removePage()
     
   handleKey: (keyCode, key)->
-    self = fimplus._settingMethod
+    self = pateco._settingMethod
     console.info 'Setting Method Key:' + keyCode
     # length = Object.keys(self.data.buttons).length
     listElement = '.setting-menu'
     switch keyCode
       when key.ENTER
-        # fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
-        fimplus._addCard.initPage(self.callBackFunc)
+        # pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco._addCard.initPage(self.callBackFunc)
         break;
       when key.RETURN
         self.removePage()
-        fimplus._setting.initKey()
+        pateco._setting.initKey()
         break;
       when key.UP
-        fimplus._backButton.setActive(true, self.handleBackbutton)
+        pateco._backButton.setActive(true, self.handleBackbutton)
         self.toggleActiveMenu(false)
 
   handleKeyLoadCard: (keyCode, key)->
-    self = fimplus._settingMethod
+    self = pateco._settingMethod
     console.info 'Setting Load Visa Card:' + keyCode
     length = $('.bt-payment-load').find('li').length
     listElement = '.bt-payment-load'
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
       self.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         break;
       when key.RETURN
         console.log 'Call back to setting menu'
         self.data.haveSource = false
         self.removePage()
-        fimplus._setting.initKey()
+        pateco._setting.initKey()
         break;
       when key.UP
         self.data.currentActive--
         if self.data.currentActive < 0
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
         actionKey()
@@ -175,10 +175,10 @@ fimplus._settingMethod =
         break;
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   callBackFunc: ()->
-    self = fimplus._settingMethod
+    self = pateco._settingMethod
     self.initPage()
   
   removePage: ()->

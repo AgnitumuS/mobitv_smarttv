@@ -1,10 +1,10 @@
-fimplus._viewmore =
+pateco._viewmore =
   data:
     item: {}
   
   initPage: (item, callback)->
-    fimplus._ribbon.displayRibbon(false)
-    self = fimplus._viewmore
+    pateco._ribbon.displayRibbon(false)
+    self = pateco._viewmore
     self.data.item = item
     self.data.ribbon = []
     self.data.callback = ()->
@@ -23,12 +23,12 @@ fimplus._viewmore =
   
   
   onLeavePage: ()->
-    fimplus._ribbon.displayRibbon(true)
-    self = fimplus._viewmore
+    pateco._ribbon.displayRibbon(true)
+    self = pateco._viewmore
     self.element.html('')
   
   handleBackbutton: (keyCode, key)->
-    self = fimplus._viewmore
+    self = pateco._viewmore
     switch keyCode
       when key.DOWN
         positionEntity = self.data.positionEntity
@@ -39,7 +39,7 @@ fimplus._viewmore =
         self.removePage()
   
   handleKey: (keyCode, key)->
-    self = fimplus._viewmore
+    self = pateco._viewmore
     console.info 'View More Key:' + keyCode
     positionEntity = self.data.positionEntity
     actionLeftRight = ()->
@@ -66,7 +66,7 @@ fimplus._viewmore =
         if positionEntity.row is 0
           positionEntity.active = false
           self.setActivePointer(positionEntity.col, positionEntity.row, false)
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           return
         
         positionEntity.current -= positionEntity.maxCol
@@ -86,7 +86,7 @@ fimplus._viewmore =
       when key.UP
         if self.data.ribbonActive > 0
           self.data.ribbonActive--
-          fimplus._ribbon.setRibbonPosition(self.data.ribbonActive)
+          pateco._ribbon.setRibbonPosition(self.data.ribbonActive)
           actionLeftRight()
         break;
     # calcualate position of pointer when change key
@@ -98,39 +98,39 @@ fimplus._viewmore =
   
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   setCurrentBanner: (inFirst = false)->
     self = @
     #    if inFirst
     currentBanner = self.data.ribbon.items[self.data.positionEntity.current]
     if inFirst
-      fimplus._banner.render(currentBanner)
+      pateco._banner.render(currentBanner)
     else
-      fimplus._banner.reRender(currentBanner)
+      pateco._banner.reRender(currentBanner)
   
   removePage: ()->
-    self = fimplus._viewmore
+    self = pateco._viewmore
     self.element.html('')
-    fimplus._ribbon.displayRibbon()
+    pateco._ribbon.displayRibbon()
     if self.data.callback() and _.isFunction(self.data.callback)
       self.data.callback()
     else
-      fimplus._page.onReturnPage()
+      pateco._page.onReturnPage()
   
   onRetrunPage: ()->
-    self = fimplus._viewmore
+    self = pateco._viewmore
     $('#banner').find('.home-main').html('')
-    #    fimplus._page.activeIconBack(false)
-    fimplus._ribbon.displayRibbon(false)
+    #    pateco._page.activeIconBack(false)
+    pateco._ribbon.displayRibbon(false)
     self.initPage(self.data.item, self.data.callback)
   
   
   onRetrunPageLogin: ()->
-    self = fimplus._viewmore
-    if fimplus.UserService.isLogin()
-      fimplus._ribbon.displayRibbon(false)
-      self.initPage(fimplus._page.onReturnPage)
+    self = pateco._viewmore
+    if pateco.UserService.isLogin()
+      pateco._ribbon.displayRibbon(false)
+      self.initPage(pateco._page.onReturnPage)
       
       setTimeout(()->
         self.initActivePointer()
@@ -139,13 +139,13 @@ fimplus._viewmore =
       self.initKey()
     else
       self.removePage()
-      fimplus._page.initKey()
+      pateco._page.initKey()
   
   openDetail: ()->
-    self = fimplus._viewmore
+    self = pateco._viewmore
     self.onLeavePage()
     currentItem = self.data.ribbon.items[self.data.positionEntity.current]
-    fimplus._detail.initPage(currentItem, self.onRetrunPage)
+    pateco._detail.initPage(currentItem, self.onRetrunPage)
   
   onActiveEntity: ()->
     self = @
@@ -201,10 +201,10 @@ fimplus._viewmore =
   
   setNotifyViewmore: (active = true)->
     text = "movie-empty"
-    self = fimplus._viewmore
+    self = pateco._viewmore
     notify = self.element.find('.viewmore-notify')
-    lang = fimplus.UserService.getValueStorage('userSettings', 'language')
-    text = fimplus.LanguageService.convert(text, lang)
+    lang = pateco.UserService.getValueStorage('userSettings', 'language')
+    text = pateco.LanguageService.convert(text, lang)
     notify.html(text)
     
     if active
@@ -217,7 +217,7 @@ fimplus._viewmore =
     loadBannerInViewMore = (banner)->
       source = Templates['module.banner.home-main']()
       template = Handlebars.compile(source)
-      currentTitleLangguage = fimplus.UserService.getValueStorage('userSettings', 'movieTitleLanguage')
+      currentTitleLangguage = pateco.UserService.getValueStorage('userSettings', 'movieTitleLanguage')
       if currentTitleLangguage is 'en' then banner.knownAs = banner.title
       $('#banner').find('.home-main').html(template(banner))
     
@@ -243,13 +243,13 @@ fimplus._viewmore =
           description    : 'header-watchlater'
           title          : 'watch-later'
           image3x        :
-            bannerAppletv: 'https://ast.fimplus.io/files/header-watch_1489466156484.png'
-          posterLandscape: 'https://ast.fimplus.io/files/header-ic-watch_1489466929334.png'
-        #        fimplus._page.activeIconBack()
+            bannerAppletv: 'https://ast.pateco.io/files/header-watch_1489466156484.png'
+          posterLandscape: 'https://ast.pateco.io/files/header-ic-watch_1489466929334.png'
+        #        pateco._page.activeIconBack()
         #        loadBannerInViewMore(banner)
-        fimplus._banner.reRender(banner)
+        pateco._banner.reRender(banner)
       else
-        fimplus._page.activeIconBack()
+        pateco._page.activeIconBack()
         self.setNotifyViewmore(false)
         self.initActivePointer()
         loadBannerInViewMore(self.data.ribbon.items[self.data.positionEntity.current])
@@ -260,14 +260,14 @@ fimplus._viewmore =
       page : 0
     
     if _.isEmpty(self.data.item)
-      if fimplus.UserService.isLogin()
-        if fimplus.UserService.data.watchLater.items.length is 0
+      if pateco.UserService.isLogin()
+        if pateco.UserService.data.watchLater.items.length is 0
           self.removePage()
         else
-          done(null, fimplus.UserService.data.watchLater)
+          done(null, pateco.UserService.data.watchLater)
       else
-        fimplus._login.initPage(fimplus._viewmore.onRetrunPageLogin)
+        pateco._login.initPage(pateco._viewmore.onRetrunPageLogin)
       return
     
     params.id = self.data.item.categoryId
-    fimplus.ApiService.getRibbonDetail(params, done)
+    pateco.ApiService.getRibbonDetail(params, done)

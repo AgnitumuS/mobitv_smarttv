@@ -1,4 +1,4 @@
-fimplus._payment =
+pateco._payment =
   data:
     id           : '#payment'
     template     : Templates['module.payment']()
@@ -10,18 +10,18 @@ fimplus._payment =
     self.data.callback = ()-> console.log 'callback'
     self.data.callback = callback if _.isFunction(callback)
     if type is 'buyPackage'
-      fimplus._buyPackage.initPage(self.onReturnPage)
+      pateco._buyPackage.initPage(self.onReturnPage)
     if type is 'rentMovie'
       retry = ()->
         self.removePage()
-      env = fimplus.env
-      self.data.pricePackage = fimplus._detail.data.item.ppvPrice
-      allowMethod = fimplus._detail.data.item.notAllowChargeOnMethod
+      env = pateco.env
+      self.data.pricePackage = pateco._detail.data.item.ppvPrice
+      allowMethod = pateco._detail.data.item.notAllowChargeOnMethod
       if allowMethod is '[]' or !allowMethod
         allowMethod = null
       getSourceIdDone = (error, result) ->
         if result.status
-          fimplus._error.initPage({
+          pateco._error.initPage({
             title      : "button-buy-package"
             onReturn   : retry
             description: result.responseJSON.message
@@ -45,13 +45,13 @@ fimplus._payment =
               self.data.sourceId = result.sources[i].id
             i++
         if self.data.paymentMethodSync is 1
-          fimplus._rentMovie.initPage(fimplus._detail.data.item, self.data.sourceId, self.onReturnPage)
+          pateco._rentMovie.initPage(pateco._detail.data.item, self.data.sourceId, self.onReturnPage)
         else
           self.data.isRentMovie = true
-          fimplus._paymentMethod.initPage(self.data, self.onReturnPage)
-      fimplus.ApiService.getPaymentMethod(allowMethod, env, getSourceIdDone)
+          pateco._paymentMethod.initPage(self.data, self.onReturnPage)
+      pateco.ApiService.getPaymentMethod(allowMethod, env, getSourceIdDone)
   onReturnPage: ()->
-    self = fimplus._payment
+    self = pateco._payment
     self.removePage()
 
   showPage: (idPage)->
@@ -72,7 +72,7 @@ fimplus._payment =
 
   removePage: ()->
     self = @
-    fimplus._redeemCode.data.code = null
+    pateco._redeemCode.data.code = null
     self.data.callback()
     self.element.html('')
 

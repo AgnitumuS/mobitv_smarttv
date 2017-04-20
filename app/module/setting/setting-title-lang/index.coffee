@@ -1,4 +1,4 @@
-fimplus._settingTitleLang =
+pateco._settingTitleLang =
   data:
     id: '#setting-title-lang'
     template  : Templates['module.setting.setting-title-lang']()
@@ -11,17 +11,17 @@ fimplus._settingTitleLang =
         type: 'vi'
         action: ()->
           console.log 'Chuyển sang tiếng Việt'
-          fimplus._settingTitleLang.data.activeTitleLanguage = 'vi'
-          fimplus._settingTitleLang.render()
-          fimplus.UserService.upDateLocalStorage('userSettings','movieTitleLanguage','vi')
+          pateco._settingTitleLang.data.activeTitleLanguage = 'vi'
+          pateco._settingTitleLang.render()
+          pateco.UserService.upDateLocalStorage('userSettings','movieTitleLanguage','vi')
       english =
         title: 'account-language-en'
         type: 'en'
         action: ()->
           console.log 'Chuyển sang tiếng Anh'
-          fimplus._settingTitleLang.data.activeTitleLanguage = 'en'
-          fimplus._settingTitleLang.render()
-          fimplus.UserService.upDateLocalStorage('userSettings','movieTitleLanguage','en')
+          pateco._settingTitleLang.data.activeTitleLanguage = 'en'
+          pateco._settingTitleLang.render()
+          pateco.UserService.upDateLocalStorage('userSettings','movieTitleLanguage','en')
     ]
   
   initPage: ()->
@@ -59,7 +59,7 @@ fimplus._settingTitleLang =
       $(listElement).find('li').first().addClass('active')
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._settingTitleLang
+    self = pateco._settingTitleLang
     switch keyCode
       when key.DOWN
         self.data.currentActive = 0
@@ -68,31 +68,31 @@ fimplus._settingTitleLang =
         self.initKey()
       when key.RETURN,key.ENTER
         self.removePage()
-        fimplus._setting.initKey()
+        pateco._setting.initKey()
   
   handleKey: (keyCode, key)->
-    self = fimplus._settingTitleLang
+    self = pateco._settingTitleLang
     console.info 'Setting Title Lang:' + keyCode
     listElement = '.btn-title-lang'
     length = $('.btn-title-lang').find('li').length
     # load detail notify in right panel
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
-      fimplus.UtitService.updateActive(listElement, self.data.currentActive, 'li')
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
+      pateco.UtitService.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         break;
       when key.RETURN
         console.log 'Call back to setting menu'
         self.data.haveSource = false
         self.removePage()
-        fimplus._setting.initPage()
+        pateco._setting.initPage()
         break;
       when key.UP
         self.data.currentActive--
         if self.data.currentActive < 0
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
@@ -103,7 +103,7 @@ fimplus._settingTitleLang =
         break;
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   removePage: ()->
     self = @

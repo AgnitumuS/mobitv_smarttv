@@ -1,7 +1,7 @@
 Handlebars.registerPartial('seasonList', Templates['module.season.season_list']());
 Handlebars.registerPartial('episodeList', Templates['module.season.episode_list']());
 
-fimplus._season =
+pateco._season =
   data    :
     id                  : '#season'
     seasonListId        : '#season .seasons'
@@ -18,7 +18,7 @@ fimplus._season =
     callback            : ()->
   
   initPage: (item, callback)->
-    self = fimplus._season
+    self = pateco._season
     self.data.item = item
     self.data.callback = callback if _.isFunction(callback)
     self.getData()
@@ -26,14 +26,14 @@ fimplus._season =
     self.data.layoutActive = 'season' # episode
     self.data.currentSeasonActive = 0
     self.data.currentEpisodeActive = 0
-    fimplus._page.activeIconBack()
+    pateco._page.activeIconBack()
   
   render: (item = {})->
     self = @
     self.data.item = item
     self.data.item.seasons = self.data.seasons
     self.data.item.episodes = self.data.episodes
-    self.data.item.model4K = fimplus.config.appInfo.model4K
+    self.data.item.model4K = pateco.config.appInfo.model4K
     template = Handlebars.compile(self.data.template)
     self.element = $(self.data.id)
     self.element.html(template(self.data.item))
@@ -47,7 +47,7 @@ fimplus._season =
   
   
   removeSeasonPage: ()->
-    self = fimplus._season
+    self = pateco._season
     self.element.html('')
     self.data.currentSeasonActive = 0
     self.data.currentEpisodeActive = 0
@@ -55,7 +55,7 @@ fimplus._season =
   
   
   opacityListItem: (type = 'season')->
-    self = fimplus._season
+    self = pateco._season
     seasonsList = $(self.data.seasonListId).find('ul.list-item')
     episodesList = $(self.data.episodeListId).find('ul.list-item')
     if type is 'on_all'
@@ -75,7 +75,7 @@ fimplus._season =
   
   
   animateScroll: ()->
-    self = fimplus._season
+    self = pateco._season
     episodeListElement = $(self.data.episodeListId).find('ul.list-item')
     seasonEl = $(self.data.seasonListId).find('ul.list-item').find('li.item')
     currentEpisode = self.data.episodes[self.data.currentEpisodeActive]
@@ -99,21 +99,21 @@ fimplus._season =
 
   
   eventEpisodeItemClick: ()->
-    self = fimplus._season
-    unless fimplus.UserService.isLogin()
-      fimplus._login.initPage(()->
-        fimplus._season.initPage(self.data.item, self.data.callback)
+    self = pateco._season
+    unless pateco.UserService.isLogin()
+      pateco._login.initPage(()->
+        pateco._season.initPage(self.data.item, self.data.callback)
       )
       return
     currentEpisode = self.data.episodes[self.data.currentEpisodeActive]
     $(self.data.id).html('')
-    fimplus._player.initPage(currentEpisode, ()->
-      fimplus._season.initPage(self.data.item, self.data.callback)
+    pateco._player.initPage(currentEpisode, ()->
+      pateco._season.initPage(self.data.item, self.data.callback)
     )
   
   
   eventSeasonItemClick: ()->
-    self = fimplus._season
+    self = pateco._season
     seasonEl = $(self.data.seasonListId).find('ul.list-item').find('li.item')
     seasonEl.removeClass('selected')
     seasonEl.eq(self.data.currentSeasonActive).addClass('selected')
@@ -131,7 +131,7 @@ fimplus._season =
     episodeListElement.css(css)
 
   hanldeBackbutton:(keyCode, key)->
-    self = fimplus._season
+    self = pateco._season
     switch keyCode
       when key.DOWN
         if self.data.layoutActive is 'season'
@@ -146,11 +146,11 @@ fimplus._season =
 
 
   keyUpToActiveBack : ()->
-    self = fimplus._season
+    self = pateco._season
     seasonItemElement = $(self.data.seasonListId).find('li.item')
     episodeItemElement = $(self.data.episodeListId).find('li.item')
     if(self.data.layoutActive is 'season' and self.data.currentSeasonActive is 0) or (self.data.layoutActive is 'episode' and self.data.currentEpisodeActive is 0)
-      fimplus._backButton.setActive(true, self.hanldeBackbutton)
+      pateco._backButton.setActive(true, self.hanldeBackbutton)
       self.opacityListItem('on_all')
       if self.data.layoutActive is 'season'
         seasonItemElement.removeClass('active')
@@ -161,7 +161,7 @@ fimplus._season =
 
   
   handleKey: (keyCode, key)->
-    self = fimplus._season
+    self = pateco._season
     console.info 'Detail Key:' + keyCode
     seasonItemElement = $(self.data.seasonListId).find('li.item')
     episodeItemElement = $(self.data.episodeListId).find('li.item')
@@ -220,19 +220,19 @@ fimplus._season =
   
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   
   
   
   
   setActiveButton: (type = '', current = 0, length = 0)->
-    self = fimplus._season
+    self = pateco._season
     if type is 'season'
       button = $(self.data.seasonListId).find('ul.list-item').find('li.item')
     if type is 'episode'
       button = $(self.data.episodeListId).find('ul.list-item').find('li.item')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
   
@@ -277,7 +277,7 @@ fimplus._season =
       asyncParallelObject = {}
       async.each(self.data.seasons, ((seasonItem, cb) ->
         asyncParallelObject[seasonItem.id] = (cback)->
-          fimplus.ApiService.getEpisodes({seasonId: seasonItem.id}, (error, resEpisode)->
+          pateco.ApiService.getEpisodes({seasonId: seasonItem.id}, (error, resEpisode)->
             cback(null, resEpisode)
           )
         cb()
@@ -288,20 +288,20 @@ fimplus._season =
     
     params =
       movieId: self.data.item.id
-    fimplus.ApiService.getSeasons(params, doneGetSeason)
+    pateco.ApiService.getSeasons(params, doneGetSeason)
   
   
   getData: ()->
     self = @
     exitApp = ()->
-      self = fimplus._season
-      fimplus._error.initPage({
+      self = pateco._season
+      pateco._error.initPage({
         onReturn   : self.initKey
         description: 'exit-confirm'
         title      : 'notification'
         buttons    : [
           title   : 'exit'
-          callback: fimplus.config.exit
+          callback: pateco.config.exit
         ,
           title   : 'button-cancel'
           callback: self.initKey
@@ -310,11 +310,11 @@ fimplus._season =
     
     retry = ()->
       self.initKey()
-      fimplus.ApiService.getEntityDetail(self.data.item.id, done)
+      pateco.ApiService.getEntityDetail(self.data.item.id, done)
     
     done = (error, result)->
       if error
-        fimplus._error.initPage({
+        pateco._error.initPage({
           onReturn   : exitApp
           description: 'Kết nối tới hệ thống bị chập chờn!,#1001'
           title      : 'Thông báo'
@@ -332,8 +332,8 @@ fimplus._season =
       self.getListSeasonsAndListEpisodes(()->
         $('#ribbon').html('')
         $('#banner').html('')
-        fimplus._season.render(self.data.item)
+        pateco._season.render(self.data.item)
         self.opacityListItem('season')
       )
     
-    fimplus.ApiService.getEntityDetail(self.data.item.id, done)
+    pateco.ApiService.getEntityDetail(self.data.item.id, done)

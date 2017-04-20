@@ -1,4 +1,4 @@
-fimplus._detail =
+pateco._detail =
   data             :
     item         : {}
     ribbon       : []
@@ -10,10 +10,10 @@ fimplus._detail =
     callback     : ()->
   
   initPageByMovieId: (id)->
-    self = fimplus._detail
+    self = pateco._detail
     self.data.item =
       id: id
-    fimplus.config.state = 'detail'
+    pateco.config.state = 'detail'
     self.initPage(self.data.item, self.removePage)
   
   initPage: (item, callback)->
@@ -28,31 +28,31 @@ fimplus._detail =
     self.getData()
     self.initKey()
     self.element = $("#banner,#ribbon")
-    fimplus._backButton.enable(true)
-    fimplus.config.state = 'detail'
-    #    fimplus._banner.activeLabelViewMore()
+    pateco._backButton.enable(true)
+    pateco.config.state = 'detail'
+    #    pateco._banner.activeLabelViewMore()
     null
   
   
   removePage: ()->
-    self = fimplus._detail
-    fimplus.config.state = ''
-    fimplus._banner.activeLabelViewMore(false)
-    fimplus._banner.removeButton()
-    fimplus._page.addClassIntoIcBack(false)
+    self = pateco._detail
+    pateco.config.state = ''
+    pateco._banner.activeLabelViewMore(false)
+    pateco._banner.removeButton()
+    pateco._page.addClassIntoIcBack(false)
     self.data.callback() if _.isFunction(self.data.callback)
   
   
   playMovie: (item)->
-    self = fimplus._detail
+    self = pateco._detail
     self.element.fadeOut()
-    fimplus._backButton.enable(false)
+    pateco._backButton.enable(false)
     if self.data.item and self.data.item.visibleOn and self.data.item.visibleOn.status is false
       finish = ()->
         self.initKey()
         self.element.fadeIn()
       
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : "notification"
         onReturn   : finish
         description: self.data.item.visibleOn.message
@@ -62,7 +62,7 @@ fimplus._detail =
         ]
       })
       return
-    fimplus._player.initPage(item, self.onReturnPage)
+    pateco._player.initPage(item, self.onReturnPage)
   
   
   viewmoreActive: (active = false)->
@@ -71,7 +71,7 @@ fimplus._detail =
     if active is true then element.addClass('active')
   
   checkShowIcUpDownFullDes: (type = '')->
-    self = fimplus._detail
+    self = pateco._detail
     timeOutValue = 300
     desFullElement = $('#banner').find('.description-full')
     maxScrollHeight = desFullElement[0].scrollHeight
@@ -94,7 +94,7 @@ fimplus._detail =
     , timeOutValue + 100)
   
   activeViewMoreLayout: (active = false)->
-    self = fimplus._detail
+    self = pateco._detail
     desElement = $('#banner').find('.description')
     desFullElement = $('#banner').find('.description-full')
     bannerDetailButton = $('#banner').find('.detail-buttons')
@@ -113,7 +113,7 @@ fimplus._detail =
   
   
   enterMovieRelatedRibbon: ()->
-    self = fimplus._detail
+    self = pateco._detail
     
     indexCurrentRibbon = self.data.ribbonActive || 0
     indexCurrentItemOfRibbon = self.data.ribbon[indexCurrentRibbon].currentActive
@@ -128,52 +128,52 @@ fimplus._detail =
       self.data.layoutActive = 'button'
       self.data.currentButton = 0
       self.data.ribbonActive = 0
-      fimplus._ribbon.removeActivePointer()
+      pateco._ribbon.removeActivePointer()
       self.playMovie(item)
       return
     if item
       self.data.item = item
-      fimplus.ApiService.getEntityDetail(self.data.item.id, (error, result)->
+      pateco.ApiService.getEntityDetail(self.data.item.id, (error, result)->
         self.data.item = result
-        fimplus._banner.render(self.data.item)
+        pateco._banner.render(self.data.item)
         self.data.layoutActive = 'button'
         self.data.currentButton = 0
         self.data.ribbonActive = 0
-        fimplus._ribbon.removeActivePointer()
+        pateco._ribbon.removeActivePointer()
         self.getData()
       )
   
   handleKeyLeft: ()->
-    self = fimplus._detail
+    self = pateco._detail
     return if self.data.layoutActive is 'icback'
     if self.data.layoutActive is 'button'
-      self.data.currentButton = fimplus._banner.setActiveButton(--self.data.currentButton, self.data.buttons.length)
+      self.data.currentButton = pateco._banner.setActiveButton(--self.data.currentButton, self.data.buttons.length)
       return
     if self.data.ribbon[self.data.ribbonActive].currentActive > 0
       self.data.ribbon[self.data.ribbonActive].currentActive--
-      fimplus._ribbon.setActivePointer(self.data.ribbon, self.data.ribbonActive)
+      pateco._ribbon.setActivePointer(self.data.ribbon, self.data.ribbonActive)
       return
   
   handleKeyRight: ()->
-    self = fimplus._detail
+    self = pateco._detail
     return if self.data.layoutActive is 'icback'
     if self.data.ribbon.length > 0
       lengthRibbon = self.data.ribbon.length
       if self.data.ribbon[self.data.ribbonActive] and self.data.ribbon[self.data.ribbonActive].items
         lengthItem = self.data.ribbon[self.data.ribbonActive].items.length
     if self.data.layoutActive is 'button'
-      self.data.currentButton = fimplus._banner.setActiveButton(++self.data.currentButton, self.data.buttons.length)
+      self.data.currentButton = pateco._banner.setActiveButton(++self.data.currentButton, self.data.buttons.length)
       return;
     if self.data.ribbon[self.data.ribbonActive].currentActive < lengthItem - 1
       self.data.ribbon[self.data.ribbonActive].currentActive++
-      fimplus._ribbon.setActivePointer(self.data.ribbon, self.data.ribbonActive)
+      pateco._ribbon.setActivePointer(self.data.ribbon, self.data.ribbonActive)
       return;
   
   handleKeyDown: ()->
-    self = fimplus._detail
-    if self.data.layoutActive is 'icback' and $(fimplus._banner.data.id).find('.description-full').is(':visible') is false
+    self = pateco._detail
+    if self.data.layoutActive is 'icback' and $(pateco._banner.data.id).find('.description-full').is(':visible') is false
       self.data.layoutActive = 'viewmore'
-      fimplus._page.addClassIntoIcBack(false)
+      pateco._page.addClassIntoIcBack(false)
       self.viewmoreActive(true)
       return
     if self.data.ribbon.length > 0
@@ -181,57 +181,57 @@ fimplus._detail =
       if self.data.ribbon[self.data.ribbonActive] and self.data.ribbon[self.data.ribbonActive].items
         lengthItem = self.data.ribbon[self.data.ribbonActive].items.length
     if self.data.layoutActive is 'viewmore'
-      if $(fimplus._banner.data.id).find('.description-full').is(':visible')
+      if $(pateco._banner.data.id).find('.description-full').is(':visible')
         self.checkShowIcUpDownFullDes('down')
         return
       self.data.layoutActive = 'button'
-      fimplus._banner.setActiveButton(self.data.currentButton, self.data.buttons.length)
-      fimplus._ribbon.removeActivePointer()
+      pateco._banner.setActiveButton(self.data.currentButton, self.data.buttons.length)
+      pateco._ribbon.removeActivePointer()
       self.viewmoreActive(false)
       return
     if self.data.layoutActive is 'button' and self.data.ribbon.length > 0
-      fimplus._banner.setActiveButton(0, 0)
-      fimplus._ribbon.setActivePointer(self.data.ribbon, self.data.ribbonActive)
+      pateco._banner.setActiveButton(0, 0)
+      pateco._ribbon.setActivePointer(self.data.ribbon, self.data.ribbonActive)
       self.data.layoutActive = 'ribbon'
       return;
     if self.data.ribbonActive < lengthRibbon - 1
       self.data.ribbonActive++
-      fimplus._ribbon.setRibbonPosition(self.data.ribbonActive)
-      fimplus._ribbon.setActivePointer(self.data.ribbon, self.data.ribbonActive)
+      pateco._ribbon.setRibbonPosition(self.data.ribbonActive)
+      pateco._ribbon.setActivePointer(self.data.ribbon, self.data.ribbonActive)
       return;
     return;
   
   handleKeyUp: ()->
-    self = fimplus._detail
-    if self.data.layoutActive is 'viewmore' and $(fimplus._banner.data.id).find('.description-full').is(':visible') is false
+    self = pateco._detail
+    if self.data.layoutActive is 'viewmore' and $(pateco._banner.data.id).find('.description-full').is(':visible') is false
       self.data.layoutActive = 'icback'
-      fimplus._page.addClassIntoIcBack()
+      pateco._page.addClassIntoIcBack()
       self.viewmoreActive(false)
       return
     if self.data.layoutActive is 'viewmore'
-      if $(fimplus._banner.data.id).find('.description-full').is(':visible')
+      if $(pateco._banner.data.id).find('.description-full').is(':visible')
         self.checkShowIcUpDownFullDes('up')
         return
     if self.data.layoutActive is 'button'
       self.data.layoutActive = 'viewmore'
       self.viewmoreActive(true)
       $(self.data.id).find('.detail-buttons').find('li').removeClass('active')
-      fimplus._banner.setActiveButton(0, 0)
+      pateco._banner.setActiveButton(0, 0)
       return
     if self.data.layoutActive is 'ribbon' and self.data.ribbonActive is 0
       self.data.layoutActive = 'button'
-      fimplus._banner.setActiveButton(self.data.currentButton, self.data.buttons.length)
-      fimplus._ribbon.removeActivePointer()
+      pateco._banner.setActiveButton(self.data.currentButton, self.data.buttons.length)
+      pateco._ribbon.removeActivePointer()
       return;
     if self.data.ribbonActive > 0
       self.data.ribbonActive--
-      fimplus._ribbon.setRibbonPosition(self.data.ribbonActive)
-      fimplus._ribbon.setActivePointer(self.data.ribbon, self.data.ribbonActive)
+      pateco._ribbon.setRibbonPosition(self.data.ribbonActive)
+      pateco._ribbon.setActivePointer(self.data.ribbon, self.data.ribbonActive)
       return;
   
   
   handleKey: (keyCode, key)->
-    self = fimplus._detail
+    self = pateco._detail
     console.info 'Detail Key:' + keyCode
     switch keyCode
       when key.LEFT
@@ -254,7 +254,7 @@ fimplus._detail =
       
       when key.RETURN
         if self.data.layoutActive is 'viewmore'
-          if $(fimplus._banner.data.id).find('.description-full').is(':visible')
+          if $(pateco._banner.data.id).find('.description-full').is(':visible')
             return self.activeViewMoreLayout(false)
         self.removePage()
         break;
@@ -275,31 +275,31 @@ fimplus._detail =
   
   
   initKey: ()->
-    self = fimplus._detail
-    fimplus.KeyService.initKey(self.handleKey)
+    self = pateco._detail
+    pateco.KeyService.initKey(self.handleKey)
   
   onClickButton: (index)->
-    self = fimplus._detail
+    self = pateco._detail
     self.data.buttons[index].action()
   
   onReturnPage: ()->
-    self = fimplus._detail
+    self = pateco._detail
     self.element.fadeIn()
     
-    fimplus.ApiService.getEntityDetail(self.data.item.id, (error, result)->
-      fimplus._detail.data.item = result
-      fimplus._detail.prepareButton()
-      fimplus._detail.checkMovieCountTime(self.data.item)
-      fimplus._detail.initKey()
+    pateco.ApiService.getEntityDetail(self.data.item.id, (error, result)->
+      pateco._detail.data.item = result
+      pateco._detail.prepareButton()
+      pateco._detail.checkMovieCountTime(self.data.item)
+      pateco._detail.initKey()
     )
-    fimplus._backButton.enable()
-    fimplus.config.state = 'detail'
+    pateco._backButton.enable()
+    pateco.config.state = 'detail'
   
   actionPlayMovie: ()->
-    self = fimplus._detail
-    unless fimplus.UserService.isLogin()
-      fimplus._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
-      fimplus._login.initPage(self.onReturnPage)
+    self = pateco._detail
+    unless pateco.UserService.isLogin()
+      pateco._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
+      pateco._login.initPage(self.onReturnPage)
       return
     
     if self.data.item.subscribed is true
@@ -311,16 +311,16 @@ fimplus._detail =
       if self.data.item.ppvPrice > 0
         console.log 'mua TVOD'
       else
-        fimplus._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
-        fimplus._payment.initPage('buyPackage', self.onReturnPage)
+        pateco._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
+        pateco._payment.initPage('buyPackage', self.onReturnPage)
       return
     return
   
   actionPlayFromStart: ()->
-    self = fimplus._detail
-    unless fimplus.UserService.isLogin()
-      fimplus._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
-      fimplus._login.initPage(self.onReturnPage)
+    self = pateco._detail
+    unless pateco.UserService.isLogin()
+      pateco._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
+      pateco._login.initPage(self.onReturnPage)
       return
     if self.data.item.subscribed is true
       item = self.data.item
@@ -328,70 +328,70 @@ fimplus._detail =
         percent : 0
         progress: 0
       self.playMovie(item)
-      #      fimplus._player.initPage(item,self.onReturnPage)
+      #      pateco._player.initPage(item,self.onReturnPage)
       return
     return
   
   actionWatchLater: ()->
-    self = fimplus._detail
-    unless fimplus.UserService.isLogin()
-      fimplus._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
-      fimplus._login.initPage(self.onReturnPage)
+    self = pateco._detail
+    unless pateco.UserService.isLogin()
+      pateco._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
+      pateco._login.initPage(self.onReturnPage)
       return
     done = (error, result) ->
       favoriteEl = $('#banner').find('.bt-movie-detail .favorite')
       return console.error error if error
       self.data.addListStatus = if self.data.addListStatus is 1 then 0 else 1
-      lang = fimplus.UserService.getValueStorage('userSettings', 'language')
+      lang = pateco.UserService.getValueStorage('userSettings', 'language')
       if self.data.addListStatus is 1
-        textBtn = fimplus.LanguageService.convert('remove', lang)
+        textBtn = pateco.LanguageService.convert('remove', lang)
         favoriteEl
           .removeClass('add')
           .addClass('remove')
           .find('a span').text(textBtn)
-        fimplus.UserService.addDataWatchLater(self.data.item)
+        pateco.UserService.addDataWatchLater(self.data.item)
       
       else if self.data.addListStatus is 0
         favoriteEl.removeClass('remove').addClass('add')
-        textBtn = fimplus.LanguageService.convert('watch-later', lang)
+        textBtn = pateco.LanguageService.convert('watch-later', lang)
         favoriteEl.find('a span').text(textBtn)
-        fimplus.UserService.addDataWatchLater(self.data.item, false)
+        pateco.UserService.addDataWatchLater(self.data.item, false)
       
-      fimplus._page.loadDataRibonOfUser({}, (errorRibbonOfUser, resultRibbonOfUser)->)
+      pateco._page.loadDataRibonOfUser({}, (errorRibbonOfUser, resultRibbonOfUser)->)
     
     params =
       like   : if self.data.addListStatus is 1 then 0 else 1
       movieId: self.data.item.id
-    fimplus.ApiService.updateFavorite(params, done)
+    pateco.ApiService.updateFavorite(params, done)
     return
   
   
   actionBtnTVOD: ()->
-    self = fimplus._detail
-    unless fimplus.UserService.isLogin()
-      fimplus._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
-      fimplus._login.initPage(self.onReturnPage)
+    self = pateco._detail
+    unless pateco.UserService.isLogin()
+      pateco._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
+      pateco._login.initPage(self.onReturnPage)
       return
     if self.data.item.subscribed is true
       return
     if self.data.item.subscribed is false
       if self.data.item.ppvPrice > 0
-        fimplus._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
-        fimplus._payment.initPage('rentMovie', self.onReturnPage)
+        pateco._banner.element.find('.detail-buttons ul.bt-movie-detail').html('')
+        pateco._payment.initPage('rentMovie', self.onReturnPage)
       else
         console.log 'subscribed is false, SVOD'
     return
   
   actionShowSeason: ()->
-    self = fimplus._detail
+    self = pateco._detail
     return if self.data.item.type isnt 'Show'
-    fimplus._season.initPage(self.data.item, ()->
-      fimplus._banner.render(self.data.item)
-      fimplus._detail.initPage(self.data.item, self.data.callback)
+    pateco._season.initPage(self.data.item, ()->
+      pateco._banner.render(self.data.item)
+      pateco._detail.initPage(self.data.item, self.data.callback)
     )
   
   coverTime: (second)->
-    lang = fimplus.UserService.getValueStorage('userSettings', 'language')
+    lang = pateco.UserService.getValueStorage('userSettings', 'language')
     unless second
       return '0'
     now = new Date()
@@ -409,65 +409,65 @@ fimplus._detail =
         resText = '0' + hours.toString()
       else
         resText = hours.toString()
-      resText = resText + ' ' + fimplus.LanguageService.convert('hours-watch', lang)
+      resText = resText + ' ' + pateco.LanguageService.convert('hours-watch', lang)
       return resText.toString()
     if minutes > 0
       if minutes < 10
         resText = '0' + minutes.toString()
       else
         resText = minutes.toString()
-      resText = resText + ' ' + fimplus.LanguageService.convert('minutes-watch', lang)
+      resText = resText + ' ' + pateco.LanguageService.convert('minutes-watch', lang)
       return resText.toString()
     if seconds > 0
       if seconds < 10
         resText = '0' + seconds.toString()
       else
         resText = seconds.toString()
-      resText = resText + ' ' + fimplus.LanguageService.convert('seconds-watch', lang)
+      resText = resText + ' ' + pateco.LanguageService.convert('seconds-watch', lang)
       return resText.toString()
   
   checkMovieCountTime: (item)->
-    self = fimplus._detail
+    self = pateco._detail
     self.data.movieCountTime = item
     expiryDate = item.expiryDate or null
     timeLeft = item.timeLeft or null
     
     if expiryDate > 0 && timeLeft > 0
       time = self.coverTime(expiryDate)
-      text = '<p>' + fimplus.LanguageService.convert('you-have', fimplus.UserService.getValueStorage('userSettings', 'language')) + ' ' + time + '</p>'
+      text = '<p>' + pateco.LanguageService.convert('you-have', pateco.UserService.getValueStorage('userSettings', 'language')) + ' ' + time + '</p>'
       self.element.find('.bt-movie-detail li:first-child').addClass('two-line')
       self.element.find('.bt-movie-detail li:first-child a').append(text)
   
   
   prepareButton: ()->
-    self = fimplus._detail
+    self = pateco._detail
     item = self.data.item
     self.data.buttons = []
-    lang = fimplus.UserService.getValueStorage('userSettings', 'language')
+    lang = pateco.UserService.getValueStorage('userSettings', 'language')
     playmovie =
       title : if(self.data.item and self.data.item.progress and self.data.item.progress.progress > 0) then 'watchContinue' else 'watch'
       slug  : 'btn-watch'
-      action: fimplus._detail.actionPlayMovie
+      action: pateco._detail.actionPlayMovie
     
     playFromStart =
       title : 'watchBegin'
       slug  : 'btn-watch-start'
-      action: fimplus._detail.actionPlayFromStart
+      action: pateco._detail.actionPlayFromStart
     
     watchlater =
       title : if self.data.addListStatus is 0 then 'watch-later' else 'remove'
       slug  : 'btn-favorite'
-      action: fimplus._detail.actionWatchLater
+      action: pateco._detail.actionWatchLater
     
     btnTVOD =
-      title : fimplus.UtitService.currency({displayType: 'text', value: self.data.item.ppvPrice})
+      title : pateco.UtitService.currency({displayType: 'text', value: self.data.item.ppvPrice})
       slug  : 'btn-tvod'
-      action: fimplus._detail.actionBtnTVOD
+      action: pateco._detail.actionBtnTVOD
     
     showSeason =
       title : 'select-season'
       slug  : 'show-season'
-      action: fimplus._detail.actionShowSeason
+      action: pateco._detail.actionShowSeason
     
     #xem tiep, xem phim
     if self.data.item.subscribed is false and self.data.item.ppvPrice > 0
@@ -476,7 +476,7 @@ fimplus._detail =
       self.data.buttons.push(playmovie)
     
     #xem tu dau
-    if fimplus.UserService.isLogin() and self.data.item.subscribed is true
+    if pateco.UserService.isLogin() and self.data.item.subscribed is true
       if(self.data.item and self.data.item.progress and self.data.item.progress.progress > 0)
         self.data.buttons.push(playFromStart)
     
@@ -494,39 +494,39 @@ fimplus._detail =
       buttons : self.data.buttons
       movie   : self.data.item
       favorite: self.data.addListStatus
-    fimplus._banner.renderButton(data)
-    fimplus._banner.setActiveButton((self.data.currentButton || 0), self.data.buttons.length)
-    fimplus._banner.setEventClickButton(self.onClickButton)
+    pateco._banner.renderButton(data)
+    pateco._banner.setActiveButton((self.data.currentButton || 0), self.data.buttons.length)
+    pateco._banner.setEventClickButton(self.onClickButton)
     # if en add class ento btn to fix css
     if lang is 'en'
       self.element.find('.bt-movie-detail li').addClass('eng')
-#    fimplus._banner.activeIconBack(true)
+#    pateco._banner.activeIconBack(true)
   
   setCurrentBanner: (inFirst = false)->
-    self = fimplus._detail
+    self = pateco._detail
     #    if inFirst
-    currentBanner = fimplus._banner.getCurrentBanner(self.data.ribbon, self.data.ribbonActive)
-    currentBanner.model4K = fimplus.config.appInfo.model4K if currentBanner
+    currentBanner = pateco._banner.getCurrentBanner(self.data.ribbon, self.data.ribbonActive)
+    currentBanner.model4K = pateco.config.appInfo.model4K if currentBanner
 #    console.log 'detail setCurrentBanner', currentBanner
     if inFirst
-      fimplus._banner.render(currentBanner)
+      pateco._banner.render(currentBanner)
     else
-      fimplus._banner.reRender(currentBanner)
+      pateco._banner.reRender(currentBanner)
   
   
   getData: ()->
-    self = fimplus._detail
+    self = pateco._detail
     
     retry = ()->
       self.initKey()
-      fimplus.ApiService.getHome(done)
+      pateco.ApiService.getHome(done)
     
     done = (error, result)->
       self.data.item = result
       self.data.addListStatus = self.data.item.favorite
       if error
-        fimplus._error.initPage({
-          onReturn   : fimplus.config.exit
+        pateco._error.initPage({
+          onReturn   : pateco.config.exit
           description: ['connect-error', '#1001']
           title      : 'notification'
           buttons    : [
@@ -534,7 +534,7 @@ fimplus._detail =
             callback: retry
           ,
             title   : 'exit'
-            callback: fimplus.config.exit
+            callback: pateco.config.exit
           ]
         })
         return console.log error
@@ -570,11 +570,11 @@ fimplus._detail =
           currentActive: 0
         }
       
-      fimplus._ribbon.render(self.data.ribbon, self.data.ribbonActive, false)
+      pateco._ribbon.render(self.data.ribbon, self.data.ribbonActive, false)
       self.prepareButton()
       self.checkMovieCountTime(self.data.item)
-      if fimplus.config.state is 'detail'
+      if pateco.config.state is 'detail'
         if self.data.item and self.data.item.descriptionShort.length > 162
-          fimplus._banner.activeLabelViewMore(true)
+          pateco._banner.activeLabelViewMore(true)
     
-    fimplus.ApiService.getEntityDetail(self.data.item.id, done)
+    pateco.ApiService.getEntityDetail(self.data.item.id, done)

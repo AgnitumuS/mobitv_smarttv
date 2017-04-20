@@ -1,4 +1,4 @@
-fimplus._mobileCard =
+pateco._mobileCard =
   data:
     id           : '#mobile-card'
     title        : 'account-balance'
@@ -9,18 +9,18 @@ fimplus._mobileCard =
       cancelBtn =
         title : 'Hủy'
         action: ()->
-          fimplus._mobileCard.removePage()
+          pateco._mobileCard.removePage()
       registerBtn =
         title: 'Đồng ý'
         action: ()->
-          fimplus._selectCard.initPage(fimplus._mobileCard.onReturnPage)
+          pateco._selectCard.initPage(pateco._mobileCard.onReturnPage)
       ]
 
 
   setActiveButton    : (current = 0, length = 0)->
     self = @
     button = self.element.find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
 
@@ -38,17 +38,17 @@ fimplus._mobileCard =
     self.data.callback = callback if _.isFunction(callback)
 
   onReturnPage: ()->
-    self = fimplus._mobileCard
+    self = pateco._mobileCard
     self.initKey()
 
   checkRedeemCode: ()->
     self = @
-    self.data.code = fimplus._redeemCode.data.code or null
+    self.data.code = pateco._redeemCode.data.code or null
     if self.data.code
-      if fimplus._redeemCode.data.percent is 1
-        self.data.item = self.data.item * fimplus._redeemCode.data.discount
+      if pateco._redeemCode.data.percent is 1
+        self.data.item = self.data.item * pateco._redeemCode.data.discount
       else
-        self.data.item = self.data.item - fimplus._redeemCode.data.discount
+        self.data.item = self.data.item - pateco._redeemCode.data.discount
 
   render: ()->
     self = @
@@ -66,12 +66,12 @@ fimplus._mobileCard =
 
   getData: ()->
     self = @
-    env = fimplus.env
+    env = pateco.env
     retry = ()->
       self.initKey()
     getWalletDone = (error, result)->
       if result.status is 400
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "select-card"
           onReturn   : retry
           description: result.responseJSON.message
@@ -85,21 +85,21 @@ fimplus._mobileCard =
       self.data.price = self.data.item - result.balance
 #      if buyPackage is true
       if result.balance >= self.data.item
-        if fimplus._payment.data.isRentMovie
+        if pateco._payment.data.isRentMovie
           itemResult =
-            id : fimplus._detail.data.item.id
-            ppvPrice : fimplus._detail.data.item.ppvPrice
-            knownAs : fimplus._detail.data.item.knownAs
-          fimplus._rentMovie.initPage(itemResult, '', fimplus._payment.onReturnPage)
+            id : pateco._detail.data.item.id
+            ppvPrice : pateco._detail.data.item.ppvPrice
+            knownAs : pateco._detail.data.item.knownAs
+          pateco._rentMovie.initPage(itemResult, '', pateco._payment.onReturnPage)
         else
           params =
             packageId : localStorage.packageId
-            redeemCode : fimplus._redeemCode.data.code or null
+            redeemCode : pateco._redeemCode.data.code or null
             sourceId  : ""
             isTelco   : "1"
           updateWalletSubscriptionDone = (error, result) ->
             if result.status is 400
-              fimplus._error.initPage({
+              pateco._error.initPage({
                 title      : "select-card"
                 onReturn   : retry
                 description: result.responseJSON.message
@@ -110,16 +110,16 @@ fimplus._mobileCard =
               });
               return
             else
-              fimplus._paymentConfirm.initPage(result, fimplus._payment.onReturnPage)
-          fimplus.ApiService.updateWalletSubscription(params, updateWalletSubscriptionDone)
+              pateco._paymentConfirm.initPage(result, pateco._payment.onReturnPage)
+          pateco.ApiService.updateWalletSubscription(params, updateWalletSubscriptionDone)
       else
         self.render()
         self.initKey()
-    fimplus.ApiService.getWallet(env, getWalletDone)
+    pateco.ApiService.getWallet(env, getWalletDone)
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._mobileCard
+    self = pateco._mobileCard
     switch keyCode
       when key.DOWN
         self.setActiveButton(self.data.currentActive, self.data.buttons.length)
@@ -128,7 +128,7 @@ fimplus._mobileCard =
         self.removePage()
 
   handleKey: (keyCode, key)->
-    self = fimplus._mobileCard
+    self = pateco._mobileCard
     switch keyCode
       when key.RETURN
         self.removePage()
@@ -143,15 +143,15 @@ fimplus._mobileCard =
         self.data.currentActive = self.setActiveButton(--self.data.currentActive, self.data.buttons.length)
         break;
       when key.UP
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
         self.setActiveButton(0, 0)
         break;
 
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   removePage: ()->
-    self = fimplus._mobileCard
+    self = pateco._mobileCard
     self.data.callback()
     self.element.html('')

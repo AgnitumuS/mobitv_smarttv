@@ -1,4 +1,4 @@
-fimplus._login =
+pateco._login =
   data:
     id           : '#login'
     template     : Templates['module.login']()
@@ -10,20 +10,20 @@ fimplus._login =
       loginBtn =
         title : 'button-welcome-login'
         action: ()->
-          self = fimplus._login
-          fimplus._loginUserName.initPage(self.onReturnPage)
+          self = pateco._login
+          pateco._loginUserName.initPage(self.onReturnPage)
     ,
       registerBtn =
         title : 'button-welcome-register'
         action: ()->
-          self = fimplus._login
-          fimplus._registerUserName.initPage(self.onReturnPage)
+          self = pateco._login
+          pateco._registerUserName.initPage(self.onReturnPage)
     ]
   
   setActiveButton: (current = 0, length = 0)->
     self = @
     button = $(self.data.id).find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
   
@@ -35,11 +35,11 @@ fimplus._login =
     self.data.callback = ()->
     self.data.callback = callback if _.isFunction(callback)
     self.setActiveButton(self.data.currentActive, self.data.buttons.length)
-    fimplus._backButton.enable()
+    pateco._backButton.enable()
 
 # list butttons with login screen
   onReturnPage: ()->
-    self = fimplus._login
+    self = pateco._login
     self.initKey()
   
   render: ()->
@@ -57,7 +57,7 @@ fimplus._login =
   
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._login
+    self = pateco._login
     switch keyCode
       when key.DOWN
         self.setActiveButton(self.data.currentActive, self.data.buttons.length)
@@ -66,7 +66,7 @@ fimplus._login =
         self.removePage()
   
   handleKey: (keyCode, key)->
-    self = fimplus._login
+    self = pateco._login
     console.info 'Login Key:' + keyCode
     switch keyCode
       when key.RETURN
@@ -82,25 +82,25 @@ fimplus._login =
         self.data.currentActive = self.setActiveButton(++self.data.currentActive, self.data.buttons.length)
         break;
       when key.UP
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
         self.setActiveButton(0, 0)
   
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   removePage: ()->
     doneGetWacthLater = ()->
       try
-        if fimplus.UserService.data.watchLater.items.length is 0
-          fimplus._page.initPage()
+        if pateco.UserService.data.watchLater.items.length is 0
+          pateco._page.initPage()
           return
-        fimplus._page.loadDataRibonOfUser({}, ()->
-          fimplus._login.data.callback() if _.isFunction(fimplus._login.data.callback)
-          fimplus._login.element.html('')
+        pateco._page.loadDataRibonOfUser({}, ()->
+          pateco._login.data.callback() if _.isFunction(pateco._login.data.callback)
+          pateco._login.element.html('')
         )
       catch
-    fimplus.UserService.getWatchLater(doneGetWacthLater)
+    pateco.UserService.getWatchLater(doneGetWacthLater)
     
 
     

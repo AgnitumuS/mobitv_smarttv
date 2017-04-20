@@ -1,4 +1,4 @@
-fimplus._registerUserName =
+pateco._registerUserName =
   data:
     id            : '#register-user-name'
     title         : 'register-title'
@@ -9,12 +9,12 @@ fimplus._registerUserName =
       cancelBtn =
         title : 'button-back'
         action: ()->
-          fimplus._registerUserName.removePage()
+          pateco._registerUserName.removePage()
     ,
       continueBtn =
         title : 'button-continue'
         action: ()->
-          fimplus._registerUserName.registerContinue()
+          pateco._registerUserName.registerContinue()
     ]
     positionEntity:
       active: false
@@ -29,10 +29,10 @@ fimplus._registerUserName =
     if self.checkUsername()
       params =
         mobile  : self.username
-        platform: fimplus.config.platform
-      fimplus.ApiService.registerGetCode params, (error, result)->
+        platform: pateco.config.platform
+      pateco.ApiService.registerGetCode params, (error, result)->
         if result.status
-          fimplus._error.initPage({
+          pateco._error.initPage({
             title      : "register-fail"
             onReturn   : retry
             description: result.responseJSON.message
@@ -42,12 +42,12 @@ fimplus._registerUserName =
             ]
           });
           return
-        fimplus._registerOtp.initPage(self.onReturnPage)
+        pateco._registerOtp.initPage(self.onReturnPage)
   
   setActiveButton: (current = 0, length = 0)->
     self = @
     button = $(self.data.id).find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
   
@@ -60,10 +60,10 @@ fimplus._registerUserName =
     self.initKey()
 
   onReturnPage: ()->
-    self = fimplus._registerUserName
+    self = pateco._registerUserName
     element = $('.register-keyboard')
     input = $('#register-username')
-    fimplus._keyboard.render(element, input, self.onActiveEntity, 'number')
+    pateco._keyboard.render(element, input, self.onActiveEntity, 'number')
     self.initKey()
   
   render: ()->
@@ -72,7 +72,7 @@ fimplus._registerUserName =
     template = Handlebars.compile(source);
     $(self.data.id).html(template({register: self.data}))
     @renderKeyboard()
-    fimplus._keyboard.setActiveKeyboard(0, 0)
+    pateco._keyboard.setActiveKeyboard(0, 0)
     buttonClick = ()->
       index = $(@).index()
       self.data.buttons[index].action()
@@ -85,28 +85,28 @@ fimplus._registerUserName =
     self.data.positionEntity.active = false
     element = $('.register-keyboard')
     input = $('#register-username')
-    fimplus._keyboard.render(element, input, self.onActiveEntity, 'number')
+    pateco._keyboard.render(element, input, self.onActiveEntity, 'number')
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._registerUserName
+    self = pateco._registerUserName
     switch keyCode
       when key.DOWN
-        fimplus._keyboard.onBackKeyboard()
+        pateco._keyboard.onBackKeyboard()
         self.initKey()
       when key.RETURN,key.ENTER
         self.removePage()
 
   onActiveEntity: (type = 'DOWN')->
-    self = fimplus._registerUserName
+    self = pateco._registerUserName
     switch type
       when 'DOWN'
         if !self.data.positionEntity.active
           self.setActiveButton(self.data.currentActive, self.data.buttons.length)
           self.data.positionEntity.active = true
       when 'UP'
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
-        fimplus._keyboard.setActiveKeyboard(0, 0, false)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._keyboard.setActiveKeyboard(0, 0, false)
 
   
   checkUsername: ()->
@@ -115,7 +115,7 @@ fimplus._registerUserName =
       self.element.find('#register-username').val('')
       self.initKey()
     unless self.username
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : "register-fail"
         onReturn   : retry
         description: "setting-input-phone-for-request"
@@ -128,7 +128,7 @@ fimplus._registerUserName =
     patt = new RegExp("^0");
     res = patt.test(self.username);
     if !res
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : "register-fail"
         onReturn   : retry
         description: "phone-format-fail"
@@ -141,7 +141,7 @@ fimplus._registerUserName =
     patt = new RegExp("^[0-9]+$");
     res = patt.test(self.username);
     if !res
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : "register-fail"
         onReturn   : retry
         description: "phone-format-fail"
@@ -152,7 +152,7 @@ fimplus._registerUserName =
       });
       return false
     if self.username.length < 10 or self.username.length > 11
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : "register-fail"
         onReturn   : retry
         description: "phone-format-fail"
@@ -165,11 +165,11 @@ fimplus._registerUserName =
     return true
   
   handleKey: (keyCode, key)->
-    self = fimplus._registerUserName
+    self = pateco._registerUserName
     positionEntity = self.data.positionEntity
     if keyCode isnt key.RETURN
       unless positionEntity.active
-        fimplus._keyboard.handleKey(keyCode, key)
+        pateco._keyboard.handleKey(keyCode, key)
         return
     switch keyCode
       when key.RETURN
@@ -181,7 +181,7 @@ fimplus._registerUserName =
       when key.UP
         self.data.positionEntity.active = false
         $(self.data.id).find('.bt-movie').find('li').removeClass('active')
-        fimplus._keyboard.onBackBoardButton()
+        pateco._keyboard.onBackBoardButton()
         break;
       when key.LEFT
         self.data.currentActive = self.setActiveButton(--self.data.currentActive, self.data.buttons.length)
@@ -192,9 +192,9 @@ fimplus._registerUserName =
   
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   removePage: ()->
-    self = fimplus._registerUserName
+    self = pateco._registerUserName
     self.data.callback()
     self.element.html('')

@@ -1,4 +1,4 @@
-fimplus._settingSubOpacity =
+pateco._settingSubOpacity =
   data:
     id: '#sub-opacity'
     template  : Templates['module.setting.setting-sub.sub-opacity']()
@@ -12,27 +12,27 @@ fimplus._settingSubOpacity =
         title: '0%'
         value: '0.0'
         action: ()->
-          fimplus._settingSubOpacity.updateValueOpacity('0.0')
+          pateco._settingSubOpacity.updateValueOpacity('0.0')
       _25 =
         title: '25%'
         value: '0.25'
         action: ()->
-          fimplus._settingSubOpacity.updateValueOpacity('0.25')
+          pateco._settingSubOpacity.updateValueOpacity('0.25')
       _50 =
         title: '50%'
         value: '0.5'
         action: ()->
-          fimplus._settingSubOpacity.updateValueOpacity('0.5')
+          pateco._settingSubOpacity.updateValueOpacity('0.5')
       _75 =
         title: '75%'
         value: '0.75'
         action: ()->
-          fimplus._settingSubOpacity.updateValueOpacity('0.75')
+          pateco._settingSubOpacity.updateValueOpacity('0.75')
       _100 =
         title: '100%'
         value: '100'
         action: ()->
-          fimplus._settingSubOpacity.updateValueOpacity('100')
+          pateco._settingSubOpacity.updateValueOpacity('100')
     ]
   
   initPage: ()->
@@ -67,7 +67,7 @@ fimplus._settingSubOpacity =
       $(listElement).find('li').first().addClass('active')
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._settingSubOpacity
+    self = pateco._settingSubOpacity
     switch keyCode
       when key.DOWN
         self.data.currentActive = 0
@@ -78,26 +78,26 @@ fimplus._settingSubOpacity =
         self.data.haveSource = false
         self.data.currentActive = 0
         self.removePage()
-        fimplus._settingSub.initPage()
+        pateco._settingSub.initPage()
   
   handleKey: (keyCode, key)->
-    self = fimplus._settingSubOpacity
+    self = pateco._settingSubOpacity
     console.info 'Setting Sub Opacity:' + keyCode
     listElement = '.btn-sub-opacity'
     length = $('.btn-sub-opacity').find('li').length
     # load detail notify in right panel
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
-      fimplus.UtitService.updateActive(listElement, self.data.currentActive, 'li')
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
+      pateco.UtitService.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         break;
       when key.RETURN
         console.log 'Call back to setting menu'
         self.data.haveSource = false
         self.removePage()
-        fimplus._settingSub.initPage()
+        pateco._settingSub.initPage()
         break;
       when key.UP
         self.data.currentActive--
@@ -106,14 +106,14 @@ fimplus._settingSubOpacity =
       when key.DOWN
         self.data.currentActive++
         if self.data.currentActive < 0
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
         break;
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   removePage: ()->
     self = @
@@ -126,5 +126,5 @@ fimplus._settingSubOpacity =
   updateValueOpacity: (opacity)->
     self = @
     self.data.subtitleOpacity = opacity
-    fimplus.UserService.upDateLocalStorage('userSettings','subtitleOpacity', opacity)
-    fimplus._settingSubOpacity.initPage()
+    pateco.UserService.upDateLocalStorage('userSettings','subtitleOpacity', opacity)
+    pateco._settingSubOpacity.initPage()

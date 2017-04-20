@@ -4,7 +4,7 @@ ul.list-item
     .episode-img
       img(
       src='{{posterLandscape}}'
-      onerror="fimplus.UtitService.onImageError(this)")
+      onerror="pateco.UtitService.onImageError(this)")
       | {{#if progress.progress }}
       .episode-total
       .episode-progress(style='width:{{progress.percent}}%')

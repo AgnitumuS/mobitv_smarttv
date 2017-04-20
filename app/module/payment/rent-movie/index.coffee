@@ -1,4 +1,4 @@
-fimplus._rentMovie =
+pateco._rentMovie =
   data:
     id           : '#rent-movie'
     title        : 'rental'
@@ -8,34 +8,34 @@ fimplus._rentMovie =
       buyItemBtn =
         title : 'button-accept'
         action: ()->
-          self = fimplus._rentMovie
+          self = pateco._rentMovie
           self.buyItem()
     ,
       redeemCodeBtn =
         title : 'button-promo-code'
         action: ()->
-          self = fimplus._rentMovie
-          fimplus._redeemCode.initPage(self.onReInitpage)
+          self = pateco._rentMovie
+          pateco._redeemCode.initPage(self.onReInitpage)
     ,
       cancelBtn =
         title : 'button-cancel'
         action: ()->
-          self = fimplus._rentMovie
+          self = pateco._rentMovie
           self.data.currentActive = 0
-          fimplus._payment.removePage()
+          pateco._payment.removePage()
     ]
 
   setActiveButton    : (current = 0, length = 0)->
     self = @
     button = self.element.find('.payment-method-list').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
 
   initPage: (item, sourceId, callback)->
     self = @
     self.data.item = item
-    self.data.item.priceDefault = fimplus._detail.data.item.ppvPrice
+    self.data.item.priceDefault = pateco._detail.data.item.ppvPrice
     self.data.sourceId = sourceId
     self.getSourceId()
     self.data.callback = ()-> console.log 'callback'
@@ -52,21 +52,21 @@ fimplus._rentMovie =
     retry = ()->
       self.initKey()
     finish = ()->
-      fimplus._page.loadDataRibonOfUser({},()->)
-      fimplus._payment.removePage()
+      pateco._page.loadDataRibonOfUser({},()->)
+      pateco._payment.removePage()
     playMovie = ()->
-      fimplus._payment.element.html('')
-      fimplus._detail.playMovie(fimplus._detail.data.item)
+      pateco._payment.element.html('')
+      pateco._detail.playMovie(pateco._detail.data.item)
     params =
       itemId : self.data.item.id
       sourceId : self.data.sourceId
-      redeemCode : fimplus._redeemCode.data.code or null
+      redeemCode : pateco._redeemCode.data.code or null
       version : 1.0
-    if fimplus._payment.data.isRentMovie && self.data.sourceId is ''
+    if pateco._payment.data.isRentMovie && self.data.sourceId is ''
       params.isTelco = '1'
     buyItemDone = (error, result)->
       if result.status is 400
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "payment-fail"
           onReturn   : retry
           description: result.responseJSON.message
@@ -76,7 +76,7 @@ fimplus._rentMovie =
           ]
         });
         return
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : "payment-success"
         onReturn   : finish
         description: result.message
@@ -88,25 +88,25 @@ fimplus._rentMovie =
             callback: playMovie
         ]
       });
-    fimplus.ApiService.buyItem(params, buyItemDone)
+    pateco.ApiService.buyItem(params, buyItemDone)
 
   checkRedeemCode: ()->
     self = @
-    self.data.code = fimplus._redeemCode.data.code or null
+    self.data.code = pateco._redeemCode.data.code or null
     if self.data.code
-      self.data.buttons[1].title = self.data.code+' - '+fimplus.LanguageService.convert('change', fimplus.UserService.getValueStorage('userSettings', 'language'))
-      if fimplus._redeemCode.data.percent is 1
-        self.data.item.ppvPrice = fimplus._detail.data.item.ppvPrice * fimplus._redeemCode.data.discount
-        if fimplus._payment.data.isRentMovie
-          fimplus._detail.data.item.knownAs
+      self.data.buttons[1].title = self.data.code+' - '+pateco.LanguageService.convert('change', pateco.UserService.getValueStorage('userSettings', 'language'))
+      if pateco._redeemCode.data.percent is 1
+        self.data.item.ppvPrice = pateco._detail.data.item.ppvPrice * pateco._redeemCode.data.discount
+        if pateco._payment.data.isRentMovie
+          pateco._detail.data.item.knownAs
       else
-        self.data.item.ppvPrice = fimplus._detail.data.item.ppvPrice - fimplus._redeemCode.data.discount
+        self.data.item.ppvPrice = pateco._detail.data.item.ppvPrice - pateco._redeemCode.data.discount
     else
       self.data.buttons[1].title = 'button-promo-code'
 
   getSourceId: ()->
-    self = fimplus._rentMovie
-    env = fimplus.env
+    self = pateco._rentMovie
+    env = pateco.env
     getSourceIdDone = (error, result)->
       return if result.status is 400
       i = 0
@@ -117,23 +117,23 @@ fimplus._rentMovie =
         i++
       self.checkRedeemCode()
       self.confirmMessage()
-    fimplus.ApiService.getPaymentMethod(null, env, getSourceIdDone)
+    pateco.ApiService.getPaymentMethod(null, env, getSourceIdDone)
 
   confirmMessage: ()->
-    self = fimplus._rentMovie
+    self = pateco._rentMovie
     if self.data.sourceId is 'mpay' or self.data.sourceId is 'MBF'
-      self.data.description = ['do-you-want-rent', self.data.item.knownAs, 'playable-48h', fimplus.UtitService.coverNumber(self.data.item.ppvPrice), 'd', 'mpay-method']
-    else if fimplus._payment.data.isRentMovie and self.data.paymentMethodSync isnt 1
-      self.data.description = ['do-you-want-rent', self.data.item.knownAs, 'playable-48h', fimplus.UtitService.coverNumber(self.data.item.ppvPrice), 'd']
+      self.data.description = ['do-you-want-rent', self.data.item.knownAs, 'playable-48h', pateco.UtitService.coverNumber(self.data.item.ppvPrice), 'd', 'mpay-method']
+    else if pateco._payment.data.isRentMovie and self.data.paymentMethodSync isnt 1
+      self.data.description = ['do-you-want-rent', self.data.item.knownAs, 'playable-48h', pateco.UtitService.coverNumber(self.data.item.ppvPrice), 'd']
     else
-      self.data.description = ['do-you-want-rent',self.data.item.knownAs, 'playable-48h', fimplus.UtitService.coverNumber(self.data.item.ppvPrice), 'd', 'using-visa']
+      self.data.description = ['do-you-want-rent',self.data.item.knownAs, 'playable-48h', pateco.UtitService.coverNumber(self.data.item.ppvPrice), 'd', 'using-visa']
     self.render()
   onReturnPage: ()->
-    self = fimplus._rentMovie
+    self = pateco._rentMovie
     self.initKey()
 
   onReInitpage: ()->
-    self = fimplus._rentMovie
+    self = pateco._rentMovie
     self.reInitpage()
 
   render: ()->
@@ -153,7 +153,7 @@ fimplus._rentMovie =
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._rentMovie
+    self = pateco._rentMovie
     switch keyCode
       when key.DOWN
         self.setActiveButton(self.data.currentActive, self.data.buttons.length)
@@ -163,7 +163,7 @@ fimplus._rentMovie =
 
 
   handleKey: (keyCode, key)->
-    self = fimplus._rentMovie
+    self = pateco._rentMovie
     switch keyCode
       when key.RETURN
         self.removePage()
@@ -176,7 +176,7 @@ fimplus._rentMovie =
         break;
       when key.UP
         if self.data.currentActive is 0
-          fimplus._backButton.setActive(true, self.hanldeBackbutton)
+          pateco._backButton.setActive(true, self.hanldeBackbutton)
           self.setActiveButton(0, 0)
         else
           self.data.currentActive = self.setActiveButton(--self.data.currentActive, self.data.buttons.length)
@@ -185,10 +185,10 @@ fimplus._rentMovie =
   initKey: ()->
     self = @
     self.data.item.ppvPrice = self.data.item.priceDefault
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   removePage: ()->
-    self = fimplus._rentMovie
+    self = pateco._rentMovie
     self.data.currentActive = 0
     self.data.callback()
     self.element.html('')

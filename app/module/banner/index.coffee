@@ -1,7 +1,7 @@
 Handlebars.registerPartial('homeBar', Templates['module.banner.home-main']());
 Handlebars.registerPartial('detailButton', Templates['module.banner.detail-button']());
 
-fimplus._banner =
+pateco._banner =
   data:
     banner       : {}
     id           : '#banner'
@@ -10,18 +10,18 @@ fimplus._banner =
     currentBanner: {}
   
   reRender: (banner = {})->
-    self = fimplus._banner
+    self = pateco._banner
     return if !banner or banner.id is self.data.banner
     self.data.banner = banner
     source = Templates['module.banner.home-main']()
     template = Handlebars.compile(source)
     self.element = $(self.data.id)
     self.element.find('.home-main').html(template(banner))
-    currentTitleLangguage = fimplus.UserService.getValueStorage('userSettings', 'movieTitleLanguage')
+    currentTitleLangguage = pateco.UserService.getValueStorage('userSettings', 'movieTitleLanguage')
     if currentTitleLangguage is 'en' then banner.knownAs = banner.title
     doAnimation = ()->
       
-      if fimplus.config.state is 'detail'
+      if pateco.config.state is 'detail'
         if banner.descriptionShort.length > 162
           self.activeLabelViewMore()
       #      typeAnimation = "500ms opacity cubic-bezier(.5, 0, .1, 1) 0s"
@@ -51,7 +51,7 @@ fimplus._banner =
   render: (banner = {})->
     self = @
     self.data.banner = banner
-    currentTitleLangguage = fimplus.UserService.getValueStorage('userSettings', 'movieTitleLanguage')
+    currentTitleLangguage = pateco.UserService.getValueStorage('userSettings', 'movieTitleLanguage')
     if currentTitleLangguage is 'en' then banner.knownAs = banner.title
     source = self.data.template
     template = Handlebars.compile(source);
@@ -60,10 +60,10 @@ fimplus._banner =
   
   
   activeLabelViewMore: (active)->
-    self = fimplus._banner
+    self = pateco._banner
     viewmore = self.element.find('.description .description-viewmore')
     viewmore.hide()
-    if fimplus.config.state is 'detail'
+    if pateco.config.state is 'detail'
       return viewmore.show()
     if active is true
       return viewmore.show()
@@ -79,7 +79,7 @@ fimplus._banner =
   setActiveButton: (current = 0, length = 0)->
     self = @
     button = $(self.data.id).find('.detail-buttons').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
   

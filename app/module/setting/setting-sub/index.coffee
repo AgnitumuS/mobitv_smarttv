@@ -1,4 +1,4 @@
-fimplus._settingSub =
+pateco._settingSub =
   data:
     id: '#setting-sub'
     template  : Templates['module.setting.setting-sub']()
@@ -12,21 +12,21 @@ fimplus._settingSub =
         title: 'account-subtitle-color'
         valueRight: 'color'
         action: ()->
-          fimplus._settingSubColor.initPage()
+          pateco._settingSubColor.initPage()
           return
       textSize =
         title: 'account-subtitle-size'
         valueRight: 'size'
         action: ()->
           console.log 'textSize'
-          fimplus._settingSubSize.initPage()
+          pateco._settingSubSize.initPage()
           return
       textOpacity =
         title: 'account-subtitle-opacity'
         valueRight: 'opacity'
         action: ()->
           console.log 'textOpacity'
-          fimplus._settingSubOpacity.initPage()
+          pateco._settingSubOpacity.initPage()
     ]
   
   initPage: ()->
@@ -61,7 +61,7 @@ fimplus._settingSub =
       $(listElement).find('li').first().addClass('active')
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._settingSub
+    self = pateco._settingSub
     switch keyCode
       when key.DOWN
         self.data.currentActive = 0
@@ -71,32 +71,32 @@ fimplus._settingSub =
       when key.RETURN,key.ENTER
         self.data.currentActive = 0
         self.removePage()
-        fimplus._setting.initKey()
+        pateco._setting.initKey()
 
   
   handleKey: (keyCode, key)->
-    self = fimplus._settingSub
+    self = pateco._settingSub
     console.info 'Setting Sub:' + keyCode
     listElement = '.btn-sub'
     length = $('.btn-sub').find('li').length
     # load detail notify in right panel
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
-      fimplus.UtitService.updateActive(listElement, self.data.currentActive, 'li')
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
+      pateco.UtitService.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         break;
       when key.RETURN
         console.log 'Call back to setting menu'
         self.data.haveSource = false
         self.removePage()
-        fimplus._setting.initPage()
+        pateco._setting.initPage()
         break;
       when key.UP
         self.data.currentActive--
         if self.data.currentActive < 0
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
@@ -107,7 +107,7 @@ fimplus._settingSub =
         break;
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   removePage: ()->
     self = @

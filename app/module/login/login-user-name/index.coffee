@@ -1,4 +1,4 @@
-fimplus._loginUserName =
+pateco._loginUserName =
   data:
     id            : '#login-user-name'
     title         : 'login-title'
@@ -9,12 +9,12 @@ fimplus._loginUserName =
       cancelBtn =
         title : 'button-back'
         action: ()->
-          fimplus._loginUserName.removePage()
+          pateco._loginUserName.removePage()
     ,
       continueBtn =
         title : 'button-continue'
         action: ()->
-          fimplus._loginUserName.loginContinue()
+          pateco._loginUserName.loginContinue()
     ]
     positionEntity:
       active: false
@@ -24,20 +24,20 @@ fimplus._loginUserName =
     self = @
     self.data.username = $("#username").val()
     if self.checkUsername() is true
-      fimplus._loginPassword.initPage(self.data.username, self.onReturnPage)
+      pateco._loginPassword.initPage(self.data.username, self.onReturnPage)
   
   setActiveButton: (current = 0, length = 0)->
     self = @
     button = $(self.data.id).find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
   
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._loginUserName
+    self = pateco._loginUserName
     switch keyCode
       when key.DOWN
-        fimplus._keyboard.onBackKeyboard()
+        pateco._keyboard.onBackKeyboard()
         self.initKey()
       when key.RETURN,key.ENTER
         self.removePage()
@@ -52,10 +52,10 @@ fimplus._loginUserName =
     self.initKey()
   
   onReturnPage: ()->
-    self = fimplus._loginUserName
+    self = pateco._loginUserName
     element = $('.login-keyboard')
     input = $('#username')
-    fimplus._keyboard.render(element, input, self.onActiveEntity, 'text')
+    pateco._keyboard.render(element, input, self.onActiveEntity, 'text')
     self.initKey()
   
   render: ()->
@@ -64,7 +64,7 @@ fimplus._loginUserName =
     template = Handlebars.compile(source);
     $(self.data.id).html(template({login: self.data}))
     @renderKeyboard()
-    fimplus._keyboard.setActiveKeyboard(0, 0)
+    pateco._keyboard.setActiveKeyboard(0, 0)
     buttonClick = ()->
       index = $(@).index()
       self.data.buttons[index].action()
@@ -77,18 +77,18 @@ fimplus._loginUserName =
     self.data.positionEntity.active = false
     element = $('.login-keyboard')
     input = $('#username')
-    fimplus._keyboard.render(element, input, self.onActiveEntity, 'text')
+    pateco._keyboard.render(element, input, self.onActiveEntity, 'text')
   
   onActiveEntity: (type = 'DOWN')->
-    self = fimplus._loginUserName
+    self = pateco._loginUserName
     switch type
       when 'DOWN'
         if !self.data.positionEntity.active
           self.setActiveButton(self.data.currentActive, self.data.buttons.length)
           self.data.positionEntity.active = true
       when 'UP'
-        fimplus._backButton.setActive(true, self.handleBackbutton)
-        fimplus._keyboard.setActiveKeyboard(0, 0, false)
+        pateco._backButton.setActive(true, self.handleBackbutton)
+        pateco._keyboard.setActiveKeyboard(0, 0, false)
   
   checkUsername: ()->
     self = @
@@ -99,7 +99,7 @@ fimplus._loginUserName =
       phone = self.data.username
       resPhone = /^0/.test(phone)
       if phone and resPhone is false
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "login-phone-failed-login"
           onReturn   : retry
           description: "phone-format-fail"
@@ -110,7 +110,7 @@ fimplus._loginUserName =
         });
         return false
       if phone and phone.length < 10 or phone.length > 12
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "login-phone-failed-login"
           onReturn   : retry
           description: "phone-format-fail"
@@ -126,7 +126,7 @@ fimplus._loginUserName =
       email = self.data.username
       resEmail = /^[a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,15})$/.test(email)
       if email and resEmail is false
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "login-phone-failed-login"
           onReturn   : retry
           description: "email-format-fail"
@@ -139,7 +139,7 @@ fimplus._loginUserName =
       return true
     
     unless self.data.username
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : "login-phone-failed-login"
         onReturn   : retry
         description: "setting-input-phone-email-for-request"
@@ -163,12 +163,12 @@ fimplus._loginUserName =
   
   
   handleKey: (keyCode, key)->
-    self = fimplus._loginUserName
+    self = pateco._loginUserName
     console.info 'Login Key:' + keyCode
     positionEntity = self.data.positionEntity
     if keyCode isnt key.RETURN
       unless positionEntity.active
-        fimplus._keyboard.handleKey(keyCode, key)
+        pateco._keyboard.handleKey(keyCode, key)
         return
     switch keyCode
       when key.RETURN
@@ -180,7 +180,7 @@ fimplus._loginUserName =
       when key.UP
         self.data.positionEntity.active = false
         $(self.data.id).find('.bt-movie').find('li').removeClass('active')
-        fimplus._keyboard.onBackBoardButton()
+        pateco._keyboard.onBackBoardButton()
         break;
       when key.LEFT
         self.data.currentActive = self.setActiveButton(--self.data.currentActive, self.data.buttons.length)
@@ -190,11 +190,11 @@ fimplus._loginUserName =
         break;
   
   initKey: ()->
-    self = fimplus._loginUserName
-    fimplus.KeyService.initKey(self.handleKey)
+    self = pateco._loginUserName
+    pateco.KeyService.initKey(self.handleKey)
   
   removePage: ()->
-    self = fimplus._loginUserName
+    self = pateco._loginUserName
     self.data.callback()
     self.element.html('')
 

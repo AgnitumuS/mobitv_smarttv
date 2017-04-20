@@ -1,4 +1,4 @@
-fimplus._loginPassword =
+pateco._loginPassword =
   data:
     id           : '#login-password'
     title        : 'password'
@@ -9,12 +9,12 @@ fimplus._loginPassword =
       cancelBtn =
         title : 'button-back'
         action: ()->
-          fimplus._loginPassword.removePage()
+          pateco._loginPassword.removePage()
     ,
       continueBtn =
         title : 'button-confirm'
         action: ()->
-          fimplus._loginPassword.loginFinish()
+          pateco._loginPassword.loginFinish()
       ]
     positionEntity:
       active : false
@@ -28,9 +28,9 @@ fimplus._loginPassword =
       self.initKey()
     finish = ()->
       $('#login, #login-user-name, #login-password').hide()
-      fimplus._login.removePage()
+      pateco._login.removePage()
     unless self.data.password
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : "login-phone-failed-login"
         onReturn   : retry
         description: "setting-input-password-for-request"
@@ -44,13 +44,13 @@ fimplus._loginPassword =
     params =
       mobile  : self.data.username
       password: self.data.password
-      platform: fimplus.config.platform
+      platform: pateco.config.platform
       services : ["hd1_cas", "hd1_cm", "hd1_payment", "hd1_billing"]
 
     doneLoginCas = (error, result)->
       if result.status
         $('.wrap-loading').hide()
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "login-phone-failed-login"
           onReturn   : retry
           description: result.responseJSON.message
@@ -62,19 +62,19 @@ fimplus._loginPassword =
         return
       getTicket(result)
       return
-    fimplus.ApiService.loginWithPassword(params, doneLoginCas)
+    pateco.ApiService.loginWithPassword(params, doneLoginCas)
 
     getTicket = (result)->
-      data = fimplus.UtitService.formatTicket result.tickets
-      fimplus.ApiService.loginServices data, (error, result)->
+      data = pateco.UtitService.formatTicket result.tickets
+      pateco.ApiService.loginServices data, (error, result)->
         $('.wrap-loading').hide()
         if error
           console.log error
           return
-        fimplus.UserService.saveToken(result)
-        fimplus.ApiService.getUserProfile (error, user)->
+        pateco.UserService.saveToken(result)
+        pateco.ApiService.getUserProfile (error, user)->
           unless error
-            fimplus.UserService.saveProfile(user)
+            pateco.UserService.saveProfile(user)
             if user.fullName
               userName = user.fullName
             else if user.email
@@ -82,7 +82,7 @@ fimplus._loginPassword =
             else
               userName = user.localAcc.mobile
             self.removePage()
-            fimplus._error.initPage({
+            pateco._error.initPage({
               title      : "login-phone-success"
               onReturn   : finish
               timeOut    :
@@ -97,7 +97,7 @@ fimplus._loginPassword =
   setActiveButton    : (current = 0, length = 0)->
     self = @
     button = self.element.find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
 
@@ -110,7 +110,7 @@ fimplus._loginPassword =
     self.initKey()
 
   onReturnPage: ()->
-    self = fimplus._loginPassword
+    self = pateco._loginPassword
     self.initKey()
 
   render: ()->
@@ -120,7 +120,7 @@ fimplus._loginPassword =
     self.element = $(self.data.id)
     self.element.html(template({login: self.data}))
     @renderKeyboard()
-    fimplus._keyboard.setActiveKeyboard(0, 0)
+    pateco._keyboard.setActiveKeyboard(0, 0)
     buttonClick = ()->
       index = $(@).index()
       self.data.buttons[index].action()
@@ -133,35 +133,35 @@ fimplus._loginPassword =
     self.data.positionEntity.active = false
     element = $('.login-pass-keyboard')
     input = $('#password')
-    fimplus._keyboard.render(element, input, self.onActiveEntity, 'text')
+    pateco._keyboard.render(element, input, self.onActiveEntity, 'text')
 
   onActiveEntity: (type = 'DOWN')->
-    self = fimplus._loginPassword
+    self = pateco._loginPassword
     switch type
       when 'DOWN'
         if !self.data.positionEntity.active
           self.setActiveButton(self.data.currentActive, self.data.buttons.length)
           self.data.positionEntity.active = true
       when 'UP'
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
-        fimplus._keyboard.setActiveKeyboard(0, 0, false)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._keyboard.setActiveKeyboard(0, 0, false)
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._loginPassword
+    self = pateco._loginPassword
     switch keyCode
       when key.DOWN
-        fimplus._keyboard.onBackKeyboard()
+        pateco._keyboard.onBackKeyboard()
         self.initKey()
       when key.RETURN,key.ENTER
         self.removePage()
   
   handleKey: (keyCode, key)->
-    self = fimplus._loginPassword
+    self = pateco._loginPassword
     positionEntity = self.data.positionEntity
     if keyCode isnt key.RETURN
       unless positionEntity.active
-        fimplus._keyboard.handleKey(keyCode, key)
+        pateco._keyboard.handleKey(keyCode, key)
         return
     switch keyCode
       when key.RETURN
@@ -173,7 +173,7 @@ fimplus._loginPassword =
       when key.UP
         self.data.positionEntity.active = false
         self.element.find('.bt-movie').find('li').removeClass('active')
-        fimplus._keyboard.onBackBoardButton()
+        pateco._keyboard.onBackBoardButton()
         break
       when key.LEFT
         self.data.currentActive = self.setActiveButton(--self.data.currentActive, self.data.buttons.length)
@@ -184,9 +184,9 @@ fimplus._loginPassword =
   
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   removePage: ()->
-    self = fimplus._loginPassword
+    self = pateco._loginPassword
     self.data.callback()
     self.element.html('')

@@ -1,4 +1,4 @@
-fimplus._welcome =
+pateco._welcome =
   initPage: ()->
     source = Templates['module.welcome']()
     template = Handlebars.compile(source);
@@ -10,15 +10,15 @@ fimplus._welcome =
       welcomeText    : 'title-welcome'
       welcomeTextLine: 'title-welcome-1'
       galaxy         : 'galaxy-family'
-      background     : 'https://ast.fimplus.io/files/splashtv_1492575091272.jpg'
+      background     : 'https://ast.pateco.io/files/splashtv_1492575091272.jpg'
     
     turnOfWelcome = ()->
       $('#welcome').removeClass('fadeIn').addClass('fadeOut')
       setTimeout(()->
         $('#welcome').hide()
       , 2000)
-      fimplus._page.initPage()
-      fimplus.UtitService.setFlashScreenWelcome()
+      pateco._page.initPage()
+      pateco.UtitService.setFlashScreenWelcome()
 
     triggerOffScreen = ()->
       $('.current-progress').css
@@ -38,5 +38,5 @@ fimplus._welcome =
       doneLoadImage()
     , 2000)
     
-    fimplus.UtitService.loadImage(data.background, doneLoadImage)
+    pateco.UtitService.loadImage(data.background, doneLoadImage)
     

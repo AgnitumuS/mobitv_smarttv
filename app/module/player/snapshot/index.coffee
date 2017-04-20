@@ -1,4 +1,4 @@
-fimplus._playerSnapshot =
+pateco._playerSnapshot =
   data:
     callback    : ()->
       console.log 'callback'
@@ -11,7 +11,7 @@ fimplus._playerSnapshot =
     height      : 270
   
   render: ()->
-    self = fimplus._playerSnapshot
+    self = pateco._playerSnapshot
     source = Templates['module.player.snapshot']()
     template = Handlebars.compile(source);
     self.element = $('#player-wrapper .player-snapshot')
@@ -21,7 +21,7 @@ fimplus._playerSnapshot =
     self.enableSnapshot(false)
   
   initSnapshot: (snapshot)->
-    self = fimplus._playerSnapshot
+    self = pateco._playerSnapshot
     self.data.items = snapshot
     async.eachSeries(snapshot.data, (item, callback)->
       newImg = new Image;
@@ -31,7 +31,7 @@ fimplus._playerSnapshot =
     , self.render)
   
   enableSnapshot: (active = true)->
-    self = fimplus._playerSnapshot
+    self = pateco._playerSnapshot
     try
       snapshot = self.element.find('.preview-snap')
       if active
@@ -42,10 +42,10 @@ fimplus._playerSnapshot =
       console.log e
   
   calcPositionSnapshot: (second = 0)->
-    self = fimplus._playerSnapshot
+    self = pateco._playerSnapshot
     return unless self.element
     snapshot = self.element.find('.snapshot')
-    snapshot.find('.timeSnapshot').html(fimplus._player.converTime(second))
+    snapshot.find('.timeSnapshot').html(pateco._player.converTime(second))
     height = 270
 #    if $(document).width() <=1280
 #      height = 178

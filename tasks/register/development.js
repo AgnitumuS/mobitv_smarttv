@@ -2,7 +2,6 @@ module.exports = function (grunt) {
   grunt.registerTask('pre-dev-watch', [
     'sails-linker:devJs',
     'sails-linker:devCss',
-    'copy:healthCheck',
     'sync'
 
   ]);

@@ -1,4 +1,4 @@
-fimplus._settingLang =
+pateco._settingLang =
   data:
     id: '#setting-lang'
     template  : Templates['module.setting.setting-lang']()
@@ -10,16 +10,16 @@ fimplus._settingLang =
         title: 'account-language-vi'
         type: 'vi'
         action: ()->
-          fimplus._settingLang.data.activeLanguage = 'vi'
-          fimplus._settingLang.render()
-          fimplus.UserService.upDateLocalStorage('userSettings','language','vi')
+          pateco._settingLang.data.activeLanguage = 'vi'
+          pateco._settingLang.render()
+          pateco.UserService.upDateLocalStorage('userSettings','language','vi')
       english =
         title: 'account-language-en'
         type: 'en'
         action: ()->
-          fimplus._settingLang.data.activeLanguage = 'en'
-          fimplus._settingLang.render()
-          fimplus.UserService.upDateLocalStorage('userSettings','language','en')
+          pateco._settingLang.data.activeLanguage = 'en'
+          pateco._settingLang.render()
+          pateco.UserService.upDateLocalStorage('userSettings','language','en')
     ]
   
   initPage: ()->
@@ -45,7 +45,7 @@ fimplus._settingLang =
       $(listElement).find('li').first().addClass('active')
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._settingLang
+    self = pateco._settingLang
     switch keyCode
       when key.DOWN
         self.data.currentActive = 0
@@ -55,7 +55,7 @@ fimplus._settingLang =
       when key.RETURN,key.ENTER
         self.data.haveSource = false
         self.removePage()
-        fimplus._setting.initKey()
+        pateco._setting.initKey()
 
   render: ()->
     self = @
@@ -65,28 +65,28 @@ fimplus._settingLang =
 
   
   handleKey: (keyCode, key)->
-    self = fimplus._settingLang
+    self = pateco._settingLang
     console.info 'Setting Lang:' + keyCode
     listElement = '.btn-lang'
     length = $('.btn-lang').find('li').length
     # load detail notify in right panel
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
-      fimplus.UtitService.updateActive(listElement, self.data.currentActive, 'li')
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
+      pateco.UtitService.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         self.render()
         break;
       when key.RETURN
         self.data.haveSource = false
         self.removePage()
-        fimplus._setting.initPage()
+        pateco._setting.initPage()
         break;
       when key.UP
         self.data.currentActive--
         if self.data.currentActive < 0
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
@@ -97,7 +97,7 @@ fimplus._settingLang =
         break;
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   
   removePage: ()->

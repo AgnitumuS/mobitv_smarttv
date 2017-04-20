@@ -1,4 +1,4 @@
-fimplus._playerSetting =
+pateco._playerSetting =
   data:
     callback     : ()->
       console.log 'callback'
@@ -24,10 +24,10 @@ fimplus._playerSetting =
   
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   setConfigSetting: ()->
-    self = fimplus._playerSetting
+    self = pateco._playerSetting
     currentActive = self.data.currentActive
     pointer = self.element.find('.player-edit-row')
     pointer.find('.icon').removeClass('ic-check')
@@ -44,16 +44,16 @@ fimplus._playerSetting =
     self.data.items.subtitle = checkActive(self.data.items.subtitle)
   
   setActivePointer: (active = true)->
-    self = fimplus._playerSetting
+    self = pateco._playerSetting
     
     currentActive = self.data.currentActive
     setting = self.data.setting
     return if _.isEmpty(setting)
     
     maxRow = setting.length
-    currentActive.row = fimplus.KeyService.reCalc(currentActive.row, maxRow)
+    currentActive.row = pateco.KeyService.reCalc(currentActive.row, maxRow)
     maxCol = setting[currentActive.row].items.length
-    currentActive.col = fimplus.KeyService.reCalc(currentActive.col, maxCol)
+    currentActive.col = pateco.KeyService.reCalc(currentActive.col, maxCol)
     self.data.currentActive = currentActive
     
     pointer = self.element.find('.player-edit-row')
@@ -88,7 +88,7 @@ fimplus._playerSetting =
   
   
   handleKey: (keyCode, key)->
-    self = fimplus._playerSetting
+    self = pateco._playerSetting
     console.info 'Player Setting Key:' + keyCode
     
     switch keyCode
@@ -114,7 +114,7 @@ fimplus._playerSetting =
     self.setActivePointer()
   
   removePage: ()->
-    self = fimplus._playerSetting
+    self = pateco._playerSetting
     self.element.html('')
     self.data.callback()
   

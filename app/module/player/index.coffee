@@ -1,4 +1,4 @@
-fimplus._player =
+pateco._player =
   video:
     state          : 'PLAY'
     currentTime    : 0
@@ -6,30 +6,30 @@ fimplus._player =
     currentTimeSeek: 0
     currentPrecent : 0
     getVolume      : ()->
-      return fimplus.PlayerService.getVolume()
+      return pateco.PlayerService.getVolume()
     getCurrentTime : ()->
-      return fimplus.PlayerService.getCurrentTime()
+      return pateco.PlayerService.getCurrentTime()
     getDuration    : ()->
-      return fimplus.PlayerService.getDuration()
+      return pateco.PlayerService.getDuration()
     getState       : ()->
-      return fimplus.PlayerService.getState()
+      return pateco.PlayerService.getState()
     seekTo         : (second = 60)->
-#      fimplus._player.pushProgressWhenHasEvent()
-      fimplus.PlayerService.seekTo(second)
+#      pateco._player.pushProgressWhenHasEvent()
+      pateco.PlayerService.seekTo(second)
     play           : ()->
-      fimplus.PlayerService.play()
+      pateco.PlayerService.play()
     pause          : ()->
-#      fimplus._player.pushProgressWhenHasEvent()
-      fimplus.PlayerService.pause()
+#      pateco._player.pushProgressWhenHasEvent()
+      pateco.PlayerService.pause()
     stop           : ()->
-#      fimplus._player.pushProgressWhenHasEvent()
-      fimplus.PlayerService.stop()
+#      pateco._player.pushProgressWhenHasEvent()
+      pateco.PlayerService.stop()
     backward       : ()->
-#      fimplus._player.pushProgressWhenHasEvent()
-      fimplus.PlayerService.backward()
+#      pateco._player.pushProgressWhenHasEvent()
+      pateco.PlayerService.backward()
     forward        : ()->
-#      fimplus._player.pushProgressWhenHasEvent()
-      fimplus.PlayerService.forward()
+#      pateco._player.pushProgressWhenHasEvent()
+      pateco.PlayerService.forward()
   
   data:
     percentOld          : 0
@@ -53,10 +53,10 @@ fimplus._player =
       console.log 'login callback'
   
   initPage: (item, callback)->
-    self = fimplus._player
+    self = pateco._player
     #    self.data.item = item
     self.data.item = _.clone item
-    self.data.userSetting = fimplus.UserService.getUserSetting()
+    self.data.userSetting = pateco.UserService.getUserSetting()
     self.data.callback = ()->
       console.log 'callback'
     self.data.callback = callback if _.isFunction(callback)
@@ -73,41 +73,41 @@ fimplus._player =
     self.initKey()
     self.initSocket()
     self.initPlayer()
-    fimplus._page.activeIconBack(false)
-    fimplus.config.state = 'player'
+    pateco._page.activeIconBack(false)
+    pateco.config.state = 'player'
     null
   
   triggerClickActionButtons: (event, value)->
-    self = fimplus._player
+    self = pateco._player
     unless value
       self.data.currentActionButtons = $(@).index()
       self.enableButtonActions()
     self.data.buttonActions[self.data.currentActionButtons].action()
   
   enableButtonActions: (active = true)->
-    self = fimplus._player
+    self = pateco._player
     button = self.element.find('.player-bt a')
     button.removeClass('active')
     if active
       button.eq(self.data.currentActionButtons).addClass('active')
   
   initTriggerClickActionButton: ()->
-    self = fimplus._player
+    self = pateco._player
     button = self.element.find('.player-bt a')
     button.off 'click'
       .on 'click', self.triggerClickActionButtons
   
   displaySettingSubtitle: ()->
-    self = fimplus._player
+    self = pateco._player
     self.video.pause()
     items =
       sounds  : []
       subtitle: self.data.subtitle
     
-    fimplus._playerSetting.initPage(items, self.onReturnPlayer)
+    pateco._playerSetting.initPage(items, self.onReturnPlayer)
   
   prepareButtonActions: ()->
-    self = fimplus._player
+    self = pateco._player
     console.log self.data.item
     soundAndSub =
       title : 'play-option-audio-sub'
@@ -129,7 +129,7 @@ fimplus._player =
     self.data.buttonActions = [soundAndSub, season]
   
   setSubtitle: (currentTime)->
-    self = fimplus._player
+    self = pateco._player
     unless self.data.subtitleEnable
       return
     data = self.data.subtitle["VI"]
@@ -139,7 +139,7 @@ fimplus._player =
     
     subEl = self.element.find('.player-sub')
     subText = subEl.find('span')
-    sub = fimplus.SubtitleService.search(self.data.subtitle, currentTime)
+    sub = pateco.SubtitleService.search(self.data.subtitle, currentTime)
     if sub
       subEl.show()
       subText.html(sub.text)
@@ -175,14 +175,14 @@ fimplus._player =
   
   
   render: ()->
-    self = fimplus._player
+    self = pateco._player
     source = Templates['module.player']()
     template = Handlebars.compile(source);
     self.element = $('#player-wrapper')
     self.element.html(template(self.data))
   
   reRender: (item)->
-    self = fimplus._player
+    self = pateco._player
     self.data.item = item
     self.saveProgress()
     self.video.stop()
@@ -205,26 +205,26 @@ fimplus._player =
       loading.hide()
   
   getFirstEpisode: (id, cb)->
-    fimplus.ApiService.getFirstEpisode(id, cb)
+    pateco.ApiService.getFirstEpisode(id, cb)
   
   initSessionPlay: (id, cb)->
-    fimplus.ApiService.initSessionPlay(id, cb)
+    pateco.ApiService.initSessionPlay(id, cb)
   
   getLinkPlay: (session, cb)->
-    self = fimplus._player
+    self = pateco._player
     params =
       id           : session.movieId
       sessionPlayId: session.sessionPlayId
       tokenPairing : self.data.item.tokenPairing?
-    fimplus.ApiService.getPlayList(params, cb)
+    pateco.ApiService.getPlayList(params, cb)
   
   getSubtitleDone: (subtitle)->
-    self = fimplus._player
+    self = pateco._player
     self.data.subtitle = subtitle
   
   handleError: (error)->
-    self = fimplus._player
-    fimplus._error.initPage({
+    self = pateco._player
+    pateco._error.initPage({
       onReturn   : self.data.callback()
       description: ['connect-error', '#1000']
       title      : 'notification'
@@ -236,19 +236,19 @@ fimplus._player =
     return console.log error
   
   converPlaylist: (data)->
-    self = fimplus._player
+    self = pateco._player
     playlist = _.pluck(_.flatten(_.pluck data, 'playlist'), 'url')
     return playlist
   
   finishedInitTrailer: (error, result)->
-    self = fimplus._player
+    self = pateco._player
     return self.handleError(error) if error
     self.data.playlist = self.converPlaylist(result)
     self.data.drm = {}
     self.triggerPlayer()
   
   finishedInitPlayer: (error, result)->
-    self = fimplus._player
+    self = pateco._player
     if error
       return console.log error
     self.data.playlist = self.converPlaylist(result.newPlaylist)
@@ -257,10 +257,10 @@ fimplus._player =
       step: result.snapshotStep || 0
       data: result.snapshotImgs || []
     
-    fimplus._playerSnapshot.initSnapshot(self.data.snapshot)
+    pateco._playerSnapshot.initSnapshot(self.data.snapshot)
     
     unless _.isEmpty(result.subtitle)
-      fimplus.SubtitleService.getContentSubFromServer(result.subtitle, self.getSubtitleDone)
+      pateco.SubtitleService.getContentSubFromServer(result.subtitle, self.getSubtitleDone)
     else
       self.data.subtitle = {}
     self.data.marker = result.marker || []
@@ -272,13 +272,13 @@ fimplus._player =
     self.triggerPlayer()
   
   triggerPlayer: ()->
-    self = fimplus._player
-    fimplus.PlayerService.setup({
+    self = pateco._player
+    pateco.PlayerService.setup({
       url     : self.data.playlist[self.data.retryTime]
       wrapper : '#player'
       element : 'fp-player'
-      env     : fimplus.config.env
-      platform: fimplus.config.platform
+      env     : pateco.config.env
+      platform: pateco.config.platform
       position: self.data.item.progress?.progress || 0
       percent : self.data.item.progress?.percent || 0
       drm     : self.data.drm || {}
@@ -294,16 +294,16 @@ fimplus._player =
         onStateChange      : self.onStateChange
     })
     self.data.retryTime++
-    self.data.retryTime = fimplus.KeyService.reCalc(self.data.retryTime, self.data.playlist.length)
+    self.data.retryTime = pateco.KeyService.reCalc(self.data.retryTime, self.data.playlist.length)
   
   
   onReturnPlayer: ()->
-    self = fimplus._player
+    self = pateco._player
     self.initKey()
     self.video.play() if self.video and _.isFunction(self.video.play)
   
   onStateChange: (state)->
-    self = fimplus._player
+    self = pateco._player
     self.changeIconPlayer(state)
     
     param =
@@ -312,7 +312,7 @@ fimplus._player =
       state  : state
       message: ''
     
-    fimplus.TizenService.socket.sendMessage(param)
+    pateco.TizenService.socket.sendMessage(param)
   
   onError: (error)->
     console.error 'error', error
@@ -321,8 +321,8 @@ fimplus._player =
       message = error.message
     catch e
       console.log e
-    self = fimplus._player
-    fimplus._error.initPage({
+    self = pateco._player
+    pateco._error.initPage({
       onReturn   : ()->
         self.onClosePlayer()
       description: error.message || "Kết nối đến hệ thống tạm thời bị gián đoạn,#1702"
@@ -343,16 +343,16 @@ fimplus._player =
       type   : 'error'
       message: ''
       detail : error
-    fimplus.TizenService.socket.sendMessage(param)
+    pateco.TizenService.socket.sendMessage(param)
   
   onPlay: ()->
-    self = fimplus._player
+    self = pateco._player
     console.info 'on play'
 #    console.log 'self.video.currentTime',self.video.currentTime
 #    console.log 'self.video.duration',self.video.getDuration()
   
   onCurrentPlaytime: (currentTime)->
-    self = fimplus._player
+    self = pateco._player
     self.calcPercent(currentTime) if self.video.currentTimeSeek is 0
     self.video.duration = self.video.getDuration()
     self.setSubtitle(currentTime * 1000)
@@ -365,16 +365,16 @@ fimplus._player =
       type       : 'remote'
       action     : 'progress'
       movieId    : self.data.item.id
-    fimplus.TizenService.socket.sendMessage(param)
+    pateco.TizenService.socket.sendMessage(param)
   
   onBufferingComplete: ()->
-    fimplus._player.setLoading(false)
+    pateco._player.setLoading(false)
   
   onBufferingStart: ()->
-    fimplus._player.setLoading()
+    pateco._player.setLoading()
   
   contentMarker: ()->
-    self = fimplus._player
+    self = pateco._player
     if !self.data.item.isTrailer
       marker = self.data.marker
       if marker.length isnt 0
@@ -383,7 +383,7 @@ fimplus._player =
             movieId = marker[item].nextMovieId
             done = (error, result)->
               if error
-                fimplus._error.initPage({
+                pateco._error.initPage({
                   onReturn   : self.data.callback
                   description: 'Kết nối tới hệ thống bị chập chờn!,#1000'
                   title      : 'Thông báo'
@@ -394,12 +394,12 @@ fimplus._player =
                 })
                 return
               self.reRender(result.episodeInfo.episode)
-            fimplus.ApiService.getEntityDetail(movieId, done)
+            pateco.ApiService.getEntityDetail(movieId, done)
             return true
     return false
   
   onStreamCompleted: ()->
-    self = fimplus._player
+    self = pateco._player
     return if self.contentMarker()
     self.onClosePlayer()
   
@@ -409,23 +409,23 @@ fimplus._player =
       action : 'onVolumeChange'
       volume : value
       message: ''
-    fimplus.TizenService.socket.sendMessage(param)
+    pateco.TizenService.socket.sendMessage(param)
   onClosePlayer : ()->
-    self = fimplus._player
+    self = pateco._player
     self.saveProgress()
     self.video.stop()
     self.removePage()
-    fimplus.config.state = ''
+    pateco.config.state = ''
     paramPairing =
       type   : 'remote'
       message: 'Tv exit player'
       action : 'disconnect'
-    fimplus.TizenService.socket.sendMessage(paramPairing)
+    pateco.TizenService.socket.sendMessage(paramPairing)
   
   
   
   removePage: ()->
-    self = fimplus._player
+    self = pateco._player
     self.element.html('')
     self.data.callback()
   
@@ -443,7 +443,7 @@ fimplus._player =
   
   changeIconPlayer: (state)->
     console.log state
-    self = fimplus._player
+    self = pateco._player
     btn = self.element.find('.button-status')
     switch state
       when 'PLAY'
@@ -453,7 +453,7 @@ fimplus._player =
         btn.removeClass('ic-pause').addClass('ic-play')
   
   enablePointer: (active = true)->
-    self = fimplus._player
+    self = pateco._player
     pointer = self.element.find('.bar-pointer')
     if active
       pointer.show()
@@ -461,17 +461,17 @@ fimplus._player =
       pointer.hide()
   
   pushProgressWhenHasEvent: ()->
-    self = fimplus._player
+    self = pateco._player
     params =
       movieId : self.data.item.id
       progress: parseInt(self.video.currentTime)
       total   : parseInt(self.video.duration)
-    fimplus.ApiService.trackProgress(params)
+    pateco.ApiService.trackProgress(params)
     console.info 'player._player pushProgressWhenHasEvent [seekTo, pause, stop]', params
   
   
   saveProgress: ()->
-    self = fimplus._player
+    self = pateco._player
     params =
       movieId : self.data.item.id
       progress: parseInt(self.video.currentTime)
@@ -479,17 +479,17 @@ fimplus._player =
     if Math.ceil(params.progress) < 2 and self.data.firstTrack is false
       self.data.firstTrack = true
       #      console.log 'saveProgress firstTrack=', params
-      fimplus.ApiService.trackProgress(params)
+      pateco.ApiService.trackProgress(params)
     
     percent = Math.ceil(params.progress / params.total * 100)
     timeSaveProgress = percent % 5
     if timeSaveProgress is 0 and self.data.percentOld isnt percent
       self.data.percentOld = _.clone percent
-      #      console.log 'fimplus._player percent % 5=0;  saveProgress=', params
-      fimplus.ApiService.trackProgress(params)
+      #      console.log 'pateco._player percent % 5=0;  saveProgress=', params
+      pateco.ApiService.trackProgress(params)
   
   setStatusbar: ()->
-    self = fimplus._player
+    self = pateco._player
     player = self.element
     currentTime = player.find('.current-time')
     durationTime = player.find('.duration-time')
@@ -503,13 +503,13 @@ fimplus._player =
     durationTime.html(self.converTime(self.video.duration))
   
   initTrailer: (item)->
-    self = fimplus._player
+    self = pateco._player
     id = self.data.item.id
-    fimplus.ApiService.getTrailer(id, self.finishedInitTrailer)
+    pateco.ApiService.getTrailer(id, self.finishedInitTrailer)
   
   
   initPlayer: (data)->
-    self = fimplus._player
+    self = pateco._player
     self.setLoading()
     if data
       self.data.item = data
@@ -531,7 +531,7 @@ fimplus._player =
     async.waterfall(tasks, self.finishedInitPlayer)
   
   activeIcBack: (active = false)->
-    self = fimplus._player
+    self = pateco._player
     icBack = self.element.find('.ic-back')
     if active is true
       icBack.addClass('active')
@@ -539,7 +539,7 @@ fimplus._player =
       icBack.removeClass('active')
   
   displayControl: (active = false)->
-    self = fimplus._player
+    self = pateco._player
     element = $('#player-wrapper')
     classControl = ".player-bottom, .player-header,.gradient-top,.gradient-bottom"
     if active
@@ -552,10 +552,10 @@ fimplus._player =
       element.find(classControl).fadeOut()
       self.changePositionSubtitle("down")
       self.video.currentTimeSeek = 0
-      fimplus._playerSnapshot.enableSnapshot(false)
+      pateco._playerSnapshot.enableSnapshot(false)
   
   enableControlBar: (timeEnable = true)->
-    self = fimplus._player
+    self = pateco._player
     self.displayControl(true)
     clearTimeout(self.timeoutcloseview)
     return unless timeEnable
@@ -565,7 +565,7 @@ fimplus._player =
     , 5000)
   
   handleWhenKeyEnter: ()->
-    self = fimplus._player
+    self = pateco._player
     switch self.view
       when 'icback'
         self.activeIcBack(false)
@@ -580,40 +580,40 @@ fimplus._player =
           self.video.seekTo(self.video.currentTimeSeek)
           self.displayControl()
           self.video.play()
-          fimplus._player.pushProgressWhenHasEvent()
+          pateco._player.pushProgressWhenHasEvent()
           return
         
         if self.video.getState() in ['PLAY']
           self.video.pause()
           self.enableControlBar(false)
-          fimplus._player.pushProgressWhenHasEvent()
+          pateco._player.pushProgressWhenHasEvent()
           return
         
         if self.video.getState() in ['PAUSE']
           self.video.play()
           self.displayControl()
-          fimplus._player.pushProgressWhenHasEvent()
+          pateco._player.pushProgressWhenHasEvent()
           return
   
   handleWhenKeyUpDown: (key) ->
-    self = fimplus._player
+    self = pateco._player
     switch self.view
       when 'control'
         if key is 'down'
-          fimplus._playerSnapshot.enableSnapshot(false)
+          pateco._playerSnapshot.enableSnapshot(false)
           self.enablePointer(false)
           self.enableButtonActions()
           self.view = 'subtitle'
         if key is 'up'
 #          console.log 'add class active into icback'
           self.activeIcBack(true)
-          fimplus._playerSnapshot.enableSnapshot(false)
+          pateco._playerSnapshot.enableSnapshot(false)
           self.enablePointer(false)
           self.view = 'icback'
       
       when 'subtitle'
         if key is 'up'
-          fimplus._playerSnapshot.enableSnapshot()
+          pateco._playerSnapshot.enableSnapshot()
           self.enablePointer()
           self.enableButtonActions(false)
           self.view = 'control'
@@ -621,22 +621,22 @@ fimplus._player =
         if key is 'down'
 #          console.log 'remove class active from icback'
           self.activeIcBack(false)
-          fimplus._playerSnapshot.enableSnapshot(true)
+          pateco._playerSnapshot.enableSnapshot(true)
           self.enablePointer(true)
           self.view = 'control'
   
   handleWhenKeyLeftRight: (key)->
-    self = fimplus._player
+    self = pateco._player
     switch self.view
       when 'icback'
         return
       when  'subtitle'
-        fimplus._playerSnapshot.enableSnapshot(false)
+        pateco._playerSnapshot.enableSnapshot(false)
         if key is 'left'
           self.data.currentActionButtons--
         if key is 'right'
           self.data.currentActionButtons++
-        self.data.currentActionButtons = fimplus.KeyService.reCalc(self.data.currentActionButtons, self.data.buttonActions.length)
+        self.data.currentActionButtons = pateco.KeyService.reCalc(self.data.currentActionButtons, self.data.buttonActions.length)
         self.enableButtonActions()
         break;
       
@@ -646,7 +646,7 @@ fimplus._player =
         currentTime = self.video.getCurrentTime()
         duration = self.video.getDuration()
         return if duration < 1
-        fimplus._playerSnapshot.enableSnapshot()
+        pateco._playerSnapshot.enableSnapshot()
         self.video.currentTimeSeek = currentTime if self.video.currentTimeSeek is 0
         if key is 'left'
           self.video.pause()
@@ -669,11 +669,11 @@ fimplus._player =
         , 100)
         if self.video.currentTimeSeek > 12
           self.video.currentTimeSeek = Math.round(self.video.currentTimeSeek / 12) * 12
-        fimplus._playerSnapshot.calcPositionSnapshot(self.video.currentTimeSeek)
+        pateco._playerSnapshot.calcPositionSnapshot(self.video.currentTimeSeek)
         self.calcPercent(self.video.currentTimeSeek)
   
   handleKey: (keyCode, key)->
-    self = fimplus._player
+    self = pateco._player
     console.info 'Player Key:' + keyCode
     
     # This code is only show layout'control when keypress is down and up and do not do any action more
@@ -730,12 +730,12 @@ fimplus._player =
         return self.onClosePlayer()
   
   initKey: ()->
-    self = fimplus._player
-    fimplus.KeyService.initKey(self.handleKey)
+    self = pateco._player
+    pateco.KeyService.initKey(self.handleKey)
   
   
   initSocket: ()->
-    self = fimplus._player
+    self = pateco._player
     remoteOptions =
       onDisconnect       : ()->
         self.onClosePlayer()
@@ -755,5 +755,5 @@ fimplus._player =
       getCurrentTime: ()-> self.video.getCurrentTime()
       getDuration   : ()-> self.video.getDuration()
     
-    fimplus.TizenService.socket.remote.setup(remoteOptions)
+    pateco.TizenService.socket.remote.setup(remoteOptions)
   

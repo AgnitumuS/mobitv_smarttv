@@ -1,4 +1,4 @@
-fimplus._paymentConfirm =
+pateco._paymentConfirm =
   data:
     id           : '#payment-confirm'
     title        : 'button-buy-package'
@@ -10,18 +10,18 @@ fimplus._paymentConfirm =
       cancelBtn =
         title : 'button-cancel'
         action: ()->
-          fimplus._paymentConfirm.removePage()
+          pateco._paymentConfirm.removePage()
       registerBtn =
         title: 'button-accept'
         action: ()->
-          fimplus._paymentConfirm.buyPackage()
+          pateco._paymentConfirm.buyPackage()
       ]
 
 
   setActiveButton    : (current = 0, length = 0)->
     self = @
     button = self.element.find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
 
@@ -31,7 +31,7 @@ fimplus._paymentConfirm =
     console.log index
 
   initPage: (item = null, callback)->
-    self = fimplus._paymentConfirm
+    self = pateco._paymentConfirm
     self.data.item = item
     self.render()
     self.initKey()
@@ -39,18 +39,18 @@ fimplus._paymentConfirm =
     self.data.callback = callback if _.isFunction(callback)
 
   onReturnPage: ()->
-    self = fimplus._paymentConfirm
+    self = pateco._paymentConfirm
     self.initKey()
 
   getApiBuyPackage: (params)->
-    self = fimplus._paymentConfirm
+    self = pateco._paymentConfirm
     retry = ()->
       self.initKey()
     finish = ()->
-      fimplus._payment.removePage()
+      pateco._payment.removePage()
     buyPackageDone = (error, result)->
       if result.status is 400
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "button-buy-package"
           onReturn   : retry
           description: result.responseJSON.message
@@ -60,7 +60,7 @@ fimplus._paymentConfirm =
           ]
         });
         return
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : "button-buy-package"
         onReturn   : finish
         description: result.message
@@ -69,18 +69,18 @@ fimplus._paymentConfirm =
           callback: finish
         ]
       });
-    fimplus.ApiService.buyPackage(params, buyPackageDone)
+    pateco.ApiService.buyPackage(params, buyPackageDone)
 
   buyPackage: ()->
     self = @
-    if fimplus._listPackage.data.paymentMethodSync is 1
+    if pateco._listPackage.data.paymentMethodSync is 1
       params =
-        redeemCode : fimplus._redeemCode.data.code or ''
+        redeemCode : pateco._redeemCode.data.code or ''
         packageId : self.data.item.newPackageId
-        sourceId : fimplus._listPackage.data.sourceId
+        sourceId : pateco._listPackage.data.sourceId
       self.getApiBuyPackage(params)
     else
-      env = fimplus.env
+      env = pateco.env
       getSourceIdDone = (error, result)->
         if result.status is 400
           params =
@@ -88,7 +88,7 @@ fimplus._paymentConfirm =
             paymentSource : ''
             sourceId : ''
             isTelco : 1
-            redeemCode : fimplus._redeemCode.data.code or ''
+            redeemCode : pateco._redeemCode.data.code or ''
             packageId : self.data.item.newPackageId
           self.getApiBuyPackage(params)
           return
@@ -100,7 +100,7 @@ fimplus._paymentConfirm =
           i++
         if self.data.paymentMethodSync is 1
           params =
-            redeemCode : fimplus._redeemCode.data.code or ''
+            redeemCode : pateco._redeemCode.data.code or ''
             packageId : self.data.item.newPackageId
             sourceId : self.data.sourceId
           self.getApiBuyPackage(params)
@@ -110,10 +110,10 @@ fimplus._paymentConfirm =
             paymentSource : ''
             sourceId : ''
             isTelco : 1
-            redeemCode : fimplus._redeemCode.data.code or ''
+            redeemCode : pateco._redeemCode.data.code or ''
             packageId : self.data.item.newPackageId
           self.getApiBuyPackage(params)
-      fimplus.ApiService.getPaymentMethod('["MPAY"]', env, getSourceIdDone)
+      pateco.ApiService.getPaymentMethod('["MPAY"]', env, getSourceIdDone)
 
   render: ()->
     self = @
@@ -131,7 +131,7 @@ fimplus._paymentConfirm =
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._paymentConfirm
+    self = pateco._paymentConfirm
     switch keyCode
       when key.DOWN
         self.setActiveButton(self.data.currentActive, self.data.buttons.length)
@@ -140,7 +140,7 @@ fimplus._paymentConfirm =
         self.removePage()
 
   handleKey: (keyCode, key)->
-    self = fimplus._paymentConfirm
+    self = pateco._paymentConfirm
     switch keyCode
       when key.RETURN
         self.removePage()
@@ -155,15 +155,15 @@ fimplus._paymentConfirm =
         self.data.currentActive = self.setActiveButton(--self.data.currentActive, self.data.buttons.length)
         break;
       when key.UP
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
         self.setActiveButton(0, 0)
         break;
 
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   removePage: ()->
-    self = fimplus._paymentConfirm
+    self = pateco._paymentConfirm
     self.data.callback()
     self.element.html('')

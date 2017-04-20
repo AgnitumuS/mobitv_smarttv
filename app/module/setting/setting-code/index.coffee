@@ -1,4 +1,4 @@
-fimplus._settingCode =
+pateco._settingCode =
   data:
     id            : '#setting-code'
     template      : Templates['module.setting.setting-code']()
@@ -30,7 +30,7 @@ fimplus._settingCode =
     $(self.data.id).html(template)
     unless self.data.isList
       self.renderKeyboard(self.data.inputFocus, 'text')
-      fimplus._keyboard.setActiveKeyboard(0, 0)
+      pateco._keyboard.setActiveKeyboard(0, 0)
 
   renderCodeList: ()->
     self = @
@@ -49,10 +49,10 @@ fimplus._settingCode =
     element = $("#codeInput")
 
     exitApp = ()->
-      fimplus._settingCode.initPage()
+      pateco._settingCode.initPage()
 
     unless element.val()
-      fimplus._error.initPage({
+      pateco._error.initPage({
         onReturn   : exitApp
         description: 'code-empty'
         title      : 'use-code-discount-error'
@@ -73,12 +73,12 @@ fimplus._settingCode =
 
 
   getListCode: ()->
-    self = fimplus._settingCode
+    self = pateco._settingCode
     retry = ()->
       self.initKey()
     getListCodeDone = (error, result) ->
       if result.status
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "code-discount"
           onReturn   : retry
           description: result.responseJSON.message
@@ -94,42 +94,42 @@ fimplus._settingCode =
         value: ''
       if result.length > 0
         self.data.isList = true
-        fimplus.KeyService.initKey(self.handleKeyCodeList)
+        pateco.KeyService.initKey(self.handleKeyCodeList)
         self.renderCodeList()
       else
         self.data.isList = false
-    fimplus.ApiService.getListCode(getListCodeDone)
+    pateco.ApiService.getListCode(getListCodeDone)
 
   getData: ()->
-    self = fimplus._settingCode
+    self = pateco._settingCode
     self.data.code = $("#codeInput").val()
-    email = fimplus.UserService.getProfile().email
-    phone = fimplus.UserService.getProfile().localAcc.mobile
+    email = pateco.UserService.getProfile().email
+    phone = pateco.UserService.getProfile().localAcc.mobile
     params =
       code: self.data.code
       email: email
       phone: phone
-      env: fimplus.env
+      env: pateco.env
 
     retry = ()->
       self.initKey()
-      fimplus._error.destroyPage()
+      pateco._error.destroyPage()
     
     exitApp = ()->
-      fimplus._settingCode.initPage()
+      pateco._settingCode.initPage()
 
     tryInput = ()->
-      self = fimplus._settingCode
+      self = pateco._settingCode
       self.render()
       self.initKey()
 
     backSetting = ()->
-      fimplus._setting.initPage()
+      pateco._setting.initPage()
     
     addCodeDone = (error, result)->
      if error
        if result.responseJSON.error is 400
-         fimplus._error.initPage({
+         pateco._error.initPage({
            onReturn   : tryInput
            description: result.responseJSON.message
            title      : 'use-code-discount-error'
@@ -141,7 +141,7 @@ fimplus._settingCode =
          return console.log(error)
      else
        if result.status is 400
-         fimplus._error.initPage({
+         pateco._error.initPage({
            onReturn   : tryInput
            description: result.responseJSON.message
            title      : 'use-code-discount-error'
@@ -152,7 +152,7 @@ fimplus._settingCode =
          })
          return
        # successful
-       fimplus._error.initPage({
+       pateco._error.initPage({
          onReturn   : exitApp
          description: result.message
          title      : 'code-discount-success'
@@ -163,10 +163,10 @@ fimplus._settingCode =
        })
        console.log result
 
-    fimplus.ApiService.getCodeVal(params, addCodeDone)
+    pateco.ApiService.getCodeVal(params, addCodeDone)
 
   toggleActiveMenu: (toggle)->
-    self = fimplus._settingCode
+    self = pateco._settingCode
     if self.data.isList
       listElement = '.code-list'
     else
@@ -178,16 +178,16 @@ fimplus._settingCode =
       $(listElement).find('li').first().addClass('active')
 
   hanldeBackbutton: (keyCode, key) ->
-    self = fimplus._settingCode
+    self = pateco._settingCode
     console.log 'back button in coupons'
     switch keyCode
       when key.DOWN
         if self.data.isList
           self.data.currentActive = 0
           self.toggleActiveMenu(true)
-          fimplus.KeyService.initKey(self.handleKeyCodeList)
+          pateco.KeyService.initKey(self.handleKeyCodeList)
         else
-          fimplus._keyboard.onBackBoardButton()
+          pateco._keyboard.onBackBoardButton()
           self.initKey()
       when key.RETURN,key.ENTER
         self.data.haveSource = false
@@ -195,23 +195,23 @@ fimplus._settingCode =
 
         if self.data.isList
           self.removePage()
-          fimplus._setting.initKey()
+          pateco._setting.initKey()
           self.data.isList = true
         else
           if self.data.listCode.length == 0
-            fimplus._setting.initKey()
+            pateco._setting.initKey()
           else
             self.initPage()
 
 
   handleKey: (keyCode, key)->
-    self = fimplus._settingCode
+    self = pateco._settingCode
     element = $(self.data.id)
     console.info 'Setting Code:' + keyCode
     positionEntity = self.data.positionEntity
     if keyCode isnt key.RETURN
       unless positionEntity.active
-        fimplus._keyboard.handleKey(keyCode, key)
+        pateco._keyboard.handleKey(keyCode, key)
         return
     # load detail notify in right panel
     switch keyCode
@@ -223,7 +223,7 @@ fimplus._settingCode =
         self.data.haveSource = false
         #self.removePage()
         if self.data.listCode.length == 0
-          fimplus._setting.initPage()
+          pateco._setting.initPage()
         else
           self.initPage()
         break;
@@ -233,7 +233,7 @@ fimplus._settingCode =
         self.data.positionEntity.active = false
         element.find('#button-code').find('li').removeClass('active')
         self.data.onFocus = false
-        fimplus._keyboard.onBackBoardButton()
+        pateco._keyboard.onBackBoardButton()
         break;
       when key.DOWN
         self.data.onFocus = true
@@ -241,14 +241,14 @@ fimplus._settingCode =
         break;
 
   handleKeyCodeList: (keyCode, key)->
-    self = fimplus._settingCode
+    self = pateco._settingCode
     console.info 'Setting List Code:' + keyCode
     listElement = '.code-list'
     length = $('.code-list').find('li').length
     # load detail notify in right panel
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
-      fimplus.UtitService.updateActive(listElement, self.data.currentActive, 'li')
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
+      pateco.UtitService.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
         if self.data.currentActive is 0
@@ -259,13 +259,13 @@ fimplus._settingCode =
       when key.RETURN
         self.data.haveSource = false
         self.removePage()
-        fimplus._setting.initPage()
+        pateco._setting.initPage()
         break;
       when key.UP
         self.data.currentActive--
         self.data.onFocus = false
         if self.data.currentActive < 0
-          fimplus._backButton.setActive(true, self.hanldeBackbutton)
+          pateco._backButton.setActive(true, self.hanldeBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
@@ -278,17 +278,17 @@ fimplus._settingCode =
 
   initKey  : ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   renderKeyboard: (inputId, type)->
     self = @
     self.data.positionEntity.active = false
     element = $('.register-code-keyboard')
     input = $(inputId)
-    fimplus._keyboard.render(element, input, self.onActiveEntity, type)
+    pateco._keyboard.render(element, input, self.onActiveEntity, type)
 
   onActiveEntity: (type = 'DOWN')->
-    self = fimplus._settingCode
+    self = pateco._settingCode
     switch type
       when 'DOWN'
         if !self.data.positionEntity.active
@@ -297,11 +297,11 @@ fimplus._settingCode =
           self.data.onFocus = true
           $(self.data.id).find('#button-code').find('li').addClass('active')
       when 'UP'
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
-        fimplus._keyboard.setActiveKeyboard(0, 0, false)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._keyboard.setActiveKeyboard(0, 0, false)
   
 #  onActiveEntity: ()->
-#    self = fimplus._settingCode
+#    self = pateco._settingCode
 #    if !self.data.positionEntity.active
 ## length = $(self.data.id).find('.add-card-menu').find('li').length
 ## self.setActiveButton(self.data.currentActive, length)
@@ -309,7 +309,7 @@ fimplus._settingCode =
 #      self.data.onFocus = true
 #      $(self.data.id).find('#button-code').find('li').addClass('active')
 #      return
-#    fimplus._keyboard.onBackBoardButton()
+#    pateco._keyboard.onBackBoardButton()
   
   removePage: ()->
     self = @

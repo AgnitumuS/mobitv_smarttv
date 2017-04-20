@@ -1,4 +1,4 @@
-fimplus._cardNumber =
+pateco._cardNumber =
   data:
     id           : '#card-number'
     title        : 'mobile-card-number'
@@ -8,7 +8,7 @@ fimplus._cardNumber =
       registerBtn =
         title: 'button-continue'
         action: ()->
-          fimplus._cardNumber.addCode()
+          pateco._cardNumber.addCode()
       ]
     positionEntity:
       active : false
@@ -16,7 +16,7 @@ fimplus._cardNumber =
   setActiveButton    : (current = 0, length = 0)->
     self = @
     button = self.element.find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
 
@@ -26,7 +26,7 @@ fimplus._cardNumber =
     retry = ()->
       self.initKey()
     unless self.data.cardNumber
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : "mobile-card-number"
         onReturn   : retry
         description: "enter-mobile-card"
@@ -36,7 +36,7 @@ fimplus._cardNumber =
         ]
       });
       return
-    fimplus._cardSeri.initPage(self.onReturnPage)
+    pateco._cardSeri.initPage(self.onReturnPage)
 
   initPage: (callback)->
     self = @
@@ -46,7 +46,7 @@ fimplus._cardNumber =
     self.data.callback = callback if _.isFunction(callback)
 
   onReturnPage: ()->
-    self = fimplus._cardNumber
+    self = pateco._cardNumber
     self.initKey()
 
   render: ()->
@@ -56,7 +56,7 @@ fimplus._cardNumber =
     self.element = $(self.data.id)
     self.element.html(template({mobileCard: self.data}))
     @renderKeyboard()
-    fimplus._keyboard.setActiveKeyboard(0, 0)
+    pateco._keyboard.setActiveKeyboard(0, 0)
     buttonClick = ()->
       index = $(@).index()
       self.data.buttons[index].action()
@@ -69,34 +69,34 @@ fimplus._cardNumber =
     self.data.positionEntity.active = false
     element = $('.card-number-keyboard')
     input = $('#input-card-number')
-    fimplus._keyboard.render(element, input, self.onActiveEntity, 'number')
+    pateco._keyboard.render(element, input, self.onActiveEntity, 'number')
 
   onActiveEntity: (type = 'DOWN')->
-    self = fimplus._cardNumber
+    self = pateco._cardNumber
     switch type
       when 'DOWN'
         if !self.data.positionEntity.active
           self.setActiveButton(self.data.currentActive, self.data.buttons.length)
           self.data.positionEntity.active = true
       when 'UP'
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._cardNumber
+    self = pateco._cardNumber
     switch keyCode
       when key.DOWN
-        fimplus._keyboard.onBackKeyboard()
+        pateco._keyboard.onBackKeyboard()
         self.initKey()
       when key.RETURN,key.ENTER
         self.removePage()
 
   handleKey: (keyCode, key)->
-    self = fimplus._cardNumber
+    self = pateco._cardNumber
     positionEntity = self.data.positionEntity
     if keyCode isnt key.RETURN
       unless positionEntity.active
-        fimplus._keyboard.handleKey(keyCode, key)
+        pateco._keyboard.handleKey(keyCode, key)
         return
     switch keyCode
       when key.RETURN
@@ -108,14 +108,14 @@ fimplus._cardNumber =
       when  key.UP
         self.data.positionEntity.active = false
         self.element.find('.bt-movie').find('li').removeClass('active')
-        fimplus._keyboard.onBackBoardButton()
+        pateco._keyboard.onBackBoardButton()
   
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   removePage: ()->
-    self = fimplus._cardNumber
+    self = pateco._cardNumber
     self.data.callback()
     self.element.html('')
 

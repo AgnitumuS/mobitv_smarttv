@@ -1,4 +1,4 @@
-fimplus._buyPackage =
+pateco._buyPackage =
   data:
     id           : '#buy-package'
     title        : 'button-welcome-register'
@@ -11,19 +11,19 @@ fimplus._buyPackage =
       cancelBtn =
         title : 'button-cancel'
         action: ()->
-          fimplus._payment.removePage()
+          pateco._payment.removePage()
       registerBtn =
         title: 'button-welcome-register'
         action: ()->
-          $(fimplus._buyPackage.data.id).find('.overlayBuyPackage').show()
-          fimplus._listPackage.initPage(fimplus._buyPackage.onReturnPage)
+          $(pateco._buyPackage.data.id).find('.overlayBuyPackage').show()
+          pateco._listPackage.initPage(pateco._buyPackage.onReturnPage)
       ]
 
 
   setActiveButton    : (current = 0, length = 0)->
     self = @
     button = self.element.find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
 
@@ -46,7 +46,7 @@ fimplus._buyPackage =
         self.render()
         self.initKey()
         self.setActiveButton(self.data.currentActive, self.data.buttons.length)
-      fimplus.ApiService.updateProfileLeft(done)
+      pateco.ApiService.updateProfileLeft(done)
 
   initPage: (callback)->
     self = @
@@ -55,7 +55,7 @@ fimplus._buyPackage =
     self.data.callback = callback if _.isFunction(callback)
 
   onReturnPage: ()->
-    self = fimplus._buyPackage
+    self = pateco._buyPackage
     self.initKey()
   
   render: ()->
@@ -73,7 +73,7 @@ fimplus._buyPackage =
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._buyPackage
+    self = pateco._buyPackage
     switch keyCode
       when key.DOWN
         self.setActiveButton(self.data.currentActive, self.data.buttons.length)
@@ -82,7 +82,7 @@ fimplus._buyPackage =
         self.removePage()
 
   handleKey: (keyCode, key)->
-    self = fimplus._buyPackage
+    self = pateco._buyPackage
     switch keyCode
       when key.RETURN
         self.removePage()
@@ -97,16 +97,16 @@ fimplus._buyPackage =
         self.data.currentActive = self.setActiveButton(++self.data.currentActive, self.data.buttons.length)
         break;
       when key.UP
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
         self.setActiveButton(0, 0)
 
   initKey: ()->
     self = @
     self.element.find('.overlayBuyPackage').hide()
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   removePage: ()->
-    self = fimplus._buyPackage
+    self = pateco._buyPackage
     self.data.callback()
     self.element.html('')
 

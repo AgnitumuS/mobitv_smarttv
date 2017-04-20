@@ -1,4 +1,4 @@
-fimplus._settingSubColor =
+pateco._settingSubColor =
   data:
     id: '#sub-color'
     template  : Templates['module.setting.setting-sub.sub-color']()
@@ -12,37 +12,37 @@ fimplus._settingSubColor =
         title: 'account-subtitle-colorwhite'
         value: 'white'
         action: ()->
-          fimplus._settingSubColor.updateValueColor('white')
+          pateco._settingSubColor.updateValueColor('white')
       lightgreen =
         title: 'account-subtitle-colorlightgreen'
         value: 'lightgreen'
         action: ()->
-          fimplus._settingSubColor.updateValueColor('lightGreen')
+          pateco._settingSubColor.updateValueColor('lightGreen')
       blue =
         title: 'account-subtitle-colorblue'
         value: 'blue'
         action: ()->
-          fimplus._settingSubColor.updateValueColor('blue')
+          pateco._settingSubColor.updateValueColor('blue')
       green =
         title: 'account-subtitle-colorgreen'
         value: 'green'
         action: ()->
-          fimplus._settingSubColor.updateValueColor('green')
+          pateco._settingSubColor.updateValueColor('green')
       yellow =
         title: 'account-subtitle-coloryellow'
         value: 'yellow'
         action: ()->
-          fimplus._settingSubColor.updateValueColor('yellow')
+          pateco._settingSubColor.updateValueColor('yellow')
       purple =
         title: 'account-subtitle-colorpurple'
         value: 'purple'
         action: ()->
-          fimplus._settingSubColor.updateValueColor('purple')
+          pateco._settingSubColor.updateValueColor('purple')
       red =
         title: 'account-subtitle-colorred'
         value: 'red'
         action: ()->
-          fimplus._settingSubColor.updateValueColor('red')
+          pateco._settingSubColor.updateValueColor('red')
     ]
   
   initPage: ()->
@@ -77,7 +77,7 @@ fimplus._settingSubColor =
       $(listElement).find('li').first().addClass('active')
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._settingSubColor
+    self = pateco._settingSubColor
     switch keyCode
       when key.DOWN
         self.data.currentActive = 0
@@ -88,31 +88,31 @@ fimplus._settingSubColor =
         self.data.haveSource = false
         self.data.currentActive = 0
         self.removePage()
-        fimplus._settingSub.initPage()
+        pateco._settingSub.initPage()
 
   handleKey: (keyCode, key)->
-    self = fimplus._settingSubColor
+    self = pateco._settingSubColor
     console.info 'Setting Sub Color:' + keyCode
     listElement = '.btn-sub-color'
     length = $('.btn-sub-color').find('li').length
     # load detail notify in right panel
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
-      fimplus.UtitService.updateActive(listElement, self.data.currentActive, 'li')
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
+      pateco.UtitService.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         break;
       when key.RETURN
         console.log 'Call back to setting menu'
         self.data.haveSource = false
         self.removePage()
-        fimplus._settingSub.initPage()
+        pateco._settingSub.initPage()
         break;
       when key.UP
         self.data.currentActive--
         if self.data.currentActive < 0
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
@@ -123,7 +123,7 @@ fimplus._settingSubColor =
         break;
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   removePage: ()->
     self = @
@@ -136,5 +136,5 @@ fimplus._settingSubColor =
   updateValueColor: (color)->
     self = @
     self.data.subtitleColor = color
-    fimplus.UserService.upDateLocalStorage('userSettings','subtitleColor', color)
-    fimplus._settingSubColor.render()
+    pateco.UserService.upDateLocalStorage('userSettings','subtitleColor', color)
+    pateco._settingSubColor.render()

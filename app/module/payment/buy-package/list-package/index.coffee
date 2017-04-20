@@ -1,4 +1,4 @@
-fimplus._listPackage =
+pateco._listPackage =
   data:
     id           : '#list-package'
     title        : 'register-package-title'
@@ -9,8 +9,8 @@ fimplus._listPackage =
     buttons     : [
         title : 'code-discount'
         action: ()->
-          $(fimplus._listPackage.data.id).hide()
-          fimplus._redeemCode.initPage(fimplus._listPackage.onReturnPage)
+          $(pateco._listPackage.data.id).hide()
+          pateco._redeemCode.initPage(pateco._listPackage.onReturnPage)
       ]
 
 
@@ -18,7 +18,7 @@ fimplus._listPackage =
   setActiveButton    : (current = 0, length = 0)->
     self = @
     button = self.element.find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
 
@@ -42,10 +42,10 @@ fimplus._listPackage =
       retry = ()->
         self.initKey()
       sourceId = self.data.sourceId
-      redeemCode = fimplus._redeemCode.data.code
+      redeemCode = pateco._redeemCode.data.code
       updatePaymentConfirmDone = (error, result) ->
         if result.status is 400
-          fimplus._error.initPage({
+          pateco._error.initPage({
             title      : "button-buy-package"
             onReturn   : retry
             description: result.responseJSON.message
@@ -57,23 +57,23 @@ fimplus._listPackage =
           return
         localStorage.packageId = result.newPackageId
         localStorage.packageInfo = JSON.stringify(result)
-        fimplus._paymentConfirm.initPage(result, fimplus._payment.onReturnPage)
-      fimplus.ApiService.updatePaymentConfirm(packageId, sourceId, redeemCode, updatePaymentConfirmDone)
+        pateco._paymentConfirm.initPage(result, pateco._payment.onReturnPage)
+      pateco.ApiService.updatePaymentConfirm(packageId, sourceId, redeemCode, updatePaymentConfirmDone)
     else
       localStorage.packageId = packageId
-      fimplus._paymentMethod.initPage(self.data, self.onReturnPage)
+      pateco._paymentMethod.initPage(self.data, self.onReturnPage)
 
   checkRedeemCode: ()->
     self = @
-    self.data.code = fimplus._redeemCode.data.code or null
+    self.data.code = pateco._redeemCode.data.code or null
     if self.data.code
-      self.data.buttons[0].title = self.data.code+' - '+fimplus.LanguageService.convert('change', fimplus.UserService.getValueStorage('userSettings', 'language'))
+      self.data.buttons[0].title = self.data.code+' - '+pateco.LanguageService.convert('change', pateco.UserService.getValueStorage('userSettings', 'language'))
       i = 0
       while i < self.data.item.length
-        if fimplus._redeemCode.data.percent is 1
-          self.data.item[i].price.default = self.data.item[i].price.default * fimplus._redeemCode.data.discount
+        if pateco._redeemCode.data.percent is 1
+          self.data.item[i].price.default = self.data.item[i].price.default * pateco._redeemCode.data.discount
         else
-          self.data.item[i].price.default = self.data.item[i].price.default - fimplus._redeemCode.data.discount
+          self.data.item[i].price.default = self.data.item[i].price.default - pateco._redeemCode.data.discount
         i++
     else
       self.data.buttons[0].title = 'code-discount'
@@ -86,18 +86,18 @@ fimplus._listPackage =
     self.data.callback = callback if _.isFunction(callback)
 
   onReturnPage: ()->
-    self = fimplus._listPackage
+    self = pateco._listPackage
     self.getData()
   
   render: ()->
     self = @
     source = self.data.template
-    if fimplus._buyPackage.data.updatePre
-      self.data.updatePre = fimplus._buyPackage.data.updatePre
+    if pateco._buyPackage.data.updatePre
+      self.data.updatePre = pateco._buyPackage.data.updatePre
       self.data.title = 'update-pre-title'
-      self.data.buttonPackage = fimplus.LanguageService.convert('update-pre-btn', fimplus.UserService.getValueStorage('userSettings', 'language'))
+      self.data.buttonPackage = pateco.LanguageService.convert('update-pre-btn', pateco.UserService.getValueStorage('userSettings', 'language'))
     else
-      self.data.buttonPackage = fimplus.LanguageService.convert('button-welcome-register', fimplus.UserService.getValueStorage('userSettings', 'language'))
+      self.data.buttonPackage = pateco.LanguageService.convert('button-welcome-register', pateco.UserService.getValueStorage('userSettings', 'language'))
     self.checkRedeemCode()
     template = Handlebars.compile(source);
     self.element = $(self.data.id)
@@ -122,12 +122,12 @@ fimplus._listPackage =
     self = @
     retry = ()->
       self.initKey()
-    env = fimplus.env
+    env = pateco.env
     self.data.paymentMethodSync = 0
-    movieId = fimplus._detail.data.item.id or null
+    movieId = pateco._detail.data.item.id or null
     getSourceIdDone = (error, result) ->
       if result.status
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "button-buy-package"
           onReturn   : retry
           description: result.responseJSON.message
@@ -144,17 +144,17 @@ fimplus._listPackage =
           self.data.paymentMethodSync = 1
         i++
       if result.sources.length > 0
-        self.data.url = "packagedisplay?method=ccstripe&platform=#{fimplus.config.platform}&env=#{env}&version=1.0"
+        self.data.url = "packagedisplay?method=ccstripe&platform=#{pateco.config.platform}&env=#{env}&version=1.0"
         i = 0
         while i < result.sources.length
           if result.sources[i].methodType is 'CCSTRIPE'
             self.data.sourceId = result.sources[i].id
           i++
       else
-        self.data.url = "packagedisplay?method=&paymentSource=&platform=#{fimplus.config.platform}&env=#{env}&version=1.0"
+        self.data.url = "packagedisplay?method=&paymentSource=&platform=#{pateco.config.platform}&env=#{env}&version=1.0"
       getPackageDisplayDone = (error, result) ->
         if error
-          fimplus._error.initPage({
+          pateco._error.initPage({
             title      : "button-buy-package"
             onReturn   : retry
             description: result.responseJSON.message
@@ -171,12 +171,12 @@ fimplus._listPackage =
           i++
         self.render()
         self.initKey()
-      fimplus.ApiService.getPackageDisplay(movieId, self.data.url, getPackageDisplayDone)
-    fimplus.ApiService.getPaymentMethod('["MPAY"]', env, getSourceIdDone)
+      pateco.ApiService.getPackageDisplay(movieId, self.data.url, getPackageDisplayDone)
+    pateco.ApiService.getPaymentMethod('["MPAY"]', env, getSourceIdDone)
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._listPackage
+    self = pateco._listPackage
     switch keyCode
       when key.DOWN
         self.setActiveButton(self.data.currentActive, self.data.item.length)
@@ -185,7 +185,7 @@ fimplus._listPackage =
         self.removePage()
 
   handleKey: (keyCode, key)->
-    self = fimplus._listPackage
+    self = pateco._listPackage
     switch keyCode
       when key.RETURN
         self.removePage()
@@ -203,7 +203,7 @@ fimplus._listPackage =
         break;
       when key.UP
         if self.data.redeemCodeActive is false
-          fimplus._backButton.setActive(true, self.hanldeBackbutton)
+          pateco._backButton.setActive(true, self.hanldeBackbutton)
           self.setActiveButton(0, 0)
         else
           self.setActiveButton(self.data.currentActive, self.data.item.length)
@@ -222,10 +222,10 @@ fimplus._listPackage =
   initKey: ()->
     self = @
     self.data.redeemCodeActive = false
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   removePage: ()->
-    self = fimplus._listPackage
+    self = pateco._listPackage
     self.data.callback()
     self.element.html('')
 

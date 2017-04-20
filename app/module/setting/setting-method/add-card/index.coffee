@@ -1,4 +1,4 @@
-fimplus._addCard =
+pateco._addCard =
   data:
     id: '#add-card'
     template  : Templates['module.setting.setting-method.add-card']()
@@ -30,7 +30,7 @@ fimplus._addCard =
       cancleCard:
         title: 'button-cancel'
         action: ()->
-          self = fimplus._addCard
+          self = pateco._addCard
           if self.data.backVisa
             # back front visa
             self.data.cardInfo.cvc = $('#card_cvc').val()
@@ -39,7 +39,7 @@ fimplus._addCard =
             # check case when back focusInput 
             switch self.data.inputFocus
               when "#card_name"
-                fimplus._addCard.removePage()
+                pateco._addCard.removePage()
                 break;
               when "#card_number"
                 self.data.inputFocus = "#card_name"
@@ -60,7 +60,7 @@ fimplus._addCard =
       sendCard:
         title: 'button-continue'
         action: ()->
-          self = fimplus._addCard
+          self = pateco._addCard
           
           switch self.data.inputFocus
             when "#card_name"
@@ -89,7 +89,7 @@ fimplus._addCard =
                 self.data.backVisa = true
                 self.data.currentActive = 0
                 self.data.inputFocus = '#card_name'
-                fimplus.KeyService.initKey(self.handleKeyCVC)
+                pateco.KeyService.initKey(self.handleKeyCVC)
                 self.data.settingMethodtitle = 'cvv-title'
                 cvc = ''
                 if self.data.cardInfo.cvc != undefined and self.data.cardInfo.cvc != null
@@ -115,8 +115,8 @@ fimplus._addCard =
               ### send update card ###
               if self.checkCardCVV()
                 console.log 'send add card'
-                fimplus._addCard.data.cardInfo.cvc = $('#card_cvc').val()
-                fimplus._addCard.updateCard()
+                pateco._addCard.data.cardInfo.cvc = $('#card_cvc').val()
+                pateco._addCard.updateCard()
                 $(".wrap-loading").show()
               break;
           self.data.onFocus = false
@@ -126,17 +126,17 @@ fimplus._addCard =
           tryAgain:
             title: 'button-try-again'
             action: ()->
-              fimplus._addCard.data.cardFail = false
-              fimplus._addCard.data.backVisa = false
+              pateco._addCard.data.cardFail = false
+              pateco._addCard.data.backVisa = false
               # call add card action again
           cancleCardAfterFail:
             title: 'button-cancel'
             action: ()->
-              fimplus._addCard.data.cardFail = false
-              fimplus._addCard.removePage()
+              pateco._addCard.data.cardFail = false
+              pateco._addCard.removePage()
   
   initPage: (callback, success)->
-    self = fimplus._addCard
+    self = pateco._addCard
     self.data.callback = ()->
       console.log 'detail callback show homepage'
     self.data.success = success if _.isFunction(success)
@@ -147,8 +147,8 @@ fimplus._addCard =
 
   renderButton: (nameButton, value)->
     self = @
-    lang = fimplus.UserService.getValueStorage('userSettings', 'language')
-    value = fimplus.LanguageService.convert(value, lang)
+    lang = pateco.UserService.getValueStorage('userSettings', 'language')
+    value = pateco.LanguageService.convert(value, lang)
     html = '<a><span>'+value+'</span></a>'
     $(".add-card-menu li:first").html(html)
     
@@ -203,17 +203,17 @@ fimplus._addCard =
       $(listElement).find('li').first().addClass('active')
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._addCard
+    self = pateco._addCard
     switch keyCode
       when key.DOWN
         if self.data.successCard
-          fimplus.KeyService.initKey(self.handleKeyScuccessCard)
+          pateco.KeyService.initKey(self.handleKeyScuccessCard)
         if self.data.backVisa and !self.data.successCard
-          fimplus.KeyService.initKey(self.handleKeyCVC)
+          pateco.KeyService.initKey(self.handleKeyCVC)
         if !self.data.backVisa and !self.data.successCard
           self.initKey()
 #        self.data.currentActive = 0
-        fimplus._keyboard.onBackBoardButton()
+        pateco._keyboard.onBackBoardButton()
 #        self.data.currentActive = 0
 #        self.toggleActiveMenu(true)
         # check to focus Active Key handle
@@ -228,7 +228,7 @@ fimplus._addCard =
           # check case when back focusInput
           switch self.data.inputFocus
             when "#card_name"
-              fimplus._addCard.removePage()
+              pateco._addCard.removePage()
               break;
             when "#card_number"
               self.data.inputFocus = "#card_name"
@@ -243,7 +243,7 @@ fimplus._addCard =
               self.data.settingMethodtitle = 'mobile-card-number'
               self.renderButton('cancleCard', 'button-back')
               self.reRenderTitle()
-              fimplus._keyboard.onBackBoardButton()
+              pateco._keyboard.onBackBoardButton()
               break;
           console.log 'cancel add card'
           self.removeFocus()
@@ -286,7 +286,7 @@ fimplus._addCard =
     self = @
     self.setHightLightInput(inputFocus)
     self.renderKeyboard(inputFocus, type)
-    fimplus._keyboard.setActiveKeyboard(0, 0)
+    pateco._keyboard.setActiveKeyboard(0, 0)
     buttonClick = ()->
       index = $(@).index()
       self.data.buttons[index].action()
@@ -295,7 +295,7 @@ fimplus._addCard =
       .on 'click', buttonClick
 
   handleKey: (keyCode, key)->
-    self = fimplus._addCard
+    self = pateco._addCard
     console.info 'Setting Method add card Key:' + keyCode
     # length = Object.keys(self.data.buttons).length
     length = $('.add-card-menu').find('li').length
@@ -303,15 +303,15 @@ fimplus._addCard =
     positionEntity = self.data.positionEntity
     if keyCode isnt key.RETURN
       unless positionEntity.active
-        fimplus._keyboard.handleKey(keyCode, key)
+        pateco._keyboard.handleKey(keyCode, key)
         return
     # blur all input, press UP to focus
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
       self.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         break;
       when key.RETURN
         self.removePage()
@@ -319,7 +319,7 @@ fimplus._addCard =
       when key.UP
         self.data.positionEntity.active = false
         $(self.data.id).find('.add-card-menu').find('li').removeClass('active')
-        fimplus._keyboard.onBackBoardButton()
+        pateco._keyboard.onBackBoardButton()
         break;
       when key.LEFT
         if self.data.onFocus
@@ -337,7 +337,7 @@ fimplus._addCard =
         break;
       
   handleKeyCVC: (keyCode, key)->
-    self = fimplus._addCard
+    self = pateco._addCard
     console.info 'Setting Method add CVV card:' + keyCode
     # length = Object.keys(self.data.buttons).length
     length = $('.visa-bt ul').find('li').length
@@ -346,14 +346,14 @@ fimplus._addCard =
     positionEntity = self.data.positionEntity
     if keyCode isnt key.RETURN
       unless positionEntity.active
-        fimplus._keyboard.handleKey(keyCode, key)
+        pateco._keyboard.handleKey(keyCode, key)
         return
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
       self.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         break;
       when key.RETURN
         # self.removePage()
@@ -386,12 +386,12 @@ fimplus._addCard =
       when key.UP
         self.data.positionEntity.active = false
         $(self.data.id).find('.add-card-menu').find('li').removeClass('active')
-        fimplus._keyboard.onBackBoardButton()
+        pateco._keyboard.onBackBoardButton()
         self.setHightLightInput("#card_cvc")
         break;
 
   handleKeyScuccessCard: (keyCode, key)->
-    self = fimplus._addCard
+    self = pateco._addCard
     element = $(self.data.id)
     console.info 'added card success:' + keyCode
     self.data.successCard = false
@@ -399,13 +399,13 @@ fimplus._addCard =
       if self.data.success()
 #        element.find('.add-card').removeClass('fadeIn').addClass('fadeOut')
         element.html('')
-        fimplus._setting.removePage()
+        pateco._setting.removePage()
         self.data.success()
         return
 
       self.removePage()
     # self.removePage()
-    # fimplus._settingMethod.initPage()
+    # pateco._settingMethod.initPage()
 
 
   updateActive: (list, index, child)->
@@ -500,19 +500,19 @@ fimplus._addCard =
     inputCVV.on 'change', onKeyCVVChange     
   
   focusCardNumber: ()->
-    self = fimplus._addCard
+    self = pateco._addCard
     self.initKey()
     self.focusInput("#card_number", 'number')
     self.removeFocus()
   
   focusCardDate: ()->
-    self = fimplus._addCard
+    self = pateco._addCard
     self.initKey()
     self.focusInput("#card_date", 'number')
     self.removeFocus()
 
   focusCardCVV: ()->
-    self = fimplus._addCard
+    self = pateco._addCard
     self.initKey()
     self.focusInput("#card_cvc", 'number')
     self.removeFocus()
@@ -521,12 +521,12 @@ fimplus._addCard =
   checkCardNumber: ()->
     cardNum = $("#card_number")
     str = ''
-    self = fimplus._addCard
+    self = pateco._addCard
     patt = new RegExp("^[0-9 ]+$");
     res = patt.test(cardNum.val());
     str = cardNum.val().replace(/\s/g, '')
     if  str.length < 12 or str.length > 19 or !res
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : 'visa-error-invalid_number'
         onReturn   : self.focusCardNumber
         description: 'visa-error-invalid_number'
@@ -542,13 +542,13 @@ fimplus._addCard =
   checkCardDate: ()->
     cardDate = $("#card_date")
     str = ''
-    self = fimplus._addCard
+    self = pateco._addCard
     patt = new RegExp("^[0-9\/]+$");
     res = patt.test(cardDate.val());
     year = cardDate.val().substr(3,4)
     month = cardDate.val().substr(0,2)
     if !res
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : 'visa-error-invalid_expiry_date'
         onReturn   : self.focusCardDate
         description: 'visa-error-invalid_expiry_date'
@@ -560,7 +560,7 @@ fimplus._addCard =
       return false
     # wrong month
     if month <= 0 or month > 12
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : 'visa-error-invalid_expiry_month'
         onReturn   : self.focusCardDate
         description: 'visa-error-invalid_expiry_month'
@@ -576,7 +576,7 @@ fimplus._addCard =
 
     # wrong year
     if year < currentYearFormat
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : 'visa-error-invalid_expiry_year'
         onReturn   : self.focusCardDate
         description: 'visa-error-invalid_expiry_year'
@@ -590,12 +590,12 @@ fimplus._addCard =
 
   checkCardCVV: ()->
     cardCVV = $("#card_cvc")
-    self = fimplus._addCard
+    self = pateco._addCard
     patt = new RegExp("^[0-9]+$");
     res = patt.test(cardCVV.val());
     length = cardCVV.val().length
     if (length != 3 and length != 4) or !res
-      fimplus._error.initPage({
+      pateco._error.initPage({
         title      : 'visa-error-invalid_cvc'
         onReturn   : self.focusCardCVV
         description: 'visa-error-invalid_cvc'
@@ -609,18 +609,18 @@ fimplus._addCard =
 
 
   initKey: ()->
-    fimplus.KeyService.initKey(fimplus._addCard.handleKey)
+    pateco.KeyService.initKey(pateco._addCard.handleKey)
   
   setActiveButton    : (current, length)->
     self = @
     self.data.onFocus = true
     button = $(self.data.id).find('.add-card-menu').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
 
   onActiveEntity: (type = 'DOWN')->
-    self = fimplus._addCard
+    self = pateco._addCard
     switch type
       when 'DOWN'
         if !self.data.positionEntity.active
@@ -629,22 +629,22 @@ fimplus._addCard =
           self.data.onFocus = true
           $(self.data.id).find('.add-card-menu').find('li').first().addClass('active')
       when 'UP'
-        fimplus._backButton.setActive(true, self.handleBackbutton)
-        fimplus._keyboard.setActiveKeyboard(0, 0, false)
+        pateco._backButton.setActive(true, self.handleBackbutton)
+        pateco._keyboard.setActiveKeyboard(0, 0, false)
 
 #  onActiveEntity: ()->
-#    self = fimplus._addCard
+#    self = pateco._addCard
 #    if !self.data.positionEntity.active
 #      length = $(self.data.id).find('.add-card-menu').find('li').length
 #      self.setActiveButton(self.data.currentActive, length)
 #      self.data.positionEntity.active = true
 #      return
-#    fimplus._keyboard.onBackBoardButton()
+#    pateco._keyboard.onBackBoardButton()
 
   reRenderTitle: ()->
     self = @
-    lang = fimplus.UserService.getValueStorage('userSettings', 'language')
-    value = fimplus.LanguageService.convert(self.data.settingMethodtitle, lang)
+    lang = pateco.UserService.getValueStorage('userSettings', 'language')
+    value = pateco.LanguageService.convert(self.data.settingMethodtitle, lang)
     $("#add-card-title").text(value)
     # template = Handlebars.compile(source)
     # $("#add-card-title").html(template({settingMethodtitle: self.data.settingMethodtitle}))
@@ -654,22 +654,22 @@ fimplus._addCard =
     self.data.positionEntity.active = false
     element = $('.register-otp-keyboard')
     input = $(inputId)
-    fimplus._keyboard.render(element, input, self.onActiveEntity, type)
+    pateco._keyboard.render(element, input, self.onActiveEntity, type)
 
   updateCard: () ->
     self = @
     tryAgain = ()->
-      fimplus.KeyService.initKey(self.handleKeyCVC)
+      pateco.KeyService.initKey(self.handleKeyCVC)
       self.data.inputFocus = "#card_cvc"
       self.focusInput(self.data.inputFocus, 'number')
       self.setHightLightInput(self.data.inputFocus)
       self.removeFocus()
     exitApp = ()->
-      # fimplus._error.destroyPage()
-      fimplus._addCard.removePage()
-      # fimplus._page.initPage()
+      # pateco._error.destroyPage()
+      pateco._addCard.removePage()
+      # pateco._page.initPage()
 
-    Stripe.setPublishableKey fimplus.config.paymentInfo.stripe_key
+    Stripe.setPublishableKey pateco.config.paymentInfo.stripe_key
     stripeResponseHandler = (status, response) ->
       console.log response
       if response.error
@@ -678,7 +678,7 @@ fimplus._addCard =
         self.data.cardFail = true
         # notice fail key
 
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "add-credit-card-fail"
           description: 'visa-error-card_declined'
           buttons    : [
@@ -701,7 +701,7 @@ fimplus._addCard =
           $(".wrap-loading").hide()
           if error
             console.log 'Add card fail'
-            fimplus._error.initPage({
+            pateco._error.initPage({
               title      : "add-credit-card-fail"
               description: 'visa-error-card_declined'
               buttons    : [
@@ -727,7 +727,7 @@ fimplus._addCard =
             self.data.expYearCard = self.data.resultCard.card.exp_year.toString().substr(2,3)
             self.render()
             $("#ic-type").addClass(self.data.brandCard);
-            fimplus.KeyService.initKey(self.handleKeyScuccessCard)
+            pateco.KeyService.initKey(self.handleKeyScuccessCard)
 
           # if onlySync
           #   console.log 'onlySync'
@@ -740,12 +740,12 @@ fimplus._addCard =
           #   else
           #     $state.go 'paymentRentMovie', {id : $rootScope.detail.id}, {location : 'replace'}
           # return
-        fimplus.ApiService.updateCreditcard(token, updateCreditcardDone)
+        pateco.ApiService.updateCreditcard(token, updateCreditcardDone)
       return
     Stripe.card.createToken(self.data.cardInfo, stripeResponseHandler)
   
   getSourceId: ()->
-    self = fimplus._addCard
+    self = pateco._addCard
     if self.data.sourceId
       return self.data.sourceId
 
@@ -765,5 +765,5 @@ fimplus._addCard =
     self.data.callback() if _.isFunction(self.data.callback)
   
 # $("#card_date").on('keyUp', function(){
-#   fimplus._addCard.updateDate()
+#   pateco._addCard.updateDate()
 # })

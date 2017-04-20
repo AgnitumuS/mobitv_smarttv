@@ -19,8 +19,8 @@
           img(
           src='#{process.env.SERVER}images/imgholder.png'
           data-originUrl='{{posterLandscape}}'
-          onload="fimplus.UtitService.onImageLoad(this)"
-          onerror="fimplus.UtitService.onImageError(this)")
+          onload="pateco.UtitService.onImageLoad(this)"
+          onerror="pateco.UtitService.onImageError(this)")
           | {{#ifCond ../categoryId "recent" }}
           //|{{#if progress}}
           .progress-total &nbsp;
@@ -29,7 +29,7 @@
           //|{{/if}}
           | {{/ifCond}}
       //li
-        image-load(ng-model='"https://ast.fimplus.io/files/xem-them_1488968348945.png"')
+        image-load(ng-model='"https://ast.pateco.io/files/xem-them_1488968348945.png"')
       | {{/each}}
   | {{/ifMore}}
   | {{/each}}

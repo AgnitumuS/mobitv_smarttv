@@ -1,4 +1,4 @@
-fimplus._settingSubSize =
+pateco._settingSubSize =
   data:
     id: '#sub-color'
     template  : Templates['module.setting.setting-sub.sub-size']()
@@ -12,22 +12,22 @@ fimplus._settingSubSize =
         title: 'account-subtitle-size-font-type-1'
         value: 'font-type-1'
         action: ()->
-          fimplus._settingSubSize.updateValueSize('font-type-1')
+          pateco._settingSubSize.updateValueSize('font-type-1')
       normal =
         title: 'account-subtitle-size-font-type-2'
         value: 'font-type-2'
         action: ()->
-          fimplus._settingSubSize.updateValueSize('font-type-2')
+          pateco._settingSubSize.updateValueSize('font-type-2')
       big =
         title: 'account-subtitle-size-font-type-3'
         value: 'font-type-3'
         action: ()->
-          fimplus._settingSubSize.updateValueSize('font-type-3')
+          pateco._settingSubSize.updateValueSize('font-type-3')
       huge =
         title: 'account-subtitle-size-font-type-4'
         value: 'font-type-4'
         action: ()->
-          fimplus._settingSubSize.updateValueSize('font-type-4')
+          pateco._settingSubSize.updateValueSize('font-type-4')
     ]
   
   initPage: ()->
@@ -62,7 +62,7 @@ fimplus._settingSubSize =
       $(listElement).find('li').first().addClass('active')
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._settingSubSize
+    self = pateco._settingSubSize
     switch keyCode
       when key.DOWN
         self.data.currentActive = 0
@@ -73,31 +73,31 @@ fimplus._settingSubSize =
         self.data.haveSource = false
         self.data.currentActive = 0
         self.removePage()
-        fimplus._settingSub.initPage()
+        pateco._settingSub.initPage()
   
   handleKey: (keyCode, key)->
-    self = fimplus._settingSubSize
+    self = pateco._settingSubSize
     console.info 'Setting Sub Size:' + keyCode
     listElement = '.btn-sub-size'
     length = $('.btn-sub-size').find('li').length
     # load detail notify in right panel
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
-      fimplus.UtitService.updateActive(listElement, self.data.currentActive, 'li')
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
+      pateco.UtitService.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         break;
       when key.RETURN
         console.log 'Call back to setting menu'
         self.data.haveSource = false
         self.removePage()
-        fimplus._settingSub.initPage()
+        pateco._settingSub.initPage()
         break;
       when key.UP
         self.data.currentActive--
         if self.data.currentActive < 0
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
@@ -108,7 +108,7 @@ fimplus._settingSubSize =
         break;
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   removePage: ()->
     self = @
@@ -121,5 +121,5 @@ fimplus._settingSubSize =
   updateValueSize: (size)->
     self = @
     self.data.subtitleSize = size
-    fimplus.UserService.upDateLocalStorage('userSettings','subtitleSize', size)
-    fimplus._settingSubSize.initPage()
+    pateco.UserService.upDateLocalStorage('userSettings','subtitleSize', size)
+    pateco._settingSubSize.initPage()

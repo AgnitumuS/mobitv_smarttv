@@ -1,4 +1,4 @@
-fimplus._error =
+pateco._error =
   data       :
     active     : false
     id         : '#error-page'
@@ -13,7 +13,7 @@ fimplus._error =
         callback: ()->
       ]
   destroyPage: (enableCallReturn = true)->
-    self = fimplus._error
+    self = pateco._error
     self.element.find('.error-wrapper').fadeOut()
     self.element.html('')
     self.data.active = false
@@ -21,7 +21,7 @@ fimplus._error =
       self.data.currentData.onReturn()
   
   initPage: (data)->
-    self = fimplus._error
+    self = pateco._error
     return if self.data.active
     data = data || self.data.defaultData
     data.current = data.current || 0
@@ -54,7 +54,7 @@ fimplus._error =
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._error
+    self = pateco._error
     switch keyCode
       when key.DOWN
         self.setActiveButton(self.data.currentData.current, self.data.currentData.buttons.length)
@@ -63,7 +63,7 @@ fimplus._error =
         self.destroyPage()
   
   handleKey: (keyCode, key)->
-    self = fimplus._error
+    self = pateco._error
     length = self.data.currentData.buttons.length
     console.info 'Error Key:' + keyCode
     switch keyCode
@@ -84,19 +84,19 @@ fimplus._error =
         self.destroyPage()
         break;
       when key.UP
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
         self.setActiveButton(0, 0)
   
   setActiveButton: (current = 0, length = 0)->
     self = @
     button = self.element.find('.bt-movie').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
   
   initKey: ()->
-    self = fimplus._error
+    self = pateco._error
     self.data.active = true
-    fimplus.KeyService.initKey(self.handleKey, '', false)
+    pateco.KeyService.initKey(self.handleKey, '', false)
     
   

@@ -1,4 +1,4 @@
-fimplus._search =
+pateco._search =
   data:
     id            : '#search'
     template      : Templates['module.search']()
@@ -19,7 +19,7 @@ fimplus._search =
       maxCol : 4
   
   initPage: (callback)->
-    self = fimplus._search
+    self = pateco._search
     self.data.layout = 'keyboard'
     self.data.callback = ()->
       console.log 'detail callback show homepage'
@@ -30,21 +30,21 @@ fimplus._search =
     self.renderKeyboard()
     self.renderSuggest()
     self.getSuggestData()
-    fimplus._backButton.enable()
-    fimplus._keyboard.setActiveKeyboard(0, 0)
+    pateco._backButton.enable()
+    pateco._keyboard.setActiveKeyboard(0, 0)
   
   getSuggestData: ()->
-    self = fimplus._search
+    self = pateco._search
     done = (error, result)->
       if error
         return
       data = _.flatten(_.pluck result.sections, 'tiles')
       self.data.suggest.items = data
       self.renderSuggest()
-    fimplus.ApiService.getSuggestionSearch(done)
+    pateco.ApiService.getSuggestionSearch(done)
   
   renderSuggest: ()->
-    self = fimplus._search
+    self = pateco._search
     suggest = self.element.find('.search-suggest')
     self.data.suggest.currentActive = 0
     source = Templates['module.search.result-suggest']()
@@ -52,10 +52,10 @@ fimplus._search =
     suggest.html(template(self.data.suggest))
   
   setSuggestActive: (active = true)->
-    self = fimplus._search
+    self = pateco._search
     length = self.data.suggest.items.length
     
-    self.data.suggest.currentActive = fimplus.KeyService.reCalc(self.data.suggest.currentActive, length)
+    self.data.suggest.currentActive = pateco.KeyService.reCalc(self.data.suggest.currentActive, length)
     suggestEl = self.element.find('.search-suggest-content')
     suggestItem = suggestEl.find('li')
     oldIndex = suggestEl.find('.active').index()
@@ -85,20 +85,20 @@ fimplus._search =
 #      previewItem.css({opacity: 0})
   
   renderKeyboard: ()->
-    self = fimplus._search
+    self = pateco._search
     board = self.element.find('.search-keyboard')
     input = self.element.find('#inputSearch')
-    fimplus._keyboard.render(board, input, self.onActiveEntity, 'text')
+    pateco._keyboard.render(board, input, self.onActiveEntity, 'text')
   
   setNotifySearch: (type = 1, active = true)->
     types = [
       "search-empty"
       "searc-text"
     ]
-    self = fimplus._search
+    self = pateco._search
     notify = self.element.find('.search-notify')
-    lang = fimplus.UserService.getValueStorage('userSettings', 'language')
-    types[type] = fimplus.LanguageService.convert(types[type], lang)
+    lang = pateco.UserService.getValueStorage('userSettings', 'language')
+    types[type] = pateco.LanguageService.convert(types[type], lang)
     notify.html(types[type])
     
     if active
@@ -107,10 +107,10 @@ fimplus._search =
       notify.hide()
   
   onActiveEntity: (key = 'DOWN')->
-    self = fimplus._search
+    self = pateco._search
     if key is 'DOWN'
       if $('#result-search').find('.entity-detail').length <= 0
-        fimplus._keyboard.onBackBoardButton()
+        pateco._keyboard.onBackBoardButton()
         return
       self.slideKeyBoard('hide')
       positionEntity = self.data.positionEntity
@@ -121,7 +121,7 @@ fimplus._search =
         return
     if key is 'UP'
       if self.data.suggest.items.length is 0
-        fimplus._keyboard.onBackKeyboard()
+        pateco._keyboard.onBackKeyboard()
         return
       self.slideKeyBoard('hide')
       self.data.layout = 'suggest'
@@ -129,7 +129,7 @@ fimplus._search =
   
   
   initActivePointer: (current = 0)->
-    self = fimplus._search
+    self = pateco._search
     entityDetail = self.element.find('.entity-detail').eq(current)
     width = entityDetail.outerWidth()
     height = entityDetail.outerHeight()
@@ -161,7 +161,7 @@ fimplus._search =
   
   
   renderListEntity: (data = {})->
-    self = fimplus._search
+    self = pateco._search
     return unless data.results
     self.data.ribbon = data.results
     source = Templates['module.search.result-search']()
@@ -170,14 +170,14 @@ fimplus._search =
     $('#result-search').html(template(data))
   
   onSearchValue: (value)->
-    self = fimplus._search
+    self = pateco._search
     unless value
       self.setNotifySearch(1, true)
       return
     
     doneSearch = (error, result)->
       if error
-        fimplus._error.initPage({
+        pateco._error.initPage({
           onReturn   : ()->
             console.log 'exit'
           description: ['connect-error', '#1000']
@@ -201,7 +201,7 @@ fimplus._search =
         if $('#result-search').find('.entity-detail').length <= 0
           self.setNotifySearch(1, true)
         return
-    fimplus.ApiService.search(value, doneSearch)
+    pateco.ApiService.search(value, doneSearch)
   
   initEventSearchOnchange: ()->
     self = @
@@ -224,11 +224,11 @@ fimplus._search =
   removePage: ()->
     self = @
     self.element.html('')
-    fimplus._page.addClassIntoIcBack(false)
+    pateco._page.addClassIntoIcBack(false)
     self.data.callback()
   
   render: ()->
-    self = fimplus._search
+    self = pateco._search
     source = self.data.template
     template = Handlebars.compile(source);
     self.element = $(self.data.id)
@@ -236,7 +236,7 @@ fimplus._search =
     self.initKey()
   
   slideKeyBoard: (type = 'show')->
-    self = fimplus._search
+    self = pateco._search
     searchBoard = self.element.find('.search-keyboard')
     #    suggestBoard = sellf.element.find('')
     setTimeout(()->
@@ -247,7 +247,7 @@ fimplus._search =
     , 100)
   
   hanldeBackbutton: (keyCode, key)->
-    self = fimplus._search
+    self = pateco._search
     switch keyCode
       when key.DOWN
         self.setSuggestActive(true)
@@ -257,18 +257,18 @@ fimplus._search =
   
   
   handleSuggestKey: (keyCode, key)->
-    self = fimplus._search
+    self = pateco._search
     console.info 'Search Suggest Key:' + keyCode
     switch keyCode
       when key.UP
-        fimplus._backButton.setActive(true, self.hanldeBackbutton)
+        pateco._backButton.setActive(true, self.hanldeBackbutton)
         self.setSuggestActive(false)
         return;
       when key.DOWN
         self.data.layout = 'keyboard'
         self.slideKeyBoard()
         self.setSuggestActive(false)
-        fimplus._keyboard.onBackKeyboard()
+        pateco._keyboard.onBackKeyboard()
         return;
       when key.LEFT
         if self.data.suggest.currentActive > 0
@@ -288,12 +288,12 @@ fimplus._search =
     self.setSuggestActive()
   
   handleKey: (keyCode, key)->
-    self = fimplus._search
+    self = pateco._search
     
     positionEntity = self.data.positionEntity
     if keyCode isnt key.RETURN
       if self.data.layout is 'keyboard'
-        fimplus._keyboard.handleKey(keyCode, key)
+        pateco._keyboard.handleKey(keyCode, key)
         return
       if self.data.layout is 'suggest'
         self.handleSuggestKey(keyCode, key)
@@ -323,7 +323,7 @@ fimplus._search =
         if positionEntity.row is 0
           self.data.layout = 'keyboard'
           self.setActivePointer(positionEntity.col, positionEntity.row, false)
-          fimplus._keyboard.onBackBoardButton()
+          pateco._keyboard.onBackBoardButton()
           self.slideKeyBoard('show')
           return;
         positionEntity.current -= positionEntity.maxCol
@@ -339,29 +339,29 @@ fimplus._search =
   
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
   
   setCurrentBanner: (inFirst = false)->
     self = @
     #    if inFirst
-    currentBanner = fimplus._banner.getCurrentBanner(self.data.ribbon, 0)
-    currentBanner.model4K = fimplus.config.appInfo.model4K if currentBanner
+    currentBanner = pateco._banner.getCurrentBanner(self.data.ribbon, 0)
+    currentBanner.model4K = pateco.config.appInfo.model4K if currentBanner
     console.log 'search setCurrentBanner', currentBanner
     if inFirst
-      fimplus._banner.render(currentBanner)
+      pateco._banner.render(currentBanner)
     else
-      fimplus._banner.reRender(currentBanner)
+      pateco._banner.reRender(currentBanner)
   
   onReturnPage: ()->
-    self = fimplus._search
+    self = pateco._search
     self.element.show()
     self.initKey()
   
   openDetail: ()->
-    self = fimplus._search
+    self = pateco._search
     self.element.hide()
     currentItem = self.data.ribbon[self.data.positionEntity.current]
-    currentItem.model4K = fimplus.config.appInfo.model4K if currentItem
+    currentItem.model4K = pateco.config.appInfo.model4K if currentItem
 #    console.log 'search openDetail=', currentItem
-    fimplus._banner.reRender(currentItem)
-    fimplus._detail.initPage(currentItem, self.onReturnPage)
+    pateco._banner.reRender(currentItem)
+    pateco._detail.initPage(currentItem, self.onReturnPage)

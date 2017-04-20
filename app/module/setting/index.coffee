@@ -1,5 +1,5 @@
 Handlebars.registerPartial('userInfo', Templates['module.setting.user-info']());
-fimplus._setting =
+pateco._setting =
   data:
     id: '#setting'
     template  : Templates['module.setting']()
@@ -16,54 +16,54 @@ fimplus._setting =
         title: 'account-payment-method'
         valueRight: 'off'
         action: ()->
-          fimplus._settingMethod.initPage(fimplus._setting.callbackFunc)
+          pateco._settingMethod.initPage(pateco._setting.callbackFunc)
       notice:
         title: 'notification'
         valueRight: 'off'
         action: ()->
-          fimplus._settingNotification.initPage()
+          pateco._settingNotification.initPage()
       coupon:
         title: 'code-discount'
         valueRight: 'off'
         action: ()->
-          fimplus._settingCode.initPage()
+          pateco._settingCode.initPage()
       language:
         title: 'account-language-title'
         valueRight: 'lang'
         action: ()->
-          fimplus._settingLang.initPage()
+          pateco._settingLang.initPage()
       fimname:
         title: 'account-movie-name'
         valueRight: 'titlelang'
         action: ()->
-          fimplus._settingTitleLang.initPage()
+          pateco._settingTitleLang.initPage()
       subtitle:
         title: 'account-subtitle-title'
         valueRight: 'sub'
         action: ()->
-          fimplus._setting.toggleSubtitle()
+          pateco._setting.toggleSubtitle()
       subtitleSetting:
         title: 'account-custom-subtitle'
         valueRight: 'off'
         action: ()->
-          fimplus._settingSub.initPage()
+          pateco._settingSub.initPage()
       logout:
         title: 'account-logout'
         valueRight: 'logout'
         action: ()->
-          fimplus._settingLogout.initPage(fimplus._setting.callbackFunc)
+          pateco._settingLogout.initPage(pateco._setting.callbackFunc)
   
   initPage: (callback)->
-    self = fimplus._setting
-    fimplus._backButton.enable()
-    if fimplus.UserService.isLogin()
+    self = pateco._setting
+    pateco._backButton.enable()
+    if pateco.UserService.isLogin()
       self.data.callback = callback if _.isFunction(callback)
       self.getData()
       self.getDataPackage()
       self.render()
       self.initKey() 
     else
-      fimplus._login.initPage(fimplus._setting.callbackFuncLogin)
+      pateco._login.initPage(pateco._setting.callbackFuncLogin)
   
   render: ()->
     self = @
@@ -94,14 +94,14 @@ fimplus._setting =
             console.log error
       else if result isnt undefined and result isnt null
         if result.error is 1005
-          fimplus._login.initPage(fimplus._setting.callbackFuncLogin)
+          pateco._login.initPage(pateco._setting.callbackFuncLogin)
           return
 
         self.data.user_profile = result
         self.data.userDetail = true
         self.renderRightInfo()
 
-    fimplus.ApiService.getUserProfile(getPaymentMethodDone)
+    pateco.ApiService.getUserProfile(getPaymentMethodDone)
 
 
   getDataPackage: ()->
@@ -115,18 +115,18 @@ fimplus._setting =
         self.data.packageInfo = resultPackage.message
         self.data.userPackage = true
         self.renderRightInfo()
-    fimplus.ApiService.updateProfileLeft(updateProfileLeftDone)
+    pateco.ApiService.updateProfileLeft(updateProfileLeftDone)
     
 
   callbackFuncLogin: ()->
-    self = fimplus._setting
+    self = pateco._setting
     self.removePage()
-    fimplus._page.initKey()
+    pateco._page.initKey()
     
   callbackFunc: ()->
-    self = fimplus._setting
+    self = pateco._setting
     # self.removePage()
-    fimplus._setting.initKey()
+    pateco._setting.initKey()
     
   renderRightInfo: ()->
     self = @
@@ -155,7 +155,7 @@ fimplus._setting =
     $(nextActiveButton).addClass("active")
 
   toggleActiveMenu: (toggle)->
-    self = fimplus._setting
+    self = pateco._setting
     listElement = '.setting-menu'
     unless toggle
       $(listElement).find('li').removeClass('active')
@@ -163,13 +163,13 @@ fimplus._setting =
       $(listElement).find('li').first().addClass('active')
 
 #  activeIconBack: (active = true)->
-#    self = fimplus._page
+#    self = pateco._page
 #    backButton = self.element.find('.back-button')
 #    backButton.hide()
 #    if active then backButton.show()
 
   addClassIntoIcBack: (active = true, callback)->
-    self = fimplus._page
+    self = pateco._page
     backButton = self.element.find('.back-button')
     backButton.removeClass('active')
     if active
@@ -184,7 +184,7 @@ fimplus._setting =
     , 1000)
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._setting
+    self = pateco._setting
     switch keyCode
       when key.DOWN
         self.data.currentActive = 0
@@ -195,16 +195,16 @@ fimplus._setting =
         self.data.currentActive = 0
   
   handleKey: (keyCode, key)->
-    self = fimplus._setting
+    self = pateco._setting
     console.info 'Setting Key:' + keyCode
     length = Object.keys(self.data.buttons).length
     listElement = '.setting-menu'
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
       self.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         break;
       when key.RETURN
         self.removePage()
@@ -217,7 +217,7 @@ fimplus._setting =
         self.data.currentActive--
         if self.data.currentActive < 0
           #self.addClassIntoIcBack()
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
@@ -231,16 +231,16 @@ fimplus._setting =
     else 
       addStorage = 'off'
     # translate
-    currentLang = fimplus.UserService.getValueStorage('userSettings', 'language')
+    currentLang = pateco.UserService.getValueStorage('userSettings', 'language')
     if addStorage is 'on'
       str ='account-pairing-device-on'
     else 
       str = 'account-pairing-device-off'
-    valueLangTitle = fimplus.LanguageService.convert(str, currentLang)
+    valueLangTitle = pateco.LanguageService.convert(str, currentLang)
     $(".setting-menu").find('li.active a .value span').text(valueLangTitle)
-    fimplus.UserService.upDateLocalStorage('userSettings','subtitleState', addStorage)
+    pateco.UserService.upDateLocalStorage('userSettings','subtitleState', addStorage)
     
     
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)

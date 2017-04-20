@@ -1,4 +1,4 @@
-fimplus._ribbon =
+pateco._ribbon =
   data:
     id        : '#ribbon'
     sliderWrap: '.slider-wrap'
@@ -9,16 +9,16 @@ fimplus._ribbon =
     _.map ribbon, (item, i)->
       delete ribbon[i] if item is null
       item.currentActive = 0
-      viewmore = _.extend {}, fimplus.config.viewmoreButton
+      viewmore = _.extend {}, pateco.config.viewmoreButton
       viewmore.categoryId = item.categoryId
       viewmore.categoryType = item.categoryType
       viewmore.pageId = item.pageId
       viewMoreRibbon = ''
       lang = JSON.parse(localStorage.userSettings).language
       if lang is 'vi'
-        viewMoreRibbon = 'https://ast.fimplus.io/files/xem-them_1488968348945.png'
+        viewMoreRibbon = 'https://ast.pateco.io/files/xem-them_1488968348945.png'
       else
-        viewMoreRibbon = 'https://ast.fimplus.io/files/view-more_1492485660763.png'
+        viewMoreRibbon = 'https://ast.pateco.io/files/view-more_1492485660763.png'
 
       viewmore.posterLandscape = viewMoreRibbon
       if item.totalItems > 6 or item.items.length > 5
@@ -37,7 +37,7 @@ fimplus._ribbon =
     self.setRibbonPosition(currentRibbonIndex)
     
     setTimeout(()->
-      fimplus._ribbon.displayRibbon()
+      pateco._ribbon.displayRibbon()
       self.initActivePointer()
     , 500)
   
@@ -48,7 +48,7 @@ fimplus._ribbon =
     elementEnity.on 'click', done
   
   displayRibbon: (active = true)->
-    self = fimplus._ribbon
+    self = pateco._ribbon
     self.element = $('#ribbon')
     if active
       self.element.show()
@@ -56,7 +56,7 @@ fimplus._ribbon =
       self.element.hide()
   
   initActivePointer: (current = 0)->
-    self = fimplus._ribbon
+    self = pateco._ribbon
     
     entityDetail = self.element.find('.entity-view').eq(current)
     width = entityDetail.outerWidth()
@@ -89,7 +89,7 @@ fimplus._ribbon =
     $('.active-image').hide()
   
   setActivePointer: (ribbon, currentRibbonIndex = 0)->
-    self = fimplus._ribbon
+    self = pateco._ribbon
     activeRibbon = ribbon[currentRibbonIndex]
     
     current = activeRibbon.currentActive || 0

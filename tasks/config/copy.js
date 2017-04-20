@@ -1,16 +1,6 @@
 config = require('../config.js');
 module.exports = function (grunt) {
   grunt.config.set('copy', {
-    healthCheck :{
-      files :[
-        {
-          expand: true,
-          cwd: './',
-          src: ['health_check'],
-          dest: 'public'
-        }
-      ]
-    },
     assets: {
       files: [
         {

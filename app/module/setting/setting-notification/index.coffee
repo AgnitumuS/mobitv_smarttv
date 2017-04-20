@@ -1,4 +1,4 @@
-fimplus._settingNotification =
+pateco._settingNotification =
   data:
     id: '#setting-notification'
     template  : Templates['module.setting.setting-notification']()
@@ -17,7 +17,7 @@ fimplus._settingNotification =
     self.initKey()
     
   getData: ()->
-    self = fimplus._settingNotification
+    self = pateco._settingNotification
     done = (error, result)->
       self.data.notifications = result
       # load notification content when init
@@ -30,7 +30,7 @@ fimplus._settingNotification =
       self.renderNotify()
       console.log self.data.notifications
     
-    fimplus.ApiService.getNotification(done)
+    pateco.ApiService.getNotification(done)
 
   render: ()->
     self = @
@@ -65,7 +65,7 @@ fimplus._settingNotification =
         self.renderNotify()
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._settingNotification
+    self = pateco._settingNotification
     switch keyCode
       when key.DOWN
         self.data.currentActive = 0
@@ -75,30 +75,30 @@ fimplus._settingNotification =
 
       when key.RETURN,key.ENTER
         self.removePage()
-        fimplus._setting.initKey()
+        pateco._setting.initKey()
 
   handleKey: (keyCode, key)->
-    self = fimplus._settingNotification
+    self = pateco._settingNotification
     console.info 'Setting Notification:' + keyCode
     length = $('.bt-notificartion').find('li').length
     listElement = '.bt-notificartion'
     # load detail notify in right panel
 
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
-      fimplus.UtitService.updateActive(listElement, self.data.currentActive, 'li')
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
+      pateco.UtitService.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.RETURN
         console.log 'Call back to setting menu'
         self.data.haveSource = false
         self.removePage()
-        fimplus._setting.initPage()
+        pateco._setting.initPage()
         break;
       when key.UP
         self.data.currentActive--
         if self.data.currentActive < 0
           self.data.currentActive = 0
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
@@ -113,7 +113,7 @@ fimplus._settingNotification =
       when key.ENTER
         if self.data.notifications.count is 0
           self.removePage()
-          fimplus._setting.initPage()
+          pateco._setting.initPage()
         break;
       when key.DOWN
         if self.data.currentActive < length
@@ -132,7 +132,7 @@ fimplus._settingNotification =
         break;
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   
   removePage: ()->

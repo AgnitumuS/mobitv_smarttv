@@ -1,4 +1,4 @@
-fimplus._redeemCode =
+pateco._redeemCode =
   data:
     id           : '#redeem-code'
     title        : 'code-discount'
@@ -8,20 +8,20 @@ fimplus._redeemCode =
     buttons     : [
       registerBtn =
         action: ()->
-          fimplus._redeemCode.getCode()
+          pateco._redeemCode.getCode()
       ]
 
   setActiveButton    : (current = 0, length = 0)->
     self = @
     button = self.element.find('.redeem-code-list').find('li')
-    current = fimplus.KeyService.reCalc(current, length)
+    current = pateco.KeyService.reCalc(current, length)
     button.removeClass('active').eq(current).addClass('active')
     return current
 
   getCode: ()->
     self = @
     if self.data.currentActive is 0
-      fimplus._enterRedeemCode.initPage(self.onReturnPage)
+      pateco._enterRedeemCode.initPage(self.onReturnPage)
     else
       self.data.code = self.data.listCode[self.data.currentActive-1].code
       i = 0
@@ -49,7 +49,7 @@ fimplus._redeemCode =
     self.data.callback = callback if _.isFunction(callback)
 
   onReturnPage: ()->
-    self = fimplus._redeemCode
+    self = pateco._redeemCode
     self.getData()
 
 
@@ -59,7 +59,7 @@ fimplus._redeemCode =
     template = Handlebars.compile(source);
     self.element = $(self.data.id)
     self.element.html(template({payment: self.data}))
-    fimplus._payment.showPage(self.element)
+    pateco._payment.showPage(self.element)
     self.setActiveButton(self.data.currentActive, self.data.listCode.length+1)
     buttonClick = ()->
       index = $(@).index()
@@ -74,7 +74,7 @@ fimplus._redeemCode =
       self.initKey()
     getListCodeDone = (error, result) ->
       if result.status
-        fimplus._error.initPage({
+        pateco._error.initPage({
           title      : "code-discount"
           onReturn   : retry
           description: result.responseJSON.message
@@ -91,11 +91,11 @@ fimplus._redeemCode =
         self.isGiftcode = 1
       else
         self.isGiftcode = 0
-    fimplus.ApiService.getListCode(getListCodeDone)
+    pateco.ApiService.getListCode(getListCodeDone)
 
   hanldeBackbutton: (keyCode, key) ->
     console.log 'backb'
-    self = fimplus._redeemCode
+    self = pateco._redeemCode
     switch keyCode
       when key.DOWN
         self.setActiveButton(self.data.currentActive, self.data.listCode.length+1)
@@ -104,7 +104,7 @@ fimplus._redeemCode =
         self.removePage()
 
   handleKey: (keyCode, key)->
-    self = fimplus._redeemCode
+    self = pateco._redeemCode
     switch keyCode
       when key.RETURN
         self.removePage()
@@ -117,7 +117,7 @@ fimplus._redeemCode =
         break;
       when key.UP
         if self.data.currentActive is 0
-          fimplus._backButton.setActive(true, self.hanldeBackbutton)
+          pateco._backButton.setActive(true, self.hanldeBackbutton)
           self.setActiveButton(0, 0)
         else
           self.data.currentActive = self.setActiveButton(--self.data.currentActive, self.data.listCode.length+1)
@@ -125,10 +125,10 @@ fimplus._redeemCode =
   
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
 
   removePage: ()->
-    self = fimplus._redeemCode
+    self = pateco._redeemCode
     $('#rent-movie').show()
     self.data.callback()
     self.element.html('')

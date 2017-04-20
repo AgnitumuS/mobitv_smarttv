@@ -1,4 +1,4 @@
-fimplus._settingLogout =
+pateco._settingLogout =
   data:
     id: '#setting-logout'
     template  : Templates['module.setting.setting-logout']()
@@ -10,12 +10,12 @@ fimplus._settingLogout =
         title: 'button-cancel'
         action: ()->
           console.log 'Hủy logout'
-          fimplus._settingLogout.exitApp()
+          pateco._settingLogout.exitApp()
       logout =
         title: 'account-logout'
         action: ()->
           console.log 'Logout'
-          fimplus._settingLogout.logoutLocal()
+          pateco._settingLogout.logoutLocal()
     ]
   
   initPage: (callback)->
@@ -34,7 +34,7 @@ fimplus._settingLogout =
       $(listElement).find('li').first().addClass('active')
 
   handleBackbutton: (keyCode, key) ->
-    self = fimplus._settingLogout
+    self = pateco._settingLogout
     switch keyCode
       when key.DOWN
         self.data.currentActive = 0
@@ -43,18 +43,18 @@ fimplus._settingLogout =
         self.initKey()
       when key.RETURN,key.ENTER
         self.removePage()
-        fimplus._setting.initKey()
+        pateco._setting.initKey()
 
   exitApp: ()->
-    fimplus._settingLogout.removePage()
-    fimplus._setting.initKey()
+    pateco._settingLogout.removePage()
+    pateco._setting.initKey()
 
   # open screen success and go home
   finish: ()->
-    fimplus._setting.removePage()
-    fimplus._settingLogout.removePage()
-    fimplus._page.initPage()
-    fimplus._setting.data.currentActive = 0
+    pateco._setting.removePage()
+    pateco._settingLogout.removePage()
+    pateco._page.initPage()
+    pateco._setting.data.currentActive = 0
   
   render: ()->
     self = @
@@ -68,30 +68,30 @@ fimplus._settingLogout =
   
 
   handleKey: (keyCode, key)->
-    self = fimplus._settingLogout
+    self = pateco._settingLogout
     element = $(self.data.id)
     console.info 'Setting Logout:' + keyCode
     listElement = '#btn-logout'
     # load detail notify in right panel
     length = $(listElement).find("li").length
     actionKey = ()->
-      self.data.currentActive = fimplus.KeyService.reCalc(self.data.currentActive, length)
-      fimplus.UtitService.updateActive(listElement, self.data.currentActive, 'li')
+      self.data.currentActive = pateco.KeyService.reCalc(self.data.currentActive, length)
+      pateco.UtitService.updateActive(listElement, self.data.currentActive, 'li')
     switch keyCode
       when key.ENTER
-        fimplus.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
+        pateco.UtitService.convertObjToArr(self.data.buttons)[self.data.currentActive].action()
         break;
       when key.RETURN
         console.log 'Call back to setting menu'
         self.removePage()
-        # fimplus._setting.initKey()
+        # pateco._setting.initKey()
         break;
       when key.LEFT
         # focus on input Code
         # $("#codeInput").focus()
         self.data.currentActive--
         if self.data.currentActive < 0
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
@@ -102,13 +102,13 @@ fimplus._settingLogout =
         break;
       when key.UP
         if self.data.currentActive < 0
-          fimplus._backButton.setActive(true, self.handleBackbutton)
+          pateco._backButton.setActive(true, self.handleBackbutton)
           self.toggleActiveMenu(false)
         else
           actionKey()
   initKey: ()->
     self = @
-    fimplus.KeyService.initKey(self.handleKey)
+    pateco.KeyService.initKey(self.handleKey)
     
   removePage: ()->
     self = @
@@ -125,15 +125,15 @@ fimplus._settingLogout =
       self = @
       if error
         # open screen fail and back previous screen
-        fimplus._error.initPage({
+        pateco._error.initPage({
             description: 'Đăng xuất thất bại, vui lòng thử lại.'
             title      : 'Đăng xuất lỗi'
             buttons    : [
               title   : 'Thử lại'
-              # callback: fimplus._settingLogout.logoutLocal()
+              # callback: pateco._settingLogout.logoutLocal()
             ,
               title   : 'Hủy'
-              # callback: fimplus._setting.initPage()
+              # callback: pateco._setting.initPage()
             ]
         })
         return
@@ -148,16 +148,16 @@ fimplus._settingLogout =
       localStorage.setItem('packageInfo', 'null')
       localStorage.setItem('sourceId', 'null')
 
-      fimplus._error.initPage({
+      pateco._error.initPage({
         description: 'logout-success'
-        onReturn : fimplus._settingLogout.finish
+        onReturn : pateco._settingLogout.finish
         title      : 'account-logout'
         buttons    : [
           title   : 'payment-button-back'
-          callback: fimplus._settingLogout.finish
+          callback: pateco._settingLogout.finish
         ]
       })
-    fimplus.ApiService.updateLogout(fimplus.config.appInfo.deviceId, updateLogoutDone)
+    pateco.ApiService.updateLogout(pateco.config.appInfo.deviceId, updateLogoutDone)
   
       
   
