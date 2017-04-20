@@ -1,0 +1,28 @@
+#sub-color.setting-page.animate.fadeIn.background
+  i.icon.ic-fim.ic-home
+  .setting-title
+
+    h1 {{language 'account-subtitle-color'}} 
+  .setting-left
+    ul.setting-menu.btn-sub-color
+      | {{#each buttons}}
+      li(class="{{#ifCond ../currentActive @index}}{{#ifCond ../onFocus true}}active{{/ifCond}}{{/ifCond}}")
+        a
+          .label {{language title}} 
+            | {{#ifCond value 'white'}}
+            span ({{language 'account-subtitle-default'}})
+            | {{/ifCond}}
+          .value
+            | {{#ifCond ../subtitleColor value}}
+            i.icon.ic-check
+            | {{/ifCond}}
+      | {{/each}}
+  .setting-right
+    .setting-sub
+      .bg-sub
+        .text-sub(class="{{subtitleSize}}", style="background-color:rgba(0,0,0, {{subtitleOpacity}}); color: {{subtitleColor}}")
+          | {{language 'account-subtitle-sample'}}
+  .setting-footer
+    | {{language 'account-footer'}}
+    | {{language 'account-footer-or'}}
+    b movies.fimplus.vn

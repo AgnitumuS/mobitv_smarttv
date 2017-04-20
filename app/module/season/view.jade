@@ -1,0 +1,15 @@
+.season-page.home-bg
+	.gradient-left
+	.gradient-bottom
+	i.icon.ic-fim.ic-home
+	.swap-animation
+		.img-wrapper(style='background-image: url("{{bannerAppletv}}");')
+	.home-main
+		.home-title
+			//i.icon.ic-back.bt-back
+			h1 {{knownAs}}
+		.content
+			.seasons
+				|{{> seasonList }}
+			.episodes
+				|{{> episodeList }}

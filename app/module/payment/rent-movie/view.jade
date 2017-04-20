@@ -1,0 +1,12 @@
+div#rent-movie.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language rentMovie.title}}
+    .payment-method-center
+      .description {{language rentMovie.description}}
+      ul.payment-method-list
+        | {{#each rentMovie.buttons}}
+        li.payment-method-li
+          a: span {{language title}}
+        | {{/each}}

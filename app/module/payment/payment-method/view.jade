@@ -1,0 +1,12 @@
+div#payment-method.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language payment.title}}
+    .payment-method-center
+      .description {{language payment.description}}
+      ul.payment-method-list
+        | {{#each payment.methods}}
+        li.payment-method-li
+          a: span {{language name}}
+        | {{/each}}

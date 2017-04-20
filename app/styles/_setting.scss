@@ -1,0 +1,809 @@
+.setting-page {
+  z-index: 3;
+  padding: 68px 90px;
+  .setting-title {
+    h1 {
+      font-size: 50px;
+      line-height: 50px;
+      font-weight: 500;
+      margin: 0;
+      text-transform: uppercase;
+      vertical-align: middle;
+      display: inline-block;
+    }
+    .setting-ic {
+      display: inline-block;
+      vertical-align: top;
+    }
+    .bt-back {
+      float: left;
+      vertical-align: middle;
+      top: 6% !important;
+      //margin: 3px 18px 0 -57px;
+    }
+  }
+  .setting-footer {
+    position: absolute;
+    bottom: 60px;
+    right: 90px;
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.5);
+    b {
+      color: #fff;
+      padding: 0 10px;
+    }
+  }
+}
+
+.register-code-keyboard {
+  margin-top: 20px;
+}
+
+#setting-method,
+#setting-notification,
+#setting-code,
+#setting-lang,
+#setting-quality,
+#movie-name,
+#setting-title-lang,
+#setting-sub,
+#setting-logout {
+  z-index: 6;
+}
+
+#sub-color,
+#sub-size,
+#sub-opacity,
+#add-card {
+  z-index: 6;
+}
+
+.setting-left {
+  display: inline-block;
+  width: 38%;
+}
+
+ul.setting-menu {
+  line-height: 1;
+  list-style: none;
+  margin-top: 40px;
+  width: 600px;
+  li {
+    padding: 20px;
+    white-space: nowrap;
+    height: 70px;
+    background-color: $grey;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    &.language {
+      margin-top: 60px;
+    }
+    a {
+      font-size: 32px;
+      line-height: 32px;
+      color: #fff;
+      .label {
+        float: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-bottom: 5px;
+        &.notify {
+          width: 530px;
+        }
+      }
+      .value {
+        float: right;
+        display: inline-block;
+        span {
+          color: #fff;
+          opacity: 0.5;
+        }
+        .resolution {
+          margin-left: 10px;
+        }
+      }
+    }
+    &.active {
+      background-color: $blue;
+    }
+  }
+}
+
+#setting-notification {
+  .bt-notificartion {
+    transition: 0.54s -webkit-transform cubic-bezier(0.5, 0, 0.1, 1) 0s;
+  }
+  h2 {
+    font-size: 38px;
+    line-height: 57px;
+    margin: -13px 0 20px 0;
+  }
+  .setting-left {
+    display: inline-block;
+    width: 38%;
+    vertical-align: top;
+    text-align: left;
+    overflow: hidden;
+    margin-top: 35px;
+    height: 84%;
+    position: relative;
+    ul {
+      margin-top: 0;
+    }
+  }
+  .icon-down {
+    position: absolute;
+    bottom: 6%;
+    left: 18%;
+    width: 40px;
+    height: 25px;
+    background: url(img/ic_down.png) no-repeat 0 0;
+  }
+}
+
+.setting-right {
+  display: inline-block;
+  width: 55%;
+  vertical-align: top;
+  .setting-account {
+    margin-top: 40px;
+  }
+  h2 {
+    font-size: 38px;
+    line-height: 38px;
+    margin: 0 0 20px 0;
+  }
+  p {
+    font-size: 32px;
+    line-height: 50px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .setting-method {
+    margin-top: 35px;
+    p {
+      font-size: 38px;
+      font-weight: 600;
+      color: #fff;
+      &.text {
+        font-size: 32px;
+        line-height: 50px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+  .setting-sub {
+    margin-top: 40px;
+    .bg-sub {
+      background-image: url('img/bg_sub.png');
+      width: 1067px;
+      height: 600px;
+      border: 4px solid #fff;
+      position: relative;
+      .text-sub {
+        width: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        font-size: 32px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        bottom: 4%;
+        padding-left: 15px;
+        padding-right: 15px;
+        line-height: 66px;
+        display: inline-table;
+        border-radius: 4px;
+        text-align: center;
+        text-shadow: 1px 1px 1px #000;
+      }
+      .setting-method {
+        margin-top: 35px;
+        p {
+          font-size: 38px;
+          font-weight: 600;
+          color: #fff;
+          &.text {
+            font-size: 32px;
+            line-height: 50px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+          }
+        }
+      }
+      .setting-notify {
+        p {
+          &.text {
+            word-wrap: break-word;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+.setting-center {
+  width: 100%;
+  text-align: center;
+  display: block;
+  .setting-input-code {
+    margin-top: 120px;
+    input.code {
+      width: 800px;
+      height: 70px;
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.4);
+      border-radius: 4px;
+      font-size: 38px;
+      padding: 0 5px;
+      text-align: center;
+      border: none;
+      text-transform: uppercase;
+    }
+  }
+  .setting-logout {
+    position: fixed;
+    top: 42%;
+    left: 50%;
+    width: 650px;
+    transform: translate(-50%, -50%);
+    p {
+      margin-bottom: 60px;
+    }
+    h1 {
+      font-size: 60px;
+      line-height: 90px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+  }
+}
+
+.visa-bg {
+  background-image: url('img/ic_card_no-content.png');
+  width: 606px;
+  height: 362px;
+  margin: 30px auto;
+  position: relative;
+  #ic-type, #ic-type-load {
+    float: right;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 30px;
+    background-repeat: no-repeat;
+    &.visa {
+      background-image: url('img/visa.png');
+    }
+    &.mastercard {
+      background-image: url('img/mastercard.png');
+      width: 52px;
+    }
+    &.americanexpress {
+      background-image: url('img/americanexpress.png');
+      width: 77px;
+    }
+    &.discover {
+      background-image: url('img/discover.png');
+      width: 54px;
+    }
+    &.dinersclub {
+      background-image: url('img/dinersblub.png');
+      width: 65px;
+      height: 47px;
+    }
+    &.jcb {
+      background-image: url('img/jcb.png');
+      width: 54px;
+      height: 48px;
+    }
+  }
+  label {
+    display: block;
+    position: absolute;
+    text-align: left;
+    width: 100%;
+    font-size: 20px;
+    left: 55px;
+    top: 13px;
+    opacity: 0.6;
+    text-transform: uppercase;
+    &.card-number {
+      top: 112px;
+    }
+    &.card-date {
+      top: 208px;
+    }
+  }
+  input {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 60px;
+    width: 507px;
+    border-radius: 4px;
+    font-size: 38px;
+    padding: 0 5px;
+    text-align: left;
+    position: absolute;
+    left: 55px;
+    border: 0;
+    &:not(:placeholder-shown) {
+      padding-left: 21px;
+    }
+    /* webkit solution */
+    &::-webkit-input-placeholder {
+      text-align: center;
+      padding-left: 0;
+    }
+    /* mozilla solution */
+    &:-moz-placeholder {
+      text-align: center;
+      padding-left: 0;
+    }
+    &:focus {
+      border: 2px solid #fff;
+    }
+    &.name {
+      top: 53px;
+      background-color: transparent;
+      text-align: left;
+      padding-left: 0;
+      text-transform: uppercase;
+      &::-webkit-input-placeholder {
+        text-align: left;
+      }
+      /* mozilla solution */
+      &:-moz-placeholder {
+        text-align: left;
+      }
+      &.active {
+        padding: 21px;
+      }
+    }
+    &.number {
+      top: 146px;
+    }
+    &.date {
+      top: 245px;
+      width: 150px;
+    }
+    &.active {
+      border: 2px solid #fff
+    }
+  }
+  p {
+    position: absolute;
+    left: 55px;
+    font-size: 38px;
+    font-weight: 600;
+    &.name {
+      top: 53px;
+      text-shadow: 0 2px 2px #212F4C;
+      text-transform: uppercase;
+    }
+    &.number {
+      top: 146px;
+      background-color: rgba(255, 255, 255, .4);
+      padding: 0 10px;
+      text-shadow: 0 2px 2px #212F4C;
+    }
+    &.date {
+      top: 245px;
+      background-color: rgba(255, 255, 255, .4);
+      padding: 0 10px;
+      text-shadow: 0 2px 2px #212F4C;
+    }
+  }
+}
+
+.visa-bg-after {
+  background-image: url('img/ic_card_af.png');
+  width: 606px;
+  height: 362px;
+  margin: 30px auto;
+  position: relative;
+  input {
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 60px;
+    width: 175px;
+    border-radius: 4px;
+    font-size: 38px;
+    padding: 0 5px;
+    text-align: center;
+    position: absolute;
+    right: 16px;
+    top: 170px;
+    &.cvc {
+      color: #000
+    }
+    &.active {
+      border: 2px solid #fff
+    }
+  }
+}
+
+.visa-bt {
+  width: 606px;
+  margin: 60px auto;
+  ul.setting-bt {
+    list-style: none;
+    display: inline-block;
+    li {
+      display: inline-block;
+      background-color: $grey;
+      border-radius: 4px;
+      text-align: center;
+      width: 270px;
+      height: 70px;
+      color: #fff;
+      margin: 0 0 0 55px !important;
+      padding: 18px 0;
+      font-size: 32px;
+      text-transform: uppercase;
+      float: left;
+      &:first-child {
+        margin-left: 0 !important;
+      }
+      a {
+        span {
+          font-size: 32px;
+          color: #fff;
+          text-transform: uppercase;
+          font-weight: 600;
+        }
+      }
+      &.active {
+        background-color: $blue;
+      }
+      &:hover {
+        background-color: $blue;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .setting-page {
+    padding: 43px 60px;
+    .setting-title {
+      h1 {
+        font-size: 33px;
+        line-height: 33px;
+      }
+      .bt-back {
+        margin: 2px 12px 0 -38px;
+      }
+    }
+    .setting-footer {
+      bottom: 40px;
+      right: 60px;
+      font-size: 18.5px;
+      b {
+        padding: 0 6.5px;
+      }
+    }
+  }
+
+  .register-code-keyboard {
+    margin-top: 13px;
+  }
+
+  ul.setting-menu {
+    margin-top: 26.5px;
+    width: 400px;
+    li {
+      padding: 13px;
+      height: 46.5px;
+      border-radius: 2.5px;
+      margin-bottom: 13px;
+      &.language {
+        margin-top: 40px;
+      }
+      a {
+        font-size: 21px;
+        line-height: 21px;
+        .label {
+          padding-bottom: 3px;
+          &.notify {
+            width: 353px;
+          }
+        }
+        .value {
+          .resolution {
+            margin-left: 6.5px;
+          }
+        }
+      }
+    }
+  }
+
+  #setting-notification {
+    h2 {
+      font-size: 25px;
+      line-height: 38px;
+      margin: -8.5px 0 13px 0;
+    }
+    .setting-left {
+      margin-top: 23px;
+    }
+    .icon-down {
+      width: 26.5px;
+      height: 16.5px;
+    }
+  }
+
+  .setting-right {
+    .setting-account {
+      margin-top: 26.5px;
+    }
+    h2 {
+      font-size: 25px;
+      line-height: 25px;
+      margin: 0 0 13px 0;
+      .setting-page {
+        padding: 40px 60px;
+        .setting-title {
+          h1 {
+            font-size: 35px;
+            margin-top: -14px;
+          }
+          .bt-back {
+            margin: -1px 16px 0 -35px;
+          }
+        }
+        .setting-footer {
+          bottom: 40px;
+          right: 60px;
+          font-size: 19px;
+          b {
+            padding: 0 5px;
+          }
+        }
+      }
+      ul.setting-menu {
+        line-height: 1;
+        list-style: none;
+        margin-top: 40px;
+        width: 400px;
+        li {
+          padding: 14px;
+          height: 47px;
+          background-color: $grey;
+          margin-bottom: 13px;
+          &.language {
+            margin-bottom: 40px;
+          }
+          a {
+            font-size: 21px;
+            line-height: 21px;
+            color: #fff;
+            .label {
+              float: left;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              padding-bottom: 5px;
+              &.notify {
+                width: 530px;
+              }
+            }
+            .value {
+              float: right;
+              display: inline-block;
+              span {
+                color: #fff;
+                opacity: 0.5;
+                &.season {
+                  opacity: 1;
+                }
+              }
+              .resolution {
+                margin-left: 10px;
+              }
+            }
+          }
+          &.active {
+            background-color: $blue;
+          }
+        }
+      }
+    }
+    p {
+      font-size: 21px;
+      line-height: 33px;
+    }
+    .setting-method {
+      margin-top: 35px;
+      p {
+        font-size: 25px;
+        line-height: 30px;
+        &.text {
+          font-size: 25px;
+          line-height: 30px;
+        }
+      }
+    }
+    .setting-notify {
+      p {
+        font-size: 25px;
+        line-height: 30px;
+        &.text {
+          font-size: 25px;
+          line-height: 30px;
+          word-wrap: break-word;
+        }
+      }
+    }
+    .setting-sub {
+      margin-top: 40px;
+      .bg-sub {
+        width: 630px;
+        height: 400px;
+        background-size: cover;
+        .text-sub {
+          width: 365px;
+          height: 45px;
+          font-size: 21px;
+          line-height: 48px;
+          text-shadow: 1px 1px 1px #000;
+        }
+      }
+    }
+  }
+
+  .setting-center {
+    .setting-input-code {
+      margin-top: 80px;
+      input.code {
+        width: 533px;
+        height: 46.5px;
+        border-radius: 2.5px;
+        font-size: 25px;
+        padding: 0 3px;
+      }
+    }
+    .setting-logout {
+      width: 433px;
+      p {
+        margin-bottom: 40px;
+      }
+      h1 {
+        font-size: 40px;
+        line-height: 60px;
+      }
+    }
+  }
+
+  .visa-bg {
+    width: 404px;
+    height: 241px;
+    margin: 20px auto;
+    #ic-type, #ic-type-load {
+      bottom: 13px;
+      right: 13px;
+      width: 66.5px;
+      height: 20px;
+      &.mastercard {
+        width: 34.5px;
+      }
+      &.americanexpress {
+        width: 51px;
+      }
+      &.discover {
+        width: 36px;
+      }
+      &.dinersclub {
+        width: 43px;
+        height: 32px;
+      }
+      &.jcb {
+        width: 36px;
+        height: 32px;
+      }
+    }
+    label {
+      font-size: 13px;
+      left: 36.5px;
+      top: 8.5px;
+      &.card-number {
+        top: 74.5px;
+      }
+      &.card-date {
+        top: 138.5px;
+      }
+    }
+    input {
+      height: 40px;
+      width: 336px;
+      border-radius: 2.5px;
+      font-size: 25.5px;
+      padding: 0 3px;
+      left: 36.5px;
+      &:not(:placeholder-shown) {
+        padding-left: 14px;
+      }
+      &:focus {
+        border: 1.3px solid #fff;
+      }
+      &.name {
+        top: 35px;
+        &.active {
+          padding: 14px;
+        }
+      }
+      &.number {
+        top: 97px;
+      }
+      &.date {
+        top: 163px;
+        width: 100px;
+      }
+      &.active {
+        border: 1.3px solid #fff
+      }
+    }
+    p {
+      left: 36.5px;
+      font-size: 25px;
+      &.name {
+        top: 35px;
+        text-shadow: 0 1.3px 1.3px #212F4C;
+      }
+      &.number {
+        top: 97px;
+        padding: 0 6.5px;
+        text-shadow: 0 1.3px 1.3px #212F4C;
+      }
+      &.date {
+        top: 163px;
+        padding: 0 6.5px;
+        text-shadow: 0 1.3px 1.3px #212F4C;
+      }
+    }
+  }
+
+  .visa-bg-after {
+    width: 404px;
+    height: 241px;
+    margin: 20px auto;
+    input {
+      height: 40px;
+      width: 116.6px;
+      border-radius: 2.5px;
+      font-size: 25px;
+      padding: 0 3px;
+      right: 10.5px;
+      top: 113px;
+      &.active {
+        border: 1.3px solid #fff
+      }
+    }
+  }
+
+  .visa-bt {
+    width: 404px;
+    margin: 40px auto;
+    ul.setting-bt {
+      li {
+        border-radius: 2.5px;
+        width: 180px;
+        height: 46.5px;
+        margin: 0 0 0 36.5px !important;
+        padding: 12px 0;
+        font-size: 21px;
+        a {
+          span {
+            font-size: 21px;
+          }
+        }
+      }
+    }
+  }
+}

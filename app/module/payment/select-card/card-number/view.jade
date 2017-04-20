@@ -1,0 +1,13 @@
+div#card-number.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language mobileCard.title}}
+    .mobile-card-center
+      input.card-number#input-card-number
+      .card-number-keyboard
+      ul.bt-movie
+          | {{#each mobileCard.buttons}}
+          li
+              a: span {{language title}}
+          | {{/each}}

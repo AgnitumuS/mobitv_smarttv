@@ -1,0 +1,72 @@
+#add-card.add-card.setting-page.animate.fadeIn.background
+  i.icon.ic-fim.ic-home
+  .setting-title
+
+    h1#add-card-title {{language settingMethodtitle}}
+  | {{#unless backVisa}}
+  | {{#unless cardFail}}
+  | {{#unless successCard}}  
+  .setting-center
+    .visa-bg
+      label.card-name {{language 'full-name'}}
+      input.name#card_name(type="text", placeholder="{{language 'full-name'}}", name='card_name')
+      //- p.name FIMPLUS
+      label.card-number {{language 'mobile-card-number'}}
+      input.number#card_number(type="text", name='card_number', placeholder='XXXX XXXX XXXX XXXX', maxlength='19')
+      //p.number XXX
+      label.card-date {{language 'expiration-date'}}
+      input.date#card_date(type="text", name='card_date', placeholder='XX/XX', maxlength='5')
+      //p.date 22/30
+      span#ic-type.type
+    .register-otp-keyboard
+    .visa-bt
+      ul.setting-bt.add-card-menu
+        | {{#each buttons}}
+        li(class="{{#ifCond ../currentActive @index}}{{#ifCond ../onFocus true}}active{{/ifCond}}{{/ifCond}}")
+          a
+            span {{language title}}
+        | {{/each}}
+  | {{/unless}}
+  | {{/unless}}
+  | {{/unless}}
+
+  | {{#unless successCard}}
+  | {{#if backVisa}}
+  | {{#unless cardFail}} 
+  .setting-center
+    .visa-bg-after
+      input.cvc#card_cvc(type='text', placeholder='XXXX', name='card_cvc', maxlength='3')
+    .register-otp-keyboard
+    .visa-bt
+      ul.setting-bt.add-card-menu
+        | {{#each buttons}}
+        li(class="{{#ifCond ../currentActive @index}}{{#ifCond ../onFocus true}}active{{/ifCond}}{{/ifCond}}")
+          a
+            span {{language title}}
+        | {{/each}}
+  | {{/unless}}
+  | {{/if}}
+  | {{/unless}}
+
+  | {{#if successCard}}
+  | {{#unless cardFail}} 
+  .setting-center
+    .visa-bg
+      label.card-name {{language 'full-name'}}
+      p.name {{resultCard.card.name}}
+      label.card-number {{language 'mobile-card-number'}}
+      p.number **** **** **** {{resultCard.card.last4}}
+      label.card-date {{language 'expiration-date'}}
+      p.date {{expMonthCard}}/{{expYearCard}}
+      span#ic-type.type
+    .visa-bt
+      ul.setting-bt
+        li.active.add-card-menu#compeleteBtn
+          a
+            span {{language 'button-confirm'}}
+  | {{/unless}}
+  | {{/if}}
+  .setting-footer
+    | {{language 'account-footer'}}
+    | {{language 'account-footer-or'}}
+    b movies.fimplus.vn

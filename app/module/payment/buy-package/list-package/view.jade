@@ -1,0 +1,26 @@
+div#list-package.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language payment.title}}
+    ul.package-list
+      | {{#each payment.item}}
+      li.package-li
+        p.package-name {{packageName}}
+        p.package-price {{coverNumber price.default}}
+          span.package-price đ
+        | {{#ifNotEqual ../payment.code null}}
+        p.package-price-discount {{coverNumber priceDefault}}
+          span đ
+        | {{/ifNotEqual}}
+        .package-time
+          span {{groupTime}}
+        p.package-description {{description}}
+        ul.bt-movie
+          li
+            a: span {{../payment.buttonPackage}}
+      | {{/each}}
+      | {{#each payment.buttons}}
+      .redeem-code {{language title}}
+      | {{/each}}
+

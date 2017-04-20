@@ -1,0 +1,39 @@
+#setting-notification.setting-page.animate.fadeIn.background
+  i.icon.ic-fim.ic-home
+  .setting-title
+
+    h1 {{language 'notification'}}
+  .setting-left
+    | {{#ifMore notifications.count 0}}
+    ul.setting-menu.bt-notificartion
+      | {{#each notifications.rows}}
+      li(class="{{#ifCond ../currentActive @index}}{{#ifCond ../onFocus true}}active{{/ifCond}}{{/ifCond}}")
+        a
+          .label {{#limit title}}{{/limit}}
+      | {{/each}}
+    | {{/ifMore}}
+  | {{#if icActive}}
+  span.icon-down
+  | {{/if}}
+  .setting-right
+    | {{#ifMore notifications.count 0}}
+    .setting-notify.setting-method
+      h2 {{currentNotify.description}}
+      p.text {{currentNotify.content}}
+    | {{/ifMore}}
+  .setting-center
+    .setting-logout.visa-bt
+      | {{#ifCond notifications.count 0}}
+      p {{language 'notification-empty'}}
+      | {{/ifCond}}
+      | {{#ifCond notifications.count 0}}
+      ul.setting-bt
+        li.active
+          a
+            span {{language 'button-back'}}
+    | {{/ifCond}}
+  
+  .setting-footer
+    | {{language 'account-footer'}}
+    | {{language 'account-footer-or'}}
+    b movies.fimplus.vn

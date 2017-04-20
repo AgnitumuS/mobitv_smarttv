@@ -1,0 +1,28 @@
+doctype
+html
+	head
+		block meta
+			base(href='/')
+			//meta(name="viewport" content="width=1920,height=1080, user-scalable=no")
+			meta(name="viewport" content="width=device-width")
+			meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+		title #{platform}
+		link(rel="icon" type="image/png" href="#{process.env.SERVER}styles/img/favicon.png")
+
+		block platform
+		block style
+		// STYLES
+		// STYLES END
+		script(type='text/javascript').
+			window.fimplus.server = '#{process.env.SERVER}';
+			window.fimplus.env = '#{process.env.ENV || "development"}';
+
+
+	body(class="#{platform}")
+		#main-app
+			.logo_slashscreen(style='display:none;')
+		// SCRIPTS
+		// SCRIPTS END
+		block script
+
+

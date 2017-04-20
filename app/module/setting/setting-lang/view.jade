@@ -1,0 +1,22 @@
+#setting-lang.setting-page.animate.fadeIn.background
+  i.icon.ic-fim.ic-home
+  .setting-title
+
+    h1 {{language 'account-language-title'}}
+  .setting-left
+    ul.setting-menu.btn-lang
+      | {{#each buttons}}
+      li(class="{{#ifCond ../currentActive @index}}{{#ifCond ../onFocus true}}active{{/ifCond}}{{/ifCond}}")
+        a
+          .label {{language title}}
+          .value
+            | {{#ifCond ../activeLanguage type}}
+            i.icon.ic-check
+            | {{/ifCond}}
+      | {{/each}}
+  .setting-right
+    .setting-account
+  .setting-footer
+    | {{language 'account-footer'}}
+    | {{language 'account-footer-or'}}
+    b movies.fimplus.vn

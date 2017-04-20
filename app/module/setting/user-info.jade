@@ -1,0 +1,13 @@
+.setting-account#setting-account
+  | {{#if user.fullName}}
+  h2 {{user.fullName}}
+  | {{/if}}
+  | {{#if packageInfo}}
+  h2#packageInfo  {{packageInfo}}
+  | {{/if}}
+  | {{#if user.email}}
+  p Email:
+    span {{user.email}}
+  | {{/if}}
+  p {{language 'phone'}}: 
+    span#phone {{user.localAcc.mobile}}

@@ -1,0 +1,28 @@
+ul.preview-snap
+  | {{#each listSnaps}}
+  li.snapshot(class='snapshot-{{@index}}')
+    | {{#each ../data}}
+    span.thumb(
+    class='thumb thumb-{{position}}'
+    style='background-image:url("{{url}}")')
+      span.overTimeSS(style='display: none')
+        span.timeSnapshot 00:00
+    | {{/each }}
+  | {{/each}}
+
+  //li
+  //  img(src='https://ast.fimplus.io/images/curse-of-the-royal-harem_poster_landscape_16x9_960x540_3x.jpg')
+  //li
+  //  img(src='https://ast.fimplus.io/images/curse-of-the-royal-harem_poster_landscape_16x9_960x540_3x.jpg')
+  //li
+  //  img(src='https://ast.fimplus.io/images/curse-of-the-royal-harem_poster_landscape_16x9_960x540_3x.jpg')
+  //li.active
+  //  img(src='https://ast.fimplus.io/images/curse-of-the-royal-harem_poster_landscape_16x9_960x540_3x.jpg')
+  //  .time
+  //    span 32:40
+  //li
+  //  img(src='https://ast.fimplus.io/images/curse-of-the-royal-harem_poster_landscape_16x9_960x540_3x.jpg')
+  //li
+  //  img(src='https://ast.fimplus.io/images/curse-of-the-royal-harem_poster_landscape_16x9_960x540_3x.jpg')
+  //li
+  //  img(src='https://ast.fimplus.io/images/curse-of-the-royal-harem_poster_landscape_16x9_960x540_3x.jpg')

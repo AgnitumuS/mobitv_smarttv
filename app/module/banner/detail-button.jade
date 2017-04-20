@@ -1,0 +1,52 @@
+.info
+	label {{language 'cast'}}:&nbsp;
+		| {{#each cast}}
+		span {{name}}{{#unless @last}}, {{/unless}}
+		| {{/each}}
+	label {{language 'director'}}:&nbsp;
+		| {{#each director}}
+		span {{name}}{{#unless @last}}, {{/unless}}
+		| {{/each}}
+ul.list-button.bt-movie-detail.animated.hide
+	| {{#each buttons}}
+	li(class="{{#ifCond slug 'btn-favorite' }}favorite {{#ifCond ../favorite  0 }}add{{/ifCond}} {{#ifCond ../favorite  1 }}remove{{/ifCond}} {{/ifCond}}")
+		a
+			span {{language title}}
+
+		|{{#ifCond slug 'btn-watch' }}
+		|{{#ifMore ../movie.progress.percent 0 }}
+		.progress-total &nbsp;
+		.progress-movie(style='width:{{../movie.progress.percent}}%;') &nbsp;
+		|{{/ifMore}}
+		|{{/ifCond}}
+	| {{/each}}
+
+	//|{{#ifCond movie.subscribed false }}
+	//|{{#ifMore movie.ppvPrice 0 }}
+	//li
+	//	a
+	//		span.price {{movie.ppvPrice}}đ
+	//|{{/ifMore}}
+	//|{{/ifCond}}
+
+
+
+	//li
+	//  a
+	//    span.price 29.000đ
+	//li.two-line
+	//  a
+	//    span.price 10.000đ
+	//    p Dùng thẻ visa
+	//li
+	//  a
+	//    span Xem tiếp
+	//    .line-bar
+	//      .line-pointer
+	//li
+	//  a
+	//    span Xem từ đầu
+	//li.two-line
+	//  a
+	//    span.price Xem phim
+	//    p Bạn còn 47h để xem

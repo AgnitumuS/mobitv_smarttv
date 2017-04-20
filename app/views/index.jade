@@ -1,0 +1,10 @@
+extends layout
+block platform
+  -platform = 'web'
+  script(type='text/javascript').
+    window.fimplus = {};
+    window.fimplus.platform = '#{platform}';
+
+block style
+block script
+  //script(type='text/javascript' src="/player/jwplayer.js")

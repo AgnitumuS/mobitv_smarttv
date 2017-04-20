@@ -1,0 +1,242 @@
+#payment {
+  z-index: 5;
+  #buy-package,
+  #list-package,
+  #payment-method,
+  #redeem-code,
+  #enter-redeem-code,
+  #mobile-card,
+  #select-card,
+  #card-number,
+  #card-seri,
+  #payment-confirm,
+  #rent-movie {
+    z-index: 6;
+  }
+  .overlayBuyPackage{
+    background-color: #000;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    display: none;
+  }
+  .buy-package-center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    .termOS{
+      font-size: 32px;
+      opacity: 0.5;
+      line-height: 32px;
+      margin-top: 35px;
+    }
+    .descriptionUnder{
+      font-size: 38px;
+      line-height: 57px;
+      padding: 0 5%;
+    }
+    .description {
+      font-size: 38px;
+      line-height: 57px;
+      padding: 0 20%;
+      b {
+        padding: 0 10px;
+      }
+    }
+  }
+  ul.bt-movie li span {
+    font-weight: bold;
+  }
+  .description-upgrade {
+    position: absolute;
+    font-size: 28px;
+    text-align: center;
+    top: 10%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    span {
+      padding: 0 10px;
+      color: rgb(52, 148, 248);
+    }
+  }
+  ul.package-list {
+    list-style: none;
+    text-align: center;
+    margin-top: 6%;
+  }
+  li.package-li {
+    height: 650px;
+    width: 450px;
+    background-color: #fff;
+    color: rgb(26, 26, 26);
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0px 40px;
+    border-radius: 8px;
+    padding: 37px;
+    position: relative;
+    p {
+      margin: 20px 0;
+    }
+    p.package-name {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 32px;
+      margin: 0 0 50px;
+    }
+    p.package-price {
+      font-size: 90px;
+      color: rgb(52, 148, 248);
+      position: relative;
+      font-weight: 500;
+      margin-bottom: 70px;
+    }
+    span.package-price {
+      position: absolute;
+      font-size: 32px;
+      top: -25px;
+    }
+    p.package-price-discount {
+      font-size: 32px;
+      color: rgba(33, 33, 33, 0.5);
+      text-decoration: line-through;
+      font-weight: 700;
+      line-height: 32px;
+      position: absolute;
+      top: 25%;
+      left: 0;
+      right: 0;
+    }
+    .package-time {
+      color: rgb(52, 148, 248);
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      span {
+        border: 2.5px solid;
+        border-radius: 4px;
+        padding: 10px;
+      }
+    }
+    p.package-description {
+      font-size: 28px;
+      line-height: 42px;
+      margin-top: 50px;
+    }
+    ul.bt-movie {
+      position: absolute;
+      text-align: center;
+      bottom: 37px;
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+      font-weight: bold;
+    }
+  }
+  .redeem-code {
+    padding: 20px 50px;
+    text-transform: uppercase;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 32px;
+    background-color: #383838;
+    display: table;
+    margin: 3% auto;
+    border-radius: 4px;
+    &:hover {
+      background-color: #338fee;
+    }
+  }
+  .active {
+    background-color: #338fee;
+  }
+}
+
+@media screen and (max-width: 1280px){
+  #payment {
+    .buy-package-center {
+      .termOS{
+        font-size: 21px;
+        line-height: 21px;
+        margin-top: 23px;
+      }
+      .descriptionUnder{
+        font-size: 25px;
+        line-height: 38px;
+      }
+      .description {
+        font-size: 25px;
+        line-height: 38px;
+        b {
+          padding: 0 7px;
+        }
+      }
+    }
+    .description-upgrade {
+      font-size: 19px;
+      span {
+        padding: 0 7px;
+      }
+    }
+    li.package-li {
+      height: 433px;
+      width: 300px;
+      margin: 0px 27px;
+      border-radius: 5px;
+      padding: 25px;
+      p {
+        margin: 13px 0;
+      }
+      p.package-name {
+        font-size: 21px;
+        line-height: 21px;
+        margin: 0 0 33px;
+      }
+      p.package-price {
+        font-size: 60px;
+        margin-bottom: 47px;
+      }
+      span.package-price {
+        font-size: 21px;
+        top: -17px;
+      }
+      p.package-price-discount {
+        font-size: 21px;
+        line-height: 21px;
+      }
+      .package-time {
+        font-size: 19px;
+        span {
+          border: 1.7px solid;
+          border-radius: 3px;
+          padding: 6.7px;
+        }
+      }
+      p.package-description {
+        font-size: 19px;
+        line-height: 28px;
+        margin-top: 33px;
+      }
+      ul.bt-movie {
+        bottom: 25px;
+      }
+    }
+    .redeem-code {
+      padding: 13px 33px;
+      font-size: 21px;
+      line-height: 21px;
+      border-radius: 3px;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+div#card-seri.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language mobileCard.title}}
+    .mobile-card-center
+      input.card-number#input-card-seri
+      .card-seri-keyboard
+      ul.bt-movie
+          | {{#each mobileCard.buttons}}
+          li
+              a: span {{language title}}
+          | {{/each}}

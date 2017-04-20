@@ -1,0 +1,50 @@
+ul.detail-info
+	//rating
+	//li
+		| {{#forLoop 5}}
+		| {{#ifLess @index rating.fimplus }}
+		i.icon.ic-star-on
+		| {{/ifLess}}
+		| {{#ifMoreEqual @index rating.fimplus }}
+		i.icon.ic-star-off
+		| {{/ifMoreEqual}}
+		| {{/forLoop}}
+
+	| {{#ifCond model4K 1 }}
+	| {{#ifCond hd 3 }}
+	li: i.icon.ic-4k
+	| {{/ifCond}}
+	| {{/ifCond}}
+
+	| {{#unless model4K }}
+	| {{#ifMore hd 1 }}
+	li: i.icon.ic-hd
+	| {{/ifMore}}
+	| {{/unless}}
+
+	li {{releaseYear}}
+
+	| {{#if genres }}
+	| {{#if genres.[0] }}
+	li {{genres.[0].name}}
+	| {{/if}}
+	| {{/if}}
+
+	| {{#ifCond audioType 1}}
+	li {{language 'dubbing'}}
+	| {{/ifCond}}
+
+
+	| {{#ifCond type 'Show' }}
+	| {{#if seasonLabelVn }}
+	li {{ seasonLabelVn }}
+	| {{/if}}
+	| {{/ifCond}}
+
+ul.list-item
+	| {{#each seasons}}
+	li.item(class='{{#ifCond @index 0}} active selected {{/ifCond}}')
+		a
+			span.title {{knownAs}}
+			span.subtitle {{totalEpisode}} {{episodeLabelVn}}
+	| {{/each}}

@@ -1,0 +1,11 @@
+extends layout
+block platform
+  -platform = 'tv_tizen'
+  script(type='text/javascript').
+    window.fimplus = {};
+    window.fimplus.platform = '#{platform}';
+  script(type='text/javascript', src='$WEBAPIS/webapis/webapis.js')
+
+block style
+block script
+  //script(type='text/javascript' src="/player/jwplayer.js")

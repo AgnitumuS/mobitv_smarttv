@@ -1,0 +1,52 @@
+.setting-page.animated.fadeIn.background
+  i.icon.ic-fim.ic-home
+  #setting-menu
+    .setting-title
+      h1 {{language 'custom'}}
+    .setting-left
+      ul.setting-menu
+        | {{#each buttons}}
+        li(class="{{#ifCond ../currentActive @index}}active{{/ifCond}}{{#ifCond valueRight 'lang'}} language{{/ifCond}}")
+          a
+            .label {{language title}}
+            .value
+              | {{#ifNotEqual valueRight "off"}}
+              | {{#ifCond valueRight 'lang'}}
+              span {{language ../language}}
+              | {{/ifCond}}
+              | {{#ifCond valueRight 'titlelang'}}
+              span {{language ../movieTitleLanguage}}
+              | {{/ifCond}}
+              | {{#ifCond valueRight 'sub'}}
+              | {{#ifCond ../subtitleState 'on'}}
+              span {{language 'account-pairing-device-on'}}
+              | {{/ifCond}}
+              | {{#ifCond ../subtitleState 'off'}}
+              span {{language 'account-pairing-device-off'}}
+              | {{/ifCond}}
+              | {{/ifCond}}
+              | {{#ifCond valueRight 'logout'}}
+              span 
+              | {{/ifCond}}
+              | {{/ifNotEqual}}
+              | {{#ifCond valueRight 'off'}}
+              i.icon.ic-arrow
+              | {{/ifCond}}
+
+        | {{/each}}
+    .setting-right
+      | {{> userInfo}}
+    .setting-footer
+      | {{language 'account-footer'}}
+      | {{language 'account-footer-or'}}
+      b movies.fimplus.vn
+
+div#setting-method
+div#setting-notification
+div#setting-code
+div#setting-lang
+div#setting-quality
+div#setting-title-lang
+div#setting-sub
+div#setting-logout
+div#add-card

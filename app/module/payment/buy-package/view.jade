@@ -1,0 +1,15 @@
+div#buy-package.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language payment.title}}
+    .buy-package-center
+      .description {{language payment.description}}
+      .descriptionUnder {{language payment.descriptionUnder}}
+      ul.bt-movie
+        | {{#each payment.buttons}}
+        li
+          a: span {{language title}}
+        | {{/each}}
+  div.overlayBuyPackage
+  div#list-package

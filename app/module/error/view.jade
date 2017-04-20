@@ -1,0 +1,15 @@
+div.error-wrapper.animated.fadeIn.home-bg.background
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language title}}
+    .error-content
+      .description {{language description}}
+      | {{#if descriptionUnder}}
+      .description {{language descriptionUnder}}
+      | {{/if}}
+      ul.bt-movie
+        | {{#each buttons}}
+        li
+          a: span {{language title}}
+        | {{/each}}

@@ -1,0 +1,19 @@
+div#setting-logout.setting-page.animated.fadeIn.background
+  i.icon.ic-fim.ic-home
+  .setting-title
+
+    h1 {{language 'account-logout'}}
+  .setting-center
+    .setting-logout.visa-bt
+      p {{language 'logout-confirm'}}
+      ul#btn-logout.setting-bt
+        | {{#each buttons}}
+        li(class="{{#ifCond ../currentActive @index}}{{#ifCond ../onFocus true}}active{{/ifCond}}{{/ifCond}}")
+          a: span {{language title}}
+        | {{/each}}
+  .setting-footer
+      | {{language 'account-footer'}}
+      | {{language 'account-footer-or'}}
+      b movies.fimplus.vn
+
+

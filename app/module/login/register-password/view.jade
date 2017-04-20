@@ -1,0 +1,14 @@
+div#register-password.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language register.title}}
+    .login-center
+      .description {{language register.description}}
+      input.username#register-password-input.phone-number(type='password')
+      .register-password-keyboard
+      ul.bt-movie
+        | {{#each register.buttons}}
+        li
+          a: span {{language title}}
+        | {{/each}}

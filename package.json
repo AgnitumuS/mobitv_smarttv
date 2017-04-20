@@ -1,0 +1,41 @@
+{
+  "name": "hd1-smart-tv",
+  "version": "1.0.0",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "dev": "npm install && grunt dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "grunt": "^1.0.1",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-coffee": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^2.0.0",
+    "grunt-contrib-jade": "^1.0.0",
+    "grunt-contrib-jst": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^2.3.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-express-server": "^0.5.3",
+    "grunt-newer": "^1.2.0",
+    "grunt-parallel": "^0.5.1",
+    "grunt-sails-linker": "^1.0.4",
+    "grunt-sass-globbing": "^1.5.1",
+    "grunt-sync": "^0.6.2",
+    "grunt-text-replace": "^0.4.0",
+    "include-all": "^4.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://tamltt@bitbucket.org/fimplus/hd1-smartv-tv.git"
+  },
+  "homepage": "https://bitbucket.org/fimplus/hd1-smartv-tv#readme",
+  "description": "",
+  "devDependencies": {}
+}

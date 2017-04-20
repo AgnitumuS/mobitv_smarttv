@@ -1,0 +1,37 @@
+#setting-code.setting-page.animate.fadeIn.background
+	i.icon.ic-fim.ic-home
+	| {{#unless isList}}
+	.setting-title
+
+		h1 {{language 'code-discount'}}
+
+	.setting-center
+		.setting-input-code
+			input.code#codeInput(type='text')
+			.register-code-keyboard
+			.visa-bt
+				ul.setting-bt#button-code
+					li(class='{{#if onFocus}}active{{/if}}')
+						a
+							span {{language 'button-confirm'}}
+	| {{/unless}}
+	| {{#if isList}}
+	.setting-title
+
+		h1 {{language 'code-discount'}}
+	.setting-center.redeem-code-center
+		.description {{language 'list-code-discount'}}
+		ul.code-list.redeem-code-list
+			li.add-new.code.redeem-code-li(class="{{#ifCond currentActive 0}}active{{/ifCond}}")
+				a: span {{language 'enter-new-code'}}
+			| {{#each listCode}}
+			li.code.redeem-code-li(class="{{#ifCondPlusOne ../currentActive @index}}active{{/ifCondPlusOne}}")
+				a: span {{code}}({{#if isDiscount}}-{{/if}}{{value}}%)
+			| {{/each}}
+	| {{/if}}
+	.setting-footer
+		| {{language 'account-footer'}}
+		| {{language 'account-footer-or'}}
+		b movies.fimplus.vn
+
+

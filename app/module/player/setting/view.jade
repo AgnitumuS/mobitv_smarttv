@@ -1,0 +1,17 @@
+.player-edit-wrapper
+  .player-edit
+    | {{#unless setting.length}}
+    span.player-notify {{language 'movie-no-sub'}}
+    | {{/unless}}
+    | {{#each setting}}
+    div.player-edit-row
+      .label-edit
+        | {{language title}}
+      ul.edit-popup
+        | {{#each items}}
+        li
+          i.icon(class='{{#if isActive}}ic-check{{/if}}')
+          //.ic-check
+          | {{language title}}
+        | {{/each}}
+    | {{/each}}

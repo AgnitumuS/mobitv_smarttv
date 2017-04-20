@@ -1,0 +1,15 @@
+table.keyboard
+  tbody
+    | {{#each key}}
+    tr
+      | {{#each this}}
+      td(colspan="{{checkColSpan this}}")
+        span(data-value='{{this}}') {{{filterKeyboard this}}}
+      | {{/each}}
+    | {{/each}}
+
+ul.delete-key
+  | {{#each button}}
+  li(data-value='{{this}}')
+    | {{{filterKeyboard this}}}
+  | {{/each}}

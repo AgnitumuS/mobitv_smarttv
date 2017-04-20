@@ -1,0 +1,80 @@
+#redeem-code, #enter-redeem-code, #setting-code {
+  .redeem-code-center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    .description {
+      font-size: 48px;
+      line-height: 48px;
+      margin-bottom: 20px;
+    }
+    input.redeem-code {
+      width: 800px;
+      height: 70px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border: none;
+      border-radius: 4px;
+      font-size: 32px;
+      color: #fff;
+      padding: 30px;
+    }
+    ul.redeem-code-list {
+      list-style: none;
+      margin-top: 80px;
+      .active{
+        background-color: rgb(52,148,248) !important;
+      }
+      li.redeem-code-li{
+        background-color: #383838;
+        border-radius: 4px;
+        width: 520px;
+        height: 70px;
+        margin: 25px auto;
+        font-size: 32px;
+        font-weight: bold;
+        line-height: 70px;
+        &:hover {
+          background-color: #338fee;
+        }
+      }
+    }
+  }
+  ul.bt-movie li span{
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 1280px){
+  #redeem-code, #enter-redeem-code, #setting-code {
+    .redeem-code-center {
+      .description {
+        font-size: 32px;
+        line-height: 32px;
+        margin-bottom: 13.33px;
+      }
+      input.redeem-code {
+        width: 533.33px;
+        height: 46.66px;
+        border-radius: 2.66px;
+        font-size: 21.33px;
+        padding: 20px;
+      }
+      ul.redeem-code-list {
+        margin-top: 53.33px;
+        li.redeem-code-li{
+          border-radius: 2.66px;
+          width: 346.66px;
+          height: 46.66px;
+          margin: 16.66px auto;
+          font-size: 21.33px;
+          line-height: 46.66px;
+        }
+      }
+    }
+  }
+}

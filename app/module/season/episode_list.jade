@@ -1,0 +1,16 @@
+ul.list-item
+  | {{#each episodes}}
+  li.item(class='{{#ifCond @index 0}}active selected{{/ifCond}}')
+    .episode-img
+      img(
+      src='{{posterLandscape}}'
+      onerror="fimplus.UtitService.onImageError(this)")
+      | {{#if progress.progress }}
+      .episode-total
+      .episode-progress(style='width:{{progress.percent}}%')
+      | {{/if}}
+    .episode-content
+      .episode-title {{knownAs}}
+      .episode-description {{limit descriptionShort}}
+      .episode-length {{timeEpisode runtime}}
+  | {{/each}}

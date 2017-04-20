@@ -1,0 +1,36 @@
+#error-page {
+  .error-wrapper {
+    z-index: 10;
+    .error-content {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      .description {
+        font-size: 38px;
+        line-height: 57px;
+        margin-bottom: 20px;
+      }
+    }
+    ul.bt-movie li span {
+      font-weight: bold;
+    }
+  }
+}
+
+@media screen and (max-width: 1280px){
+  #error-page {
+    .error-wrapper {
+      .error-content {
+        .description {
+          font-size: 25px;
+          line-height: 38px;
+          margin-bottom: 13px;
+        }
+      }
+    }
+  }
+}

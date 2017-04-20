@@ -1,0 +1,18 @@
+div#select-card.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language mobileCard.title}}
+    ul.mobile-card-list
+      | {{#each mobileCard.listTelco}}
+      li.mobile-card-li
+        p.mobile-card-name {{shortName}}
+        i.icon(class='ic-{{shortName}}')
+        p.mobile-card-price {{description}}
+        ul.bt-movie
+          li
+            a
+              span {{language 'choose-card'}}
+      | {{/each}}
+  div#card-number
+  div#card-seri

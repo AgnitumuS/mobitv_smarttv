@@ -1,0 +1,20 @@
+div#redeem-code.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language payment.title}}
+    .redeem-code-center
+      .description {{language payment.description}}
+      ul.redeem-code-list
+        li.redeem-code-li.active
+          a
+            span {{language 'enter-new-code'}}
+        | {{#each payment.listCode}}
+        li.redeem-code-li.active
+          | {{#ifCond isPercentage 1}}
+          a: span {{code}} (-{{value}}%)
+          | {{/ifCond}}
+          | {{#ifCond isPercentage 0}}
+          a: span {{code}} (-{{value}}đ)
+          | {{/ifCond}}
+        | {{/each}}

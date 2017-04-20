@@ -1,0 +1,309 @@
+.icon {
+  display: inline-block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  position: relative;
+  &.ic-logo {
+    background-image: url('img/fimplus_logo.png');
+    width: 600px;
+    height: 286px;
+  }
+  &.ic-hd {
+    background-image: url('img/ic_hd.png');
+    width: 64px;
+    height: 46px;
+  }
+  &.ic-4k {
+    background-image: url('img/ic_4k.png');
+    width: 64px;
+    height: 46px;
+  }
+  &.ic-star-on {
+    background-image: url('img/ic_star_on.png');
+    width: 30px;
+    height: 30px;
+  }
+  &.ic-star-off {
+    background-image: url('img/ic_star_off.png');
+    width: 30px;
+    height: 30px;
+  }
+  &.ic-fim {
+    background-image: url('img/ic_fim.png');
+    width: 150px;
+    height: 50px;
+  }
+  &.ic-back {
+    background-image: url('img/ic_back.png');
+    width: 25px;
+    height: 40px;
+    &.active {
+      background-image: url('img/ic_back_active.png');
+    }
+  }
+  &.ic-user-l {
+    background-image: url('img/ic_user_l.png');
+    width: 400px;
+    height: 400px;
+  }
+  &.ic-search-l {
+    background-image: url('img/ic_search_l.png');
+    width: 378px;
+    height: 380px;
+  }
+  &.ic-watch-l {
+    background-image: url('img/ic_watch_l.png');
+    width: 320px;
+    height: 320px;
+  }
+  &.ic-price-l {
+    background-image: url('img/ic_price_l.png');
+    width: 320px;
+    height: 256px;
+  }
+  &.ic-package-l {
+    background-image: url('img/ic_package_l.png');
+    width: 320px;
+    height: 256px;
+  }
+  &.ic-search {
+    background-image: url('img/ic_search.png');
+    width: 80px;
+    height: 80px;
+  }
+  &.ic-package {
+    background-image: url('img/ic_package.png');
+    width: 80px;
+    height: 64px;
+  }
+  &.ic-price {
+    background-image: url('img/ic_price.png');
+    width: 80px;
+    height: 64px;
+  }
+  &.ic-watch {
+    background-image: url('img/ic_watch.png');
+    width: 80px;
+    height: 80px;
+  }
+  &.ic-user {
+    background-image: url('img/ic_watch.png');
+    width: 80px;
+    height: 80px;
+  }
+  &.ic-arrow {
+    background-image: url('img/ic_arrow.png');
+    width: 18px;
+    height: 28px;
+  }
+  &.ic-play,
+  &.ic-pause {
+    width: 40px;
+    height: 50px;
+  }
+  &.ic-play {
+    background-image: url('img/ic_play.png');
+  }
+  &.ic-pause {
+    background-image: url('img/ic_pause.png');
+  }
+  &.ic-sub {
+    background-image: url('img/ic_sub.png');
+    width: 44px;
+    height: 43px;
+  }
+  &.ic-season {
+    background-image: url('img/ic_season.png');
+    width: 48px;
+    height: 44px;
+  }
+  &.ic-check {
+    background-image: url('img/ic_check.png');
+    width: 38px;
+    height: 28px;
+  }
+
+  &.ic-watch-later {
+    background-image: url('img/ic_watch_later.png');
+    width: 28px;
+    height: 28px;
+  }
+  &.ic-MobiFone {
+    background-image: url('img/ic_mobi.png');
+    width: 255px;
+    height: 153px;
+  }
+  &.ic-Viettel {
+    background-image: url('img/ic_viettel.png');
+    width: 255px;
+    height: 153px;
+  }
+  &.ic-VinaPhone {
+    background-image: url('img/ic_vina.png');
+    width: 255px;
+    height: 153px;
+  }
+  &.ic-VietnamMobile {
+    background-image: url('img/ic_vnmoblie.png');
+    width: 255px;
+    height: 153px;
+  }
+
+  &.ic-keyboard {
+    background-image: url('img/ic_keyboard.png');
+    width: 48px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &.ic-search30 {
+    background-image: url('img/ic_search_input.png');
+    width: 36px;
+    height: 36px;
+  }
+  &.ic-shift {
+    background-image: url('img/ic_shift.png');
+    width: 30px;
+    height: 30px;
+  }
+  &.ic-space {
+    background-image: url('img/ic_space.png');
+    width: 59px;
+    height: 12px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .icon {
+    &.ic-logo {
+      width: 400px;
+      height: 191px;
+    }
+    &.ic-hd {
+      width: 43px;
+      height: 31px;
+    }
+    &.ic-4k {
+      width: 43px;
+      height: 31px;
+    }
+    &.ic-star-on {
+      width: 20px;
+      height: 20px;
+    }
+    &.ic-star-off {
+      width: 20px;
+      height: 20px;
+    }
+    &.ic-fim {
+      background-image: url('img/ic_fim.png');
+      width: 100px;
+      height: 34px;
+    }
+    &.ic-back {
+      background-image: url('img/ic_back.png');
+      width: 17px;
+      height: 27px;
+    }
+    &.ic-user-l {
+      width: 267px;
+      height: 267px;
+    }
+    &.ic-search-l {
+      width: 252px;
+      height: 353px;
+    }
+    &.ic-watch-l {
+      width: 213px;
+      height: 213px;
+    }
+    &.ic-price-l {
+      width: 213px;
+      height: 171px;
+    }
+    &.ic-package-l {
+      width: 213px;
+      height: 171px;
+    }
+    &.ic-search {
+      width: 53px;
+      height: 53px;
+    }
+    &.ic-package {
+      width: 53px;
+      height: 43px;
+    }
+    &.ic-price {
+      width: 53px;
+      height: 43px;
+    }
+    &.ic-watch {
+      width: 53px;
+      height: 53px;
+    }
+    &.ic-user {
+      width: 53px;
+      height: 53px;
+    }
+    &.ic-arrow {
+      width: 12px;
+      height: 19px;
+    }
+    &.ic-play,
+    &.ic-pause {
+      width: 27px;
+      height: 33px;
+    }
+    &.ic-sub {
+      width: 29px;
+      height: 28.6667px;
+    }
+    &.ic-season {
+      width: 32px;
+      height: 29px;
+    }
+    &.ic-check {
+      width: 25px;
+      height: 19px;
+    }
+
+    &.ic-watch-later {
+      width: 19px;
+      height: 19px;
+    }
+    &.ic-MobiFone {
+      width: 170px;
+      height: 102px;
+    }
+    &.ic-Viettel {
+      width: 170px;
+      height: 102px;
+    }
+    &.ic-VinaPhone {
+      width: 170px;
+      height: 102px;
+    }
+    &.ic-VietnamMobile {
+      width: 170px;
+      height: 102px;
+    }
+
+    &.ic-keyboard {
+      width: 32px;
+      height: 20px;
+    }
+    &.ic-search30 {
+      width: 24px;
+      height: 24px;
+    }
+    &.ic-shift {
+      width: 20px;
+      height: 20px;
+    }
+    &.ic-space {
+      width: 39px;
+      height: 8px;
+    }
+  }
+}

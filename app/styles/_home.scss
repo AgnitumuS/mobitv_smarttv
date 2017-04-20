@@ -1,0 +1,808 @@
+.home-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  .bg-back {
+    width: 60px;
+    height: 60px;
+  }
+  .img-wrapper {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+i.ic-home {
+  position: absolute;
+  right: 90px;
+  top: 60px;
+  z-index: 2;
+}
+
+.home-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  //opacity: 0.1;
+  transition: opacity 1s cubic-bezier(.5, 0, .1, 1) 0s;
+  &.on-load-img {
+    opacity: 1;
+  }
+  .gradient-left {
+    background: #000;
+    z-index: 2;
+    width: 80%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100;Neutral+Density */
+    background: -moz-linear-gradient(left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    // filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#00000000', GradientType=1);
+    /* IE6-9 */
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 3;
+      //background-image: -webkit-gradient(linear, left top, right top, from(#000), to(transparent));
+      //background-image: -webkit-linear-gradient(left, #000, transparent);
+      //background-image: -moz-linear-gradient(left, #000, transparent);
+      //background-image: -o-linear-gradient(left, #000, transparent);
+      //background-image: linear-gradient(to right, #000, transparent);
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,7db9e8+100&1+0,1+10,0.01+69,0+100 */
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100;Neutral+Density */
+      background: -moz-linear-gradient(left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+      /* FF3.6-15 */
+      background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+      /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+      /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      // filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#00000000', GradientType=1);
+      /* IE6-9 */
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 620px;
+    }
+  }
+  .gradient-bottom {
+    background: #000;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    height: 30%;
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      background-image: -webkit-gradient(linear, left top, right top, from(#000), to(transparent));
+      background-image: -webkit-linear-gradient(bottom, #000, transparent);
+      background-image: -moz-linear-gradient(bottom, #000, transparent);
+      background-image: -o-linear-gradient(bottom, #000, transparent);
+      background-image: linear-gradient(to top, #000, transparent);
+      top: -360px;
+      width: 100%;
+      left: 0;
+      height: 362px;
+    }
+  }
+  .home-main {
+    padding: 60px 90px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    .home-title {
+      width: 55%;
+      h1 {
+        font-size: 50px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-top: 0;
+        margin-bottom: 40px;
+        max-width: 900px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-top: 8px;
+        white-space: nowrap;
+      }
+      h4 {
+        font-size: 38px;
+        line-height: 36px;
+        color: rgba(255, 255, 255, 0.5);
+        margin: 20px 0;
+      }
+      ul {
+        line-height: 1;
+        list-style: none;
+        padding-bottom: 40px;
+        li {
+          display: inline-block;
+          margin: 0 1em 0 0;
+          white-space: nowrap;
+          font-size: 32px;
+        }
+      }
+      .timeRecents {
+        font-size: 32px;
+        line-height: 48px;
+        margin-top: 20px;
+      }
+      .description {
+        font-size: 32px;
+        line-height: 48px;
+        .description-viewmore {
+          text-decoration: underline;
+          background: transparent;
+          padding: 5px;
+          line-height: 100%;
+          border-radius: 5px;
+          font-size: 30px;
+          &.active {
+            background: #328eed;
+          }
+        }
+        span {
+          width: 180px;
+          height: 50px;
+          background-color: $blue;
+          display: inline-block;
+          text-align: center;
+          font-weight: 600;
+          font-size: 34px;
+          text-decoration: underline;
+          border-radius: 4px;
+          margin-left: 20px;
+        }
+      }
+      .description-full {
+        display: none;
+        font-size: 32px;
+        line-height: 48px;
+        width: 50%;
+        position: absolute;
+        height: 65%;
+        overflow: scroll;
+        top: 25%;
+        .fa-angle-down,
+        .fa-chevron-down {
+          position: fixed;
+          left: 25%;
+          bottom: 2%;
+          color: #fff;
+          font-size: 100px;
+          display: none;
+        }
+        .fa-angle-up,
+        .fa-chevron-up {
+          position: fixed;
+          left: 25%;
+          top: 16%;
+          color: #fff;
+          font-size: 100px;
+          display: none;
+        }
+      }
+      &.header {
+        margin-top: 290px;
+        .ic-back {
+          display: none !important;
+        }
+        h1 {
+          font-size: 80px;
+          line-height: 100px;
+          font-weight: 700;
+          margin: 0;
+          text-transform: none;
+          &.text-viewmore {
+            font-size: 50px;
+            text-transform: uppercase;
+          }
+        }
+        ul,
+        i {
+          display: none;
+        }
+        .description {
+          font-size: 38px;
+          line-height: 36px;
+          color: rgba(255, 255, 255, 0.5);
+          margin: 13px 0;
+        }
+        .bt-back {
+          margin: 38px 30px 0 -55px;
+        }
+      }
+    }
+    ul.bt-movie {
+      list-style: none;
+      margin: 35px 0 0 0;
+      li {
+        display: inline-block;
+        background-color: $grey;
+        border-radius: 4px;
+        text-align: center;
+        width: 270px;
+        height: 70px;
+        color: #fff;
+        margin: 0 0 0 24px !important;
+        padding: 16px 0;
+        &.two-line {
+          padding: 6px 0;
+        }
+        &:first-child {
+          margin-left: 0 !important;
+        }
+        a {
+          span {
+            font-size: 32px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 500;
+            &.price {
+              font-size: 32px;
+              color: #fff;
+              text-transform: none;
+              font-weight: 500;
+            }
+          }
+          p {
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+            margin: 4px 0;
+          }
+        }
+        i {
+          display: inline-block;
+          float: left;
+          margin: 20px 0 20px 40px;
+        }
+        .line-bar {
+          height: 8px;
+          background-color: $grey;
+          margin-top: 10px;
+          .line-pointer {
+            background-color: $blue;
+            width: 100px;
+            height: 8px;
+          }
+        }
+        &.active {
+          background-color: #338fee;
+        }
+        &:hover {
+          background-color: #338fee;
+        }
+      }
+    }
+  }
+  .detail-buttons {
+    position: fixed;
+    top: 35%;
+    z-index: 2;
+    padding: 0 90px;
+    width: 100%;
+    .info {
+      display: inline-block;
+      font-size: 32px;
+      margin-top: 20px;
+      line-height: 60px;
+      label {
+        display: block;
+      }
+    }
+    ul.bt-movie-detail {
+      list-style: none;
+      margin: 35px 0 0 0;
+      li {
+        display: inline-block;
+        background-color: $grey;
+        border-radius: 4px;
+        text-align: center;
+        width: 270px;
+        height: 70px;
+        color: #fff;
+        margin: 0 0 0 24px !important;
+        padding: 20px 0;
+        position: relative;
+        vertical-align: top;
+        &.favorite {
+          background-repeat: no-repeat;
+          background-position: 10% 50%;
+          text-align: center;
+          &.eng {
+            width: 370px;
+          }
+          a {
+            span {
+              padding-left: 20px;
+            }
+          }
+          &.add {
+            background-image: url(img/ic_watch_later.png);
+          }
+          &.remove {
+            background-image: url(img/ic_minus_white.png);
+          }
+        }
+        .progress-movie,
+        .progress-total {
+          position: absolute;
+          color: #fff;
+          height: 12px;
+          background: #338fee;
+          top: 110%;
+        }
+        .progress-total {
+          width: 100%;
+          background: #6b6b6b;
+        }
+        &.two-line {
+          padding: 6px 0;
+        }
+        &:first-child {
+          margin-left: 0 !important;
+        }
+        a {
+          span {
+            font-size: 32px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 500;
+            vertical-align: top;
+            display: block;
+            margin: auto;
+            line-height: 100%;
+            &.price {
+              font-size: 32px;
+              color: #fff;
+              text-transform: none;
+              font-weight: 500;
+            }
+          }
+          p {
+            font-size: 20px;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+            margin: -2px 0;
+          }
+        }
+        i {
+          display: inline-block;
+          float: left;
+          margin: 20px 0 20px 40px;
+        }
+        .line-bar {
+          height: 8px;
+          background-color: $grey;
+          margin-top: 10px;
+          .line-pointer {
+            background-color: $blue;
+            width: 100px;
+            height: 8px;
+          }
+        }
+        &.active {
+          background-color: #338fee;
+        }
+        &:hover {
+          background-color: #338fee;
+        }
+      }
+    }
+  }
+  .bt-back {
+    float: left;
+    vertical-align: middle;
+    margin: 13px 30px 0 -55px;
+  }
+}
+
+.detail-wrap {
+  width: 100%;
+  height: 43%;
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  padding: 40px 90px;
+  overflow: hidden;
+  .slider-wrap {
+    height: 360px;
+    position: absolute;
+    transition: -webkit-transform 0.7s cubic-bezier(.5, 0, .1, 1) 0s;
+    transition-property: -webkit-transform, opacity, transform;
+    //will-change: transform;
+    &.active {
+      img {
+        outline: solid #fff 7px;
+      }
+    }
+    .subtitleRibbon {
+      font-size: 28px;
+      position: absolute;
+      top: -40px;
+    }
+    h4 {
+      margin: 0 0 30px 0;
+    }
+  }
+  .home-slider {
+    line-height: 1;
+    list-style: none;
+    margin-bottom: 40px;
+    transition: transform 0.7s cubic-bezier(0.5, 0, 0.1, 1) 0s;
+    position: relative;
+    transform: translate(0%, 0%);
+    display: inline-flex;
+    display: -webkit-inline-flex;
+    white-space: nowrap;
+    //flex-direction: row;
+    //-webkit-flex-direction:row;
+    //display: flex;
+    //display: -webkit-flex;
+    .entity-view {
+      padding-right: 25px;
+      //white-space: nowrap;
+      position: relative;
+      .entity-view-content {
+        width: 416px;
+        height: 234px;
+        position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+        .progress-total,
+        .progress-current {
+          background: #ccc;
+          height: 8px;
+          position: absolute;
+          bottom: 0;
+        }
+        .progress-total {
+          width: 100%;
+        }
+        .progress-current {
+          background: #009cff;
+          width: 0%;
+        }
+      }
+    }
+
+  }
+}
+
+.swap-animation {
+  transition: opacity 1s cubic-bezier(.5, 0, .1, 1) 0s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.swap-animation.ng-enter {
+  opacity: 0;
+}
+
+.swap-animation.ng-enter-active {
+  opacity: 1;
+}
+
+.swap-animation.ng-leave {
+  opacity: 1;
+}
+
+.swap-animation.ng-leave-active {
+  opacity: 0;
+}
+
+.active-image {
+  background: transparent;
+  transition: transform .34s cubic-bezier(.5, 0, .1, 1) 0s;
+  z-index: 2;
+  position: fixed;
+  bottom: 122px;
+  left: 90px;
+  padding-right: 25px;
+  .active-border {
+    outline: 6px solid #fff;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.animation-slider {
+  &.ng-hide {
+    opacity: 0;
+    //transform: translateX(-50%);
+  }
+  &.ng-hide-add,
+  &.ng-hide-remove {
+    transition: all 1s cubic-bezier(.5, 0, .1, 1) 0s;
+    transition-property: opacity, transform;
+  }
+}
+
+.back-button {
+  position: fixed;
+  top: 6.8%;
+  z-index: 15;
+  left: 2%;
+  &.page-search {
+    top: 5.5%;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .back-button {
+    top: 6.4%;
+  }
+  .home-wrap {
+    .bg-back {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  i.ic-home {
+    right: 60px;
+    top: 40px;
+  }
+
+  .home-bg {
+    &.on-load-img {
+    }
+    .gradient-left {
+      &:before {
+        width: 413px;
+      }
+    }
+    .gradient-bottom {
+      &:before {
+        top: -240px;
+        width: 100%;
+        height: 241px;
+      }
+    }
+    .home-main {
+      padding: 40px 60px;
+      .home-title {
+        h1 {
+          font-size: 33px;
+          margin-bottom: 27px;
+          max-width: 600px;
+          padding-top: 5px;
+        }
+        h4 {
+          font-size: 25px;
+          line-height: 24px;
+          margin: 13px 0;
+        }
+        ul {
+          padding-bottom: 27px;
+          li {
+            font-size: 21px;
+          }
+        }
+        .timeRecents {
+          font-size: 21px;
+          line-height: 32px;
+          margin-top: 13px;
+        }
+        .description {
+          font-size: 21px;
+          line-height: 32px;
+          .description-viewmore {
+            padding: 3px;
+            border-radius: 3px;
+            font-size: 20px;
+          }
+          span {
+            width: 150px;
+            height: 33px;
+            font-size: 23px;
+            border-radius: 2.5px;
+            margin-left: 13px;
+          }
+        }
+        .description-full {
+          font-size: 21px;
+          line-height: 32px;
+          .fa-angle-down,
+          .fa-chevron-down {
+            font-size: 67px;
+          }
+          .fa-angle-up,
+          .fa-chevron-up {
+            font-size: 67px;
+          }
+        }
+        &.header {
+          margin-top: 193px;
+          h1 {
+            font-size: 53px;
+            line-height: 67px;
+            &.text-viewmore {
+              font-size: 33px;
+            }
+          }
+          .description {
+            font-size: 25px;
+            line-height: 24px;
+            margin: 9px 0;
+          }
+          .bt-back {
+            margin: 25px 20px 0 -37px;
+          }
+        }
+      }
+      ul.bt-movie {
+        margin: 23px 0 0 0;
+        li {
+          border-radius: 2.5px;
+          width: 180px;
+          height: 47px;
+          margin: 0 0 0 16px !important;
+          padding: 11px 0;
+          &.two-line {
+            padding: 4px 0;
+          }
+          a {
+            span {
+              font-size: 21px;
+              &.price {
+                font-size: 21px;
+              }
+            }
+            p {
+              font-size: 13px;
+              margin: 2.5px 0;
+            }
+          }
+          i {
+            margin: 13px 0 13px 26px;
+          }
+          .line-bar {
+            height: 5px;
+            margin-top: 7px;
+            .line-pointer {
+              width: 67px;
+              height: 5px;
+            }
+          }
+        }
+      }
+    }
+    .detail-buttons {
+      padding: 0 60px;
+      .info {
+        font-size: 21px;
+        margin-top: 13px;
+        line-height: 40px;
+      }
+      ul.bt-movie-detail {
+        margin: 23px 0 0 0;
+        li {
+          border-radius: 2.5px;
+          width: 180px;
+          height: 47px;
+          margin: 0 0 0 16px !important;
+          padding: 13px 0;
+          &.favorite {
+            &.eng {
+              width: 246px;
+            }
+            a {
+              span {
+                padding-left: 13px;
+              }
+            }
+          }
+          .progress-movie,
+          .progress-total {
+            height: 8px;
+          }
+          &.two-line {
+            padding: 4px 0;
+          }
+          a {
+            span {
+              font-size: 21px;
+              &.price {
+                font-size: 21px;
+              }
+            }
+            p {
+              font-size: 13px;
+              margin: -1.3px 0;
+            }
+          }
+          i {
+            margin: 13px 0 13px 26px;
+          }
+          .line-bar {
+            height: 5px;
+            margin-top: 7px;
+            .line-pointer {
+              width: 67px;
+              height: 5px;
+            }
+          }
+        }
+      }
+    }
+    .bt-back {
+      float: left;
+      vertical-align: middle;
+      margin: 9px 20px 0 -37px;
+    }
+  }
+
+  .detail-wrap {
+    padding: 27px 60px;
+    .slider-wrap {
+      height: 240px;
+      &.active {
+        img {
+          outline: solid #fff 5px;
+        }
+      }
+      .subtitleRibbon {
+        font-size: 19px;
+        top: -27px;
+      }
+      h4 {
+        margin: 0 0 20px 0;
+      }
+    }
+    .home-slider {
+      margin-bottom: 27px;
+      .entity-view {
+        padding-right: 17px;
+        .entity-view-content {
+          width: 277px;
+          height: 156px;
+          .progress-total,
+          .progress-current {
+            height: 5px;
+          }
+        }
+      }
+    }
+  }
+  .active-image {
+    bottom: 81px;
+    left: 60px;
+    padding-right: 17px;
+    .active-border {
+      outline: 4px solid #fff;
+    }
+  }
+}

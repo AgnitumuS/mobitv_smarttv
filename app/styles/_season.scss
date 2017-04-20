@@ -1,0 +1,215 @@
+.season-page {
+  .swap-animation {
+    .img-wrapper {
+      opacity: 0.8;
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+  }
+  .home-main {
+    .content {
+      text-align: center;
+      height: 100%;
+      position: relative;
+      .seasons {
+        display: inline-block;
+        width: 43%;
+        vertical-align: top;
+        ul.detail-info {
+          text-align: left;
+          margin: 0 0 30px 0;
+          li {
+            display: inline-block;
+            margin-right: 35px;
+            font-size: 32px;
+            text-align: left;
+          }
+        }
+
+        ul.list-item {
+          overflow: scroll;
+          height: 100%;
+          width: 600px;
+          li.item {
+            width: 100%;
+            height: 70px;
+            border-radius: 4px;
+            display: block;
+            background-color: $grey;
+            color: #fff;
+            line-height: 40px;
+            margin-bottom: 20px;
+            padding: 12px 15px;
+            list-style: none;
+            &.active {
+              background-color: $blue !important;
+            }
+            &.selected {
+              background: #0053a9;
+            }
+            .title {
+              width: 70%;
+              display: inline-block;
+              text-align: left;
+              font-size: 32px;
+            }
+            .subtitle {
+              width: 30%;
+              display: inline-block;
+              text-align: right;
+              font-size: 32px;
+            }
+          }
+        }
+      }
+      .episodes {
+        display: inline-block;
+        width: 55%;
+        vertical-align: top;
+        text-align: left;
+        height: 100%;
+        overflow: hidden;
+        ul.list-item {
+          transition: 0.54s -webkit-transform $transformType;
+          li.item {
+            list-style: none;
+            padding-bottom: 82px;
+            width: 100%;
+            text-align: right;
+            opacity: 0.8;
+            &.active {
+              opacity: 1;
+              .episode-img {
+                border: 6px solid #fff;
+              }
+            }
+            &.selected {
+            }
+            .episode-img {
+              position: relative;
+              display: inline-block;
+              width: 400px;
+              height: 230px;
+              border: 6px solid transparent;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+              .episode-total {
+                position: absolute;
+                top: 96%;
+                background: #ccc;
+                width: 100%;
+                height: 5%;
+              }
+              .episode-progress {
+                position: absolute;
+                top: 96%;
+                background: blue;
+                height: 5%;
+              }
+            }
+            .episode-content {
+              color: #fff;
+              width: 53%;
+              display: inline-block;
+              vertical-align: top;
+              padding-left: 20px;
+              text-align: left;
+              .episode-title {
+                font-size: 38px;
+                line-height: 38px;
+                font-weight: 500;
+              }
+              .episode-description {
+                margin-top: 10px;
+                font-size: 28px;
+                line-height: 40px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                display: -webkit-box;
+              }
+              .episode-length {
+                margin-top: 30px;
+                font-size: 28px;
+                line-height: 28px;
+                color: rgba(255, 255, 255, 0.8);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .season-page {
+    .home-main {
+      .content {
+        .seasons {
+          ul.detail-info {
+            margin: 0 0 20px 0;
+            li {
+              margin-right: 23px;
+              font-size: 21px;
+            }
+          }
+
+          ul.list-item {
+            width: 400px;
+            li.item {
+              height: 46.5px;
+              border-radius: 2.5px;
+              margin-bottom: 13px;
+              padding: 8px 10px;
+              line-height: 22px;
+              .title {
+                font-size: 21px;
+              }
+              .subtitle {
+                font-size: 21px;
+              }
+            }
+          }
+        }
+        .episodes {
+          ul.list-item {
+            li.item {
+              padding-bottom: 54px;
+              &.active {
+                .episode-img {
+                  border: 4px solid #fff;
+                }
+              }
+              .episode-img {
+                width: 266.5px;
+                height: 153px;
+                border: 4px solid transparent;
+              }
+              .episode-content {
+                padding-left: 13px;
+                .episode-title {
+                  font-size: 25px;
+                  line-height: 25px;
+                }
+                .episode-description {
+                  margin-top: 6.5px;
+                  font-size: 18.5px;
+                  line-height: 18.5px;
+                }
+                .episode-length {
+                  margin-top: 20px;
+                  font-size: 18.5px;
+                  line-height: 18.5px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

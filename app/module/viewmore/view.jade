@@ -1,0 +1,28 @@
+.viewmore-wrapper
+  | {{#ifNotEqual categoryId "favorite"}}
+  h4 {{ribbon.name}}
+  | {{/ifNotEqual}}
+  | {{#ifCond categoryId "favorite"}}
+  | {{#ifMore items.length 0}}
+  h4 {{ribbon.name}}
+  | {{/ifMore}}
+  | {{/ifCond}}
+  | {{#ifCond categoryId "favorite"}}
+  | {{#ifCond items.length 0}}
+  h4#hide-title {{ribbon.name}}
+  | {{/ifCond}}
+  | {{/ifCond}}
+  div.viewmore-content
+    p.viewmore-notify
+    div.active-pointer(style='display:none')
+      div.pointer-cover
+    .viewmore-movie
+      | {{#each items}}
+      div.entity-detail
+        img(
+        src='#{process.env.SERVER}images/imgholder.png'
+        data-originUrl='{{posterLandscape}}'
+        onload="fimplus.UtitService.onImageLoad(this)"
+        onerror="fimplus.UtitService.onImageError(this)")
+      | {{/each}}
+    .clearfix

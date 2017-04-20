@@ -1,0 +1,13 @@
+div#enter-redeem-code.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language payment.title}}
+    .redeem-code-center
+      input.redeem-code#input-redeem-code
+      .enter-redeem-code-keyboard
+      ul.bt-movie
+          | {{#each payment.buttons}}
+          li
+              a: span {{language title}}
+          | {{/each}}

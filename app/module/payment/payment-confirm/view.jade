@@ -1,0 +1,14 @@
+div#payment-confirm.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language paymentConfirm.title}}
+    .buy-package-center
+      .description {{paymentConfirm.item.message}}
+      .termOS {{language paymentConfirm.descriptionUnder}}
+      ul.bt-movie
+        | {{#each paymentConfirm.buttons}}
+        li
+          a: span {{language title}}
+        | {{/each}}
+

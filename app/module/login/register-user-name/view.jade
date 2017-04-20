@@ -1,0 +1,14 @@
+div#register-user-name.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language register.title}}
+    .login-center
+      .description {{language register.description}}
+      input.username#register-username.phone-number
+      .register-keyboard
+      ul.bt-movie
+        | {{#each register.buttons}}
+        li
+          a: span {{language title}}
+        | {{/each}}

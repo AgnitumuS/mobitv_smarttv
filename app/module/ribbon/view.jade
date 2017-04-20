@@ -1,0 +1,35 @@
+.detail-wrap.animated.fadeIn
+  .active-image(style='{{#unless activePointer}}display:none{{/unless}}')
+    .active-border
+
+  | {{#each ribbon}}
+  | {{#ifMore items.length 0}}
+  .slider-wrap
+    | {{#ifCond categoryType 'Menu'}}
+    h4#hide-title {{language categoryType}}
+    | {{/ifCond}}
+    | {{#ifNotEqual categoryType 'Menu'}}
+    p.subtitleRibbon(style='color: {{{options.subtitleColor}}}') {{subtitle}}
+    h4 {{language categoryType}}
+    | {{/ifNotEqual}}
+    .home-slider
+      | {{#each items}}
+      .entity-view
+        .entity-view-content
+          img(
+          src='#{process.env.SERVER}images/imgholder.png'
+          data-originUrl='{{posterLandscape}}'
+          onload="fimplus.UtitService.onImageLoad(this)"
+          onerror="fimplus.UtitService.onImageError(this)")
+          | {{#ifCond ../categoryId "recent" }}
+          //|{{#if progress}}
+          .progress-total &nbsp;
+          .progress-current(style='width:{{progress.percent}}%;')
+            span(style='display:none;') {{progress.percent}}%
+          //|{{/if}}
+          | {{/ifCond}}
+      //li
+        image-load(ng-model='"https://ast.fimplus.io/files/xem-them_1488968348945.png"')
+      | {{/each}}
+  | {{/ifMore}}
+  | {{/each}}

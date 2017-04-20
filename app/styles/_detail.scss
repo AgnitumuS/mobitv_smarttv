@@ -1,0 +1,193 @@
+.detail-wrap {
+  .home-main {
+    .home-title
+    {
+      .description {
+        font-size: 32px;
+        line-height: 48px;
+        display: block;
+        display: -webkit-box;
+        height: 150px;
+        margin: 0 auto;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+      }
+      .bt-back {
+        float: left;
+        vertical-align: middle;
+        margin: 12px 30px 0 -55px;
+      }
+      .info {
+        display: inline-block;
+        font-size: 32px;
+        margin-top: 10px;
+        label {
+          display: block;
+        }
+      }
+      ul.bt-movie {
+        list-style: none;
+        margin: 50px 0 5px 0;
+        li {
+          display: inline-block;
+          white-space: nowrap;
+          background-color: rgba(0, 0, 0, 0.7);
+          border-radius: 5px;
+          text-align: center;
+          width: 272px;
+          height: 70px;
+          color: #fff;
+          line-height: 44px;
+          margin: 0 0 0 26px !important;
+          &:first-child {
+            margin-left: 0 !important;
+          }
+          a {
+            span {
+              font-size: 30px;
+              color: #fff;
+              font-weight: 600;
+              padding-top: 5px;
+              display: block;
+              text-transform: uppercase;
+            }
+          }
+          &.active {
+            background-color: #338fee;
+          }
+          &:hover {
+            background-color: #338fee;
+          }
+        }
+      }
+    }
+  }
+  .img-wrapper {
+    background-size: cover;
+    background-color: #B0ADA5;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: block;
+  }
+  .detail-trailer {
+    width: 100%;
+    height: 40%;
+    position: relative;
+    z-index: 1;
+    .slider-wrap {
+      -webkit-transition-duration: 300ms;
+      -moz-transition-duration: 300ms;
+      -ms-transition-duration: 300ms;
+      -o-transition-duration: 300ms;
+      transition-duration: 300ms;
+      &.active {
+        -webkit-transition-duration: 300ms;
+        -moz-transition-duration: 300ms;
+        -ms-transition-duration: 300ms;
+        -o-transition-duration: 300ms;
+        transition-duration: 300ms;
+        img {
+          outline: solid #fff 7px;
+        }
+      }
+      h4 {
+        margin-top: 0;
+      }
+    }
+    ul.home-slider {
+      line-height: 1;
+      list-style: none;
+      white-space: nowrap;
+      margin-bottom: 40px;
+      li {
+        display: inline-block;
+        margin: 0 15px 0 0;
+        white-space: nowrap;
+        transition: all .2s ease-in-out;
+        &.active {
+          outline: #fff solid 7px;
+          transform: scale(1.03);
+        }
+        &:hover {
+          outline: rgba(255, 255, 255, 0.5) solid 7px;
+          transform: scale(1.03);
+        }
+        img {
+          width: 416px;
+          height: 234px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1280px){
+  .detail-wrap {
+    .home-main {
+      .home-title
+      {
+        .description {
+          font-size: 21px;
+          line-height: 32px;
+          height: 100px;
+        }
+        .bt-back {
+          margin: 8px 20px 0 -37px;
+        }
+        .info {
+          font-size: 21px;
+          margin-top: 7px;
+        }
+        ul.bt-movie {
+          margin: 33px 0 3px 0;
+          li {
+            border-radius: 3px;
+            width: 181px;
+            height: 47px;
+            line-height: 29px;
+            margin: 0 0 0 17px !important;
+            a {
+              span {
+                font-size: 20px;
+                padding-top: 3px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .detail-trailer {
+      .slider-wrap {
+        &.active {
+          img {
+            outline: solid #fff 5px;
+          }
+        }
+      }
+      ul.home-slider {
+        margin-bottom: 27px;
+        li {
+          margin: 0 10px 0 0;
+          &.active {
+            outline: #fff solid 5px;
+          }
+          &:hover {
+            outline: rgba(255, 255, 255, 0.5) solid 5px;
+          }
+          img {
+            width: 277px;
+            height: 156px;
+          }
+        }
+      }
+    }
+  }
+}

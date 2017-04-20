@@ -1,0 +1,88 @@
+#setting-method.setting-page.animate.fadeIn.background
+  i.icon.ic-fim.ic-home
+  .setting-title
+
+    h1 {{language settingMethodtitle}}
+  .setting-left
+    | {{#ifCond haveSource false}}
+    | {{#ifCond addMethod 0}}
+    | {{#ifCond loadCard false}}
+    ul.setting-menu
+      li.active
+        a
+          .label {{language 'account-payment-method-add-more'}}
+          .value
+            i.icon.ic-arrow
+    | {{/ifCond}}
+    | {{/ifCond}}
+    | {{/ifCond}}
+    | {{#ifCond haveSource false}}
+    | {{#ifCond addMethod 1}}
+    ul.setting-menu.setting-add-method.bt-payment
+        li.active
+          a
+            .label {{language 'add-credit-card'}}
+            .value
+              i.icon.ic-arrow
+    | {{/ifCond}}
+    | {{/ifCond}}
+    | {{#if isMBF}}
+    ul.setting-menu.setting-add-method.bt-payment
+      li.active
+        a
+          .label Mobifone
+    | {{/if}}
+    | {{#if haveSource}}
+    | {{#if loadCard}}
+    | {{#unless isMBF}}
+    ul.setting-menu.setting-add-method.bt-payment-load
+      | {{#each buttons}}
+      li(class="{{#ifCond ../currentActive @index}}{{#ifCond ../onFocus true}}active{{/ifCond}}{{/ifCond}}")
+        a
+          .label {{language title}}
+          .value 
+            | {{#ifNotEqual title "credit-card"}}
+            i.icon.ic-arrow
+            | {{/ifNotEqual}}
+            | {{#ifCond title "credit-card"}}
+            i.icon.ic-check
+            | {{/ifCond}}
+      | {{/each}}
+    | {{/unless}}
+    | {{/if}}
+    | {{/if}}
+
+
+  
+  .setting-right
+    .setting-method
+      | {{#ifCond haveSource false}}
+      | {{#ifCond addMethod 0}}
+      | {{#ifCond loadCard false}}
+      p {{language 'not-sync'}}
+      p.text {{language 'enter-method'}}
+      | {{/ifCond}}
+      | {{/ifCond}}
+      | {{/ifCond}}
+
+      | {{#ifCond haveSource false}}
+      | {{#ifCond addMethod 1}}
+      p {{language 'enter-method'}}
+      | {{/ifCond}}
+      | {{/ifCond}}
+
+      | {{#if haveSource}}
+      | {{#if loadCard}}
+      | {{#unless isMBF}}
+      .visa-bg
+        p.name {{sources.detail.name}}
+        p.number **** **** **** {{sources.detail.last4}}
+        p.date {{sources.detail.expMonth}}/{{expYear}}
+        span#ic-type-load(class="{{cardBrand}}")
+      | {{/unless}}
+      | {{/if}}
+      | {{/if}}
+  .setting-footer
+    | {{language 'account-footer'}}
+    | {{language 'account-footer-or'}}
+    b movies.fimplus.vn

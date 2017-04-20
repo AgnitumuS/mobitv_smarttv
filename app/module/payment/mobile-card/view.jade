@@ -1,0 +1,20 @@
+div#mobile-card.background.animated.home-bg.fadeIn
+  i.icon.ic-fim.ic-home
+  .home-main
+    .home-title
+      h1 {{language mobileCard.title}}
+    .mobile-card-center
+      .detail-wallet
+        p
+          span.left {{language 'balance'}}
+          span.right {{coverNumber mobileCard.userWallet.balance}} đ
+        p
+          span.left {{language 'you-must-have'}}
+          span.right {{coverNumber mobileCard.price}} đ
+      .description {{language 'card-notice'}} 
+      ul.bt-movie
+        | {{#each mobileCard.buttons}}
+        li
+          a: span {{language title}}
+        | {{/each}}
+

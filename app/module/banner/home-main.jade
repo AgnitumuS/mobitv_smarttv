@@ -1,0 +1,72 @@
+.home-title.animated.fadeIn(class="{{#if isMenu}}header{{/if}} {{#if isViewmore}}header{{/if}}")
+	h1(class="{{#if isViewmore}}title-viewmore{{/if}}") {{language knownAs}}
+	| {{#if isMenu}}
+	| {{#if description}}
+	h4 {{language description}}
+	| {{/if}}
+	| {{/if}}
+	| {{#unless isMenu}}
+	| {{#unless isViewmore}}
+	ul.detail-info
+		//rating
+		//li
+			|{{#forLoop 5}}
+			|{{#ifLess @index rating.fimplus }}
+			i.icon.ic-star-on
+			|{{/ifLess}}
+			| {{#ifMoreEqual @index rating.fimplus }}
+			i.icon.ic-star-off
+			| {{/ifMoreEqual}}
+			|{{/forLoop}}
+
+		| {{#ifCond model4K 1 }}
+		| {{#ifCond hd 3 }}
+		li: i.icon.ic-4k
+		| {{/ifCond}}
+		|{{#ifBetweenEqual hd 1 2 }}
+		li: i.icon.ic-hd
+		|{{/ifBetweenEqual}}
+		| {{/ifCond}}
+
+		| {{#unless model4K }}
+		| {{#ifMore hd 0 }}
+		li: i.icon.ic-hd
+		| {{/ifMore}}
+		| {{/unless}}
+
+		li {{releaseYear}}
+
+		| {{#if genres }}
+		| {{#if genres.[0] }}
+		li {{genres.[0].name}}
+		| {{/if}}
+		| {{/if}}
+
+		| {{#ifCond audioType 1}}
+		li {{language 'dubbing'}}
+		| {{/ifCond}}
+
+		| {{#ifCond type 'Show' }}
+		| {{#if seasonLabelVn }}
+		li {{ seasonLabelVn }}
+		| {{/if}}
+		| {{/ifCond}}
+
+	.description
+		| {{limit descriptionShort}}
+		| {{#ifMore descriptionShort.length 162}}
+		a.description-viewmore(style='display:none;') {{language 'view-more-text-lower'}}
+		| {{/ifMore}}
+
+	|{{#ifCond ribbonCategoryId 'recent'}}
+	| {{#if progress.progress}}
+	.timeRecents {{language 'watching-recents'}} {{coverTimeMinute progress.progress}}
+	| {{/if}}
+	| {{/ifCond}}
+	.description-full
+		| {{descriptionShort}}
+		i.fa.fa-angle-down(aria-hidden="true")
+		i.fa.fa-angle-up(aria-hidden="true")
+
+	| {{/unless}}
+	| {{/unless}}
