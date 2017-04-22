@@ -1,7 +1,11 @@
 #ribbon
 {
+  position: fixed;
+  top:0;
+  left: 0;
   .wrapper-ribbon{
-    margin: 5% 0;
+    margin: 0 0;
+    padding-top: 100px;
     .wrapper-ribbon-title{
       font-size: 35px;
       text-shadow: 3px 3px 3px #000;
@@ -12,19 +16,50 @@
       height: auto;
       overflow-x: auto;
       white-space: nowrap;
+      vertical-align: top;
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+      font-size: 0;
       .ribbon-item {
         display: inline-block;
         width: 25%;
-        position:relative;
-        /* float: left; */
+        padding: 0 0.5%;
+        position: relative;
+        border-bottom: 10px solid transparent;
+        margin: 0;
+        &.active{
+          border-bottom: 10px solid #fff;
+          &:after{
+            display: block;
+            width: 0;
+            height: 0;
+            content: '';
+            border-left: 50px solid transparent;
+            position: absolute;
+            border-top: 50px solid #fff;
+            border-right: 50px solid transparent;
+            z-index: 9999;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%,0);
+          }
+        }
         .ribbon-img{
           width: 100%;
         }
         .ribbon-title {
           position: absolute;
-          bottom: 5%;
-          font-size: 18px;
+          bottom: 10%;
+          font-size: 30px;
+          line-height: 30px;
           text-shadow: 3px 3px 3px #000;
+          white-space: nowrap;
+          width: 90%;
+          /* height: auto; */
+          overflow: hidden;
+          /* display: inline-block; */
+          text-overflow: ellipsis;
         }
       }
     }

@@ -16,7 +16,10 @@
         display: inline-block;
         width: 25%;
         position:relative;
-        /* float: left; */
+        border: 5px solid transparent;
+        &.active{
+          border: 5px solid #fff;
+        }
         .banner-img{
           width: 100%;
         }

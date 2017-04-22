@@ -1,13 +1,29 @@
 #menu{
-  width: 100%;
-  li{
-    display: inline;
-    list-style: none;
-    &.active{
-      border-bottom: 1px solid $blue;
-    }
-    &.selected{
-      background-color: $blue_2;
+  ul.menu{
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    overflow-x: scroll;
+    line-height: 80px;
+    display: block;
+    z-index: 9996;
+    position: relative;
+    background: #fff;
+    color: #000;
+    text-align: center;
+    li{
+      display: inline-block;
+      list-style: none;
+      width:15%;
+      border-bottom: 10px solid transparent;
+      text-align:center;
+      &.active{
+        border-bottom: 10px solid $blue;
+      }
+      &.selected{
+        background-color: $blue_2;
+      }
     }
   }
+
 }

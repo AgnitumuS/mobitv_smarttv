@@ -1,4 +1,4 @@
-#banner
+//#banner
 	|{{#each banner}}
 	.wrapper-banner
 		.wrapper-banner-title {{title}}
@@ -11,6 +11,16 @@
 	|{{/each }}
 
 #ribbon
+	| {{#each banner}}
+	.wrapper-ribbon
+		.wrapper-ribbon-title {{title}}
+		.wrap-ribbon-items
+			| {{#each items}}
+			.ribbon-item
+				img.ribbon-img(src='{{imgLandscape}}')
+				.ribbon-title {{title}}
+			| {{/each }}
+	| {{/each }}
 	| {{#each ribbon}}
 	.wrapper-ribbon
 		.wrapper-ribbon-title {{title}}
