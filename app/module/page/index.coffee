@@ -1,4 +1,74 @@
 pateco._page =
+  data :
+    menu : []
+    ribbon : []
+    ribbonActive: 0
+    layout : ''
+    callback : ()->
+
+  initPage : ()->
+    self = pateco._page
+    source = Templates['module.page']()
+    template = Handlebars.compile(source);
+    self.element = $('#main-app')
+    self.element.html(template)
+    self.getData(()->
+      self.render()
+      self.initKey()
+    )
+
+
+  show:()->
+    self = pateco._page
+    self.element.show()
+
+  hide:()->
+    self = pateco._page
+    self.element.hide()
+
+  onReturnPage:()->
+
+  openDetail: ()->
+    self = pateco._page
+    currentItem = pateco._banner.getCurrentBanner(self.data.ribbon, self.data.ribbonActive)
+    pateco._detail.initPage(currentItem, self.onReturnPage)
+
+
+  removePage : ()->
+    self = pateco._page
+    self.data.callback() if _.isFunction(self.data.callback)
+
+  render : ()->
+
+  reRender : ()->
+
+  handleKey: (keyCode, key)->
+    self = pateco._page
+    console.info 'Home Key:' + keyCode
+    switch keyCode
+      when key.LEFT
+        break;
+      when key.RIGHT
+        break;
+      when key.DOWN
+        break;
+      when key.ENTER
+        break;
+      when key.UP
+        break;
+      when key.RETURN
+        break;
+
+  initKey: ()->
+    pateco.KeyService.initKey(pateco._page.handleKey)
+
+  getData : (callback = null)->
+    pateco.ApiService.getHome((error, result)->
+      callback() if _.isFunction(callback)
+    )
+
+
+pateco._page =
   data:
     ribbon      : []
     ribbonActive: 0

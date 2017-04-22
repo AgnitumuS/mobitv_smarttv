@@ -1,0 +1,13 @@
+#menu{
+  width: 100%;
+  li{
+    display: inline;
+    list-style: none;
+    &.active{
+      border-bottom: 1px solid $blue;
+    }
+    &.selected{
+      background-color: $blue_2;
+    }
+  }
+}

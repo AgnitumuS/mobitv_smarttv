@@ -6,7 +6,7 @@ initApp = ()->
     logoScreenEl.addClass('animated fadeOut')
   , 1000)
   setTimeout(()->
-    pateco._page.initPage()
+    pateco._main.initPage()
   , 1500)
 
 $(document).ready(()->

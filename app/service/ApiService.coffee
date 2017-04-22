@@ -4,6 +4,7 @@ pateco.ApiService =
   commonData : ()->
     data =
       platform : pateco.config.platform
+      env : pateco.config.env
       uuid : pateco.config.appInfo.deviceId
       macAddress : pateco.config.appInfo.macAddress
       modelId : pateco.config.appInfo.modelId
@@ -129,6 +130,13 @@ pateco.ApiService =
       method : 'GET'
     @request options, done
 
+  getHome : (done)->
+    options =
+      url : "#{pateco.config.api.cm}page/home"
+      method : 'GET'
+      data : {type : 'slug'}
+    @request options, done
+
   getPage : (id, done)->
     options =
       url : "#{pateco.config.api.cm}page/#{id}"
@@ -139,11 +147,8 @@ pateco.ApiService =
     options =
       url : "#{pateco.config.api.cm}menu/#{id}"
       method : 'GET'
-    @request options, (error, result)->
-      if error
-        return done error, result
-      sessionStorage.menu = JSON.stringify(result)
-      done error, result
+      data : {type : 'slug'}
+    @request options, done
 
   getChannel : (params = {}, done)->
     param =

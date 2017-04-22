@@ -6,7 +6,7 @@ config =
 
   api:
     production :
-      cm     : 'https://api.mobitv.io/v1/'
+      cm     : 'http://api.mobitv.io/v1/'
     development:
       cm     : 'http://dev.mobitv.io:1337/v1/'
 
