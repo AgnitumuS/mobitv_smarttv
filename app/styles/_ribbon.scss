@@ -24,12 +24,12 @@
       .ribbon-item {
         display: inline-block;
         width: 25%;
-        padding: 0 0.5%;
+        padding: 0 0;
         position: relative;
         border-bottom: 10px solid transparent;
         margin: 0;
         &.active{
-          border-bottom: 10px solid #fff;
+          border-bottom: 10px solid $blue;
           &:after{
             display: block;
             width: 0;
@@ -37,7 +37,7 @@
             content: '';
             border-left: 50px solid transparent;
             position: absolute;
-            border-top: 50px solid #fff;
+            border-top: 50px solid $blue;
             border-right: 50px solid transparent;
             z-index: 9999;
             top: 0;

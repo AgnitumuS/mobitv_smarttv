@@ -1,13 +1,14 @@
-.detail
-	.detail-content(style='background-image:""')
+.detail(style="background-image:url({{imgLandscape}})")
+	.detail-content
 		.left
-			.title phim abc
+			.title {{title}}
 			ul.info
 				li HD
+				li Star {{imdb}}
 				li 2017
 				li Thuyet minh
 				li Thuyet minh
-			.short-des short des
+			.short-des {{shortDescription}}
 			.list-buttons
 				button xem phim
 				button mua phim

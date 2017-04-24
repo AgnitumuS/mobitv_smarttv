@@ -124,10 +124,11 @@ pateco.ApiService =
     .error (error)->
       done true, error
 
-  getDetailEntity : (id, done)->
+  getDetailEntity : (params, done)->
     options =
-      url : "#{pateco.config.api.cm}entity/#{id}"
+      url : "#{pateco.config.api.cm}entity/#{params.slug}"
       method : 'GET'
+      data : params
     @request options, done
 
   getHome : (done)->
@@ -137,10 +138,12 @@ pateco.ApiService =
       data : {type : 'slug'}
     @request options, done
 
-  getPage : (id, done)->
+  getPage : (params, done)->
+    params.type = 'slug'
     options =
-      url : "#{pateco.config.api.cm}page/#{id}"
+      url : "#{pateco.config.api.cm}page/#{params.id}"
       method : 'GET'
+      data : params
     @request options, done
 
   getMenu : (id, done)->

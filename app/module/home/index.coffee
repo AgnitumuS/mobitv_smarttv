@@ -1,5 +1,5 @@
 pateco._home =
-  element : $('#home')
+  element : '#home'
   data :
     ribbon : []
     indexRibbonActive : 0 #index of ribbon is Current [1...ribbon.length()]
@@ -8,22 +8,19 @@ pateco._home =
     callback : ()->
 
   initPage:()->
-    self=@
+    self=pateco._home
     self.getData(()->
       self.render()
       self.initKey()
+      self.setRibbonPosition(self.data.indexRibbonActive)
+      self.setActiveItemOfRibbon(self.data.indexRibbonActive,self.getIndexItemActiveOfRibbon() )
     )
 
   removePage:()->
-   console.log 'remove page & call callback pre page'
+    console.log 'remove page & call callback pre page'
+    self=pateco._home
+    $(self.element).html('')
 
-  show:()->
-    self = @
-    self.element.show()
-
-  hide:()->
-    self = @
-    self.element.hide()
 
   getData:(callback = null)->
     self = pateco._home
@@ -76,19 +73,75 @@ pateco._home =
     return 0
 
 
-  openDetailPage : ()->
-    self = @
-    indexItemActive =self.getIndexItemActiveOfRibbon()
-    item = self.data.ribbon[self.data.indexRibbonActive].items[indexItemActive]
-    self.removePage()
-    pateco._detail.initPage(item, self.onReturnHomepage)
-
-
   handleKeyLeft : ()->
+    self=@
+    if self.data.layoutActive is 'menu_header'
+      if pateco._main.data.indexItemMenuActive > 0
+        pateco._main.data.indexItemMenuActive--
+        pateco._main.setItemMenuActive(pateco._main.data.indexItemMenuActive)
+      return
+    if self.data.layoutActive is 'ribbon'
+      indexItemActive = self.getIndexItemActiveOfRibbon()
+      if indexItemActive > 0
+        self.data.ribbon[self.data.indexRibbonActive].indexItemActive--
+        self.setActiveItemOfRibbon(self.data.indexRibbonActive,self.getIndexItemActiveOfRibbon() )
+      return
+
   handleKeyRight : ()->
+    self=@
+    if self.data.layoutActive is 'menu_header'
+      if pateco._main.data.indexItemMenuActive < pateco._main.data.menu.length-1
+        pateco._main.data.indexItemMenuActive++
+        pateco._main.setItemMenuActive(pateco._main.data.indexItemMenuActive)
+      return
+    if self.data.layoutActive is 'ribbon'
+      indexItemActive = self.getIndexItemActiveOfRibbon()
+      if indexItemActive < self.data.ribbon[self.data.indexRibbonActive].items.length-1
+        self.data.ribbon[self.data.indexRibbonActive].indexItemActive++
+        self.setActiveItemOfRibbon(self.data.indexRibbonActive, self.getIndexItemActiveOfRibbon() )
+      return
+
   handleKeyUp : ()->
+    self = @
+    if self.data.layoutActive is 'ribbon' and self.data.indexRibbonActive is 0
+      self.data.layoutActive = 'menu_header'
+      pateco._main.setItemMenuActive(pateco._main.data.indexItemMenuActive)
+      return
+    if self.data.layoutActive is 'ribbon'
+      if self.data.indexRibbonActive > 0
+        self.data.indexRibbonActive--
+        self.setRibbonPosition(self.data.indexRibbonActive)
+        self.setActiveItemOfRibbon(self.data.indexRibbonActive,self.getIndexItemActiveOfRibbon() )
+      return
+
   handleKeyDown : ()->
+    self=@
+    if self.data.layoutActive is 'menu_header'
+      self.data.layoutActive = 'ribbon'
+      pateco._main.removeClassMenuActive()
+      self.data.indexRibbonActive = 0
+      self.setRibbonPosition(self.data.indexRibbonActive)
+      self.setActiveItemOfRibbon(self.data.indexRibbonActive,self.data.ribbon[self.data.indexRibbonActive].indexItemActive )
+      return
+    if self.data.layoutActive is 'ribbon'
+      if self.data.indexRibbonActive < (self.data.ribbon.length - 1)
+        self.data.indexRibbonActive++
+        self.setRibbonPosition(self.data.indexRibbonActive)
+        self.setActiveItemOfRibbon(self.data.indexRibbonActive,self.getIndexItemActiveOfRibbon() )
+      return
+
   handleKeyEnter : ()->
+    self=@
+    if self.data.layoutActive is 'menu_header'
+      itemMenu = pateco._main.data.menu[pateco._main.data.indexItemMenuActive]
+      console.log 'enter menu',itemMenu
+      return
+    if self.data.layoutActive is 'ribbon'
+      itemDetail = self.data.ribbon[self.data.indexRibbonActive].items[self.getIndexItemActiveOfRibbon() ]
+      console.log 'enter detail',itemDetail
+      self.removePage()
+      pateco._detail.initPage(itemDetail, self.onReturnHomePage) if itemDetail
+      return
 
 
 
@@ -97,80 +150,38 @@ pateco._home =
     console.info 'Home Key:' + keyCode
     switch keyCode
       when key.RIGHT
-        if self.data.layoutActive is 'menu_header'
-          if pateco._main.data.indexItemMenuActive < pateco._main.data.menu.length-1
-            pateco._main.data.indexItemMenuActive++
-            pateco._main.setItemMenuActive(pateco._main.data.indexItemMenuActive)
-          return
-        if self.data.layoutActive is 'ribbon'
-          indexItemActive = self.getIndexItemActiveOfRibbon()
-          if indexItemActive < self.data.ribbon[self.data.indexRibbonActive].items.length-1
-            self.data.ribbon[self.data.indexRibbonActive].indexItemActive++
-            self.setActiveItemOfRibbon(self.data.indexRibbonActive, self.getIndexItemActiveOfRibbon() )
-          return
+        self.handleKeyRight()
         break;
       when key.LEFT
-        if self.data.layoutActive is 'menu_header'
-          if pateco._main.data.indexItemMenuActive > 0
-            pateco._main.data.indexItemMenuActive--
-            pateco._main.setItemMenuActive(pateco._main.data.indexItemMenuActive)
-          return
-        if self.data.layoutActive is 'ribbon'
-          indexItemActive = self.getIndexItemActiveOfRibbon()
-          if indexItemActive > 0
-            self.data.ribbon[self.data.indexRibbonActive].indexItemActive--
-            self.setActiveItemOfRibbon(self.data.indexRibbonActive,self.getIndexItemActiveOfRibbon() )
-          return
+        self.handleKeyLeft()
         break;
       when key.DOWN
-        if self.data.layoutActive is 'menu_header'
-          self.data.layoutActive = 'ribbon'
-          pateco._main.removeClassMenuActive()
-          self.data.indexRibbonActive = 0
-          self.setRibbonPosition(self.data.indexRibbonActive)
-          self.setActiveItemOfRibbon(self.data.indexRibbonActive,self.data.ribbon[self.data.indexRibbonActive].indexItemActive )
-          return
-        if self.data.layoutActive is 'ribbon'
-          if self.data.indexRibbonActive < (self.data.ribbon.length - 1)
-            self.data.indexRibbonActive++
-            self.setRibbonPosition(self.data.indexRibbonActive)
-            self.setActiveItemOfRibbon(self.data.indexRibbonActive,self.getIndexItemActiveOfRibbon() )
-          return
+        self.handleKeyDown()
         break;
       when key.UP
-        if self.data.layoutActive is 'ribbon' and self.data.indexRibbonActive is 0
-          self.data.layoutActive = 'menu_header'
-          pateco._main.setItemMenuActive(pateco._main.data.indexItemMenuActive)
-          return
-        if self.data.layoutActive is 'ribbon'
-          if self.data.indexRibbonActive > 0
-            self.data.indexRibbonActive--
-            self.setRibbonPosition(self.data.indexRibbonActive)
-            self.setActiveItemOfRibbon(self.data.indexRibbonActive,self.getIndexItemActiveOfRibbon() )
+        self.handleKeyUp()
         break;
       when key.ENTER
-        if self.data.layoutActive is 'menu_header'
-          console.log 'enter menu'
-          return
-        if self.data.layoutActive is 'ribbon'
-          console.log 'enter detail'
-          return
+        self.handleKeyEnter()
         break;
       when key.RETURN
         break;
 
 
   initKey:()->
-    self = @
+    self = pateco._home
     pateco.KeyService.initKey(self.handleKey)
 
-  onReturnHomepage:()->
-    self = @
+  onReturnHomePage:()->
+    self = pateco._home
     console.log 'next page & set callback return function'
-    self.initPage()
+    self.render()
+    self.initKey()
+    self.setRibbonPosition(self.data.indexRibbonActive)
+    self.setActiveItemOfRibbon(self.data.indexRibbonActive,self.getIndexItemActiveOfRibbon() )
 
   render:()->
-    self = @
+    self = pateco._home
     source = Templates['module.home']()
     template = Handlebars.compile(source)
-    $('#home').html(template({ribbon: self.data.ribbon }))
+    $(self.element).html(template({ribbon: self.data.ribbon }))

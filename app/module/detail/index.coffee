@@ -1,4 +1,5 @@
 pateco._detail =
+  element : '#detail'
   data             :
     item         : {}
     buttons      : []
@@ -7,11 +8,10 @@ pateco._detail =
     callback     : ()->
 
   initPage:(item, callback)->
-    self = @
+    self = pateco._detail
     self.data.item = item
     self.data.callback = callback if _.isFunction(callback)
-    self.getData(item,(error, result)->
-      self.data.item = result
+    self.getData(()->
       self.render()
       self.initKey()
     )
@@ -19,16 +19,62 @@ pateco._detail =
   onReturnDetailPage : ()->
 
   removePage : ()->
+    self = pateco._detail
+    $(self.element).html('')
+    self.data.callback() if _.isFunction(self.data.callback)
+
 
   render : ()->
-    self = @
+    self = pateco._detail
     source = Templates['module.detail']()
     template = Handlebars.compile(source)
-    $('#detail').html(template( self.data.item ))
+    console.log 'render detail', self.data.item
+    $(self.element).html( template( self.data.item ))
 
-  initKey : ()->
-  handleKey : ()->
-  getData : (item, callback)->
+
+  handleKeyUp : ()->
+  handleKeyDown : ()->
+  handleKeyLeft : ()->
+  handleKeyRight : ()->
+
+  initKey:()->
+    self = pateco._detail
+    pateco.KeyService.initKey(self.handleKey)
+
+  handleKey: (keyCode, key)->
+    self = pateco._detail
+    console.info 'detail Key:' + keyCode
+    switch keyCode
+      when key.RIGHT
+        self.handleKeyRight()
+        break;
+      when key.LEFT
+        self.handleKeyLeft()
+        break;
+      when key.DOWN
+        self.handleKeyDown()
+        break;
+      when key.UP
+        self.handleKeyUp()
+        break;
+      when key.ENTER
+        self.handleKeyEnter()
+        break;
+      when key.RETURN
+        self.removePage()
+
+        break;
+
+  getData : (callback=null)->
+    self=@
+    params =
+      slug : self.data.item.slug
+      type : 'slug'
+    pateco.ApiService.getDetailEntity(params, (error, result)->
+      return console.error result if error
+      self.data.item = result
+      callback() if _.isFunction(callback)
+    )
 
 #pateco._detail =
 #  data             :

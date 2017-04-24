@@ -78,7 +78,12 @@ pateco.UserService =
       return null
   
   getValueStorage: (nameStorage, objectKeyName)->
-    objectNew = JSON.parse(localStorage.getItem(nameStorage))
-    return objectNew[objectKeyName]
+    try
+      objectNew = JSON.parse(localStorage.getItem(nameStorage)) if localStorage.getItem(nameStorage)
+    catch e
+      console.error e
+    if objectNew
+      return objectNew[objectKeyName]
+    return null
 
  
