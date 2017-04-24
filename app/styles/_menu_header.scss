@@ -15,11 +15,26 @@
       display: inline-block;
       list-style: none;
       width:15%;
-      border-bottom: 10px solid transparent;
+      border-bottom: 5px solid transparent;
       text-align:center;
       font-size: 35px;
       &.active{
-        border-bottom: 10px solid $blue;
+        border-bottom: 5px solid $blue;
+        position: relative;
+        &:after{
+          display: block;
+          width: 0;
+          height: 0;
+          content: '';
+          position: absolute;
+          border-left: 20px solid transparent;
+          border-top: 20px solid $blue;
+          border-right: 20px solid transparent;
+          z-index: 9999;
+          top: 0;
+          left: 50%;
+          transform: translate(-50%,0);
+        }
       }
       &.selected{
         background-color: $blue_2;

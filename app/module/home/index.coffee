@@ -23,13 +23,29 @@ pateco._home =
 
 
   getData:(callback = null)->
+    addItemCategoryViewmore = (result)->
+      i=0
+      while result.ribbon and i < result.ribbon.length
+        if result.ribbon[i] and result.ribbon[i].total > 20
+          itemViewmore =
+            isCategoryViewmore : true
+            imgLandscape : pateco.server+'images/category-viewmore.png'
+            categoryId : result.ribbon[i].id
+          result.ribbon[i].items.push(itemViewmore)
+        i++
+      self.data.ribbon = result.ribbon
+
     self = pateco._home
     pateco.ApiService.getHome((error, result)->
       return unless result
-      self.data.ribbon = result.ribbon
-      if result.banner
-        self.data.ribbon.unshift(result.banner[1]) if result.banner[1]
-        self.data.ribbon.unshift(result.banner[0]) if result.banner[0]
+      addItemCategoryViewmore(result)
+      i=result.banner.length
+      while result.banner and i > 0
+        self.data.ribbon.unshift(result.banner[i-1]) if result.banner[i-1]
+        i--
+#      if result.banner
+#        self.data.ribbon.unshift(result.banner[1]) if result.banner[1]
+#        self.data.ribbon.unshift(result.banner[0]) if result.banner[0]
       i=0
       while i < self.data.ribbon.length
         self.data.ribbon[i].indexItemActive = 0
@@ -135,11 +151,16 @@ pateco._home =
     if self.data.layoutActive is 'menu_header'
       itemMenu = pateco._main.data.menu[pateco._main.data.indexItemMenuActive]
       console.log 'enter menu',itemMenu
+      pateco._page.initPage(itemMenu, self.onReturnHomePage)
       return
     if self.data.layoutActive is 'ribbon'
       itemDetail = self.data.ribbon[self.data.indexRibbonActive].items[self.getIndexItemActiveOfRibbon() ]
-      console.log 'enter detail',itemDetail
       self.removePage()
+      if itemDetail and itemDetail.isCategoryViewmore is true
+        console.log 'open category viewmore:',itemDetail
+        pateco._category.initPage(itemDetail, self.onReturnHomePage)
+        return
+      console.log 'enter detail:',itemDetail
       pateco._detail.initPage(itemDetail, self.onReturnHomePage) if itemDetail
       return
 
